@@ -55,6 +55,10 @@ through the debug launch extras described below, so the pictures are reproducibl
   (the satellite sunlit while the observer is in twilight or night).
 - **Point me** — pick an object and an arrow at the edge of the screen points the way
   until it is in view, where a ring marks it.
+- **Compass calibration** — phone magnetometers drift. Select something you can see, point
+  the camera at it and tap *Align*: the heading correction is computed from that one
+  sighting and kept in Settings, where it can also be adjusted by hand or reset. A banner
+  asks for the figure-eight motion when the platform reports low compass accuracy.
 
 ## How it works
 
@@ -100,8 +104,8 @@ difference is under a second.
   planets, then the bright named stars that are up. Selecting one opens the detail with the
   next passes.
 - **Settings** — layers, faintest star magnitude, satellite groups, labels and trajectory
-  length, red **night mode**, camera passthrough, a fixed position for when there is no
-  location, the minimum pass altitude, and the orbit data status with a manual refresh.
+  length, red **night mode**, camera passthrough, the compass correction, a fixed position
+  for when there is no location, the minimum pass altitude, and the orbit data status with a manual refresh.
 
 ### Adaptive layouts
 
@@ -146,8 +150,8 @@ export ANDROID_CLI_BUILD=true
 android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
 android build test "astro:hostTest"     # 58 astronomy engine tests on the JVM
-android build test "ui:hostTest"        # 38 ui unit tests on the JVM
-android build test "ui:deviceTest"      # 29 Compose UI tests on the connected device
+android build test "ui:hostTest"        # 42 ui unit tests on the JVM
+android build test "ui:deviceTest"      # 33 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 

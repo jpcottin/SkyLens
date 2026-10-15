@@ -45,6 +45,26 @@ class DevicePoseTest {
     }
 
     @Test
+    fun yawed_turnsTheHeadingEastForPositiveDegrees() {
+        val north = DevicePose.fromAngles(0.0, 20.0)
+        val turned = north.yawed(30.0)
+        assertEquals(30.0, turned.centre.azimuthDeg, 1e-9)
+        assertEquals(20.0, turned.centre.elevationDeg, 1e-9)
+        assertEquals(0.0, turned.toCamera(60.0, 45.0).rollDeg, 1e-6)
+        assertEquals(350.0, north.yawed(-10.0).centre.azimuthDeg, 1e-9)
+        assertTrue(north.yawed(0.0) === north)
+    }
+
+    @Test
+    fun compassAccuracy_mapsSensorStatus() {
+        assertEquals(CompassAccuracy.UNRELIABLE, CompassAccuracy.fromSensorStatus(0))
+        assertEquals(CompassAccuracy.HIGH, CompassAccuracy.fromSensorStatus(3))
+        assertEquals(CompassAccuracy.UNKNOWN, CompassAccuracy.fromSensorStatus(-1))
+        assertTrue(CompassAccuracy.LOW.needsCalibration)
+        assertTrue(!CompassAccuracy.MEDIUM.needsCalibration)
+    }
+
+    @Test
     fun fromAngles_roundTrips() {
         val pose = DevicePose.fromAngles(123.0, 45.0, 0.0)
         assertEquals(123.0, pose.centre.azimuthDeg, 1e-9)

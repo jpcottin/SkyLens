@@ -37,6 +37,8 @@ data class Settings(
     val useManualLocation: Boolean = false,
     /** Minimum culmination elevation for a pass to be listed. */
     val minPassElevationDeg: Double = 10.0,
+    /** Compass correction added to the sensor heading, degrees east positive, in (-180, 180]. */
+    val headingOffsetDeg: Double = 0.0,
 ) {
     fun toLayers() = SkyLayers(
         sun = showSun, moon = showMoon, planets = showPlanets, stars = showStars, satellites = showSatellites,
@@ -63,6 +65,7 @@ class SettingsRepository(private val dataStore: DataStore<Preferences>) {
         val manualAlt = doublePreferencesKey("manual_alt")
         val useManualLocation = booleanPreferencesKey("use_manual_location")
         val minPassElevation = doublePreferencesKey("min_pass_elevation")
+        val headingOffset = doublePreferencesKey("heading_offset")
     }
 
     val settings: Flow<Settings> = dataStore.data
@@ -87,6 +90,7 @@ class SettingsRepository(private val dataStore: DataStore<Preferences>) {
             p[Keys.cameraPassthrough] = next.cameraPassthrough
             p[Keys.useManualLocation] = next.useManualLocation
             p[Keys.minPassElevation] = next.minPassElevationDeg
+            p[Keys.headingOffset] = next.headingOffsetDeg
             val manual = next.manualLocation
             if (manual == null) {
                 p.remove(Keys.manualLat)
@@ -121,6 +125,7 @@ class SettingsRepository(private val dataStore: DataStore<Preferences>) {
             manualLocation = if (lat != null && lon != null) Observer(lat, lon, p[Keys.manualAlt] ?: 0.0) else null,
             useManualLocation = p[Keys.useManualLocation] ?: defaults.useManualLocation,
             minPassElevationDeg = p[Keys.minPassElevation] ?: defaults.minPassElevationDeg,
+            headingOffsetDeg = p[Keys.headingOffset] ?: defaults.headingOffsetDeg,
         )
     }
 }
