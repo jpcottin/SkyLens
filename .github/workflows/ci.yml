@@ -139,6 +139,20 @@ jobs:
           sh .github/scripts/android-build.sh "app:app-debug.apk"
           sh .github/scripts/android-build.sh "app:app-release.apk"
 
+      # The Lightbuild and Gradle caches plus the three APKs leave the runner with ~5 GB, and
+      # the emulator refuses to start with less than the 7.3 GB its userdata partition needs
+      # ("FATAL | Not enough space to create userdata partition"). Drop toolchains this job
+      # never uses, and the build caches now that the APKs exist.
+      - name: Free disk space for the emulator
+        run: |
+          df -h / | tail -1
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
+            "$AGENT_TOOLSDIRECTORY/go" || true
+          rm -rf ~/.lightbuild/m2-cache ~/.gradle/caches .lightbuild/cache || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h / | tail -1
+
       # The androidTest APK is self-instrumenting (library module). `am instrument -w` exits 0
       # even when tests fail, hence the explicit check for the "OK (N tests)" summary line.
       # Then the deterministic journey: launch the debug app with a frozen clock, a fixed
