@@ -49,7 +49,9 @@ if [ -n "$RELEASE_APK" ]; then
   [ -f "$HOME/.android/debug.keystore" ] || keytool -genkeypair -v -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
   SIGNED="$OUT/app-release-signed.apk"
   "$APKSIGNER" sign --ks "$HOME/.android/debug.keystore" --ks-pass pass:android --ks-key-alias androiddebugkey --key-pass pass:android --out "$SIGNED" "$RELEASE_APK"
-  adb install -r "$SIGNED"
+  # The debug build was signed by Lightbuild's own key: an in-place update is refused.
+  adb uninstall $PKG >/dev/null 2>&1 || true
+  adb install "$SIGNED"
   adb logcat -c
   adb shell am start -W -n $PKG/.MainActivity
   sleep 8
