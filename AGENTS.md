@@ -33,7 +33,8 @@ Deterministic launches for screenshots and CI (debuggable builds only):
 ```sh
 adb shell am start -n com.jpcottin.skylens/.MainActivity \
   --el skylens.time 1791954000000 --es skylens.location "49.2827,-123.1207,70" \
-  --es skylens.pose "100,35,0" --ez skylens.map true
+  --es skylens.pose "100,35,0" --ez skylens.map true \
+  --es skylens.select sat:25544 --ez skylens.night false --es skylens.tab objects
 ```
 
 Never add AI attribution (Co-Authored-By, "Generated with…") to commits, PRs or files.

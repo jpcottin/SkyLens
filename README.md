@@ -130,8 +130,10 @@ adb shell am start -n com.jpcottin.skylens/.MainActivity \
 ```
 
 `skylens.time` freezes the clock (epoch millis), `skylens.location` is `lat,lon[,altitude]`,
-`skylens.pose` is `azimuth,elevation[,roll]` in degrees and `skylens.map` starts in the
-drawn-sky mode. Release builds ignore them.
+`skylens.pose` is `azimuth,elevation[,roll]` in degrees, `skylens.map` starts in the
+drawn-sky mode, `skylens.select` selects an object by id (`sat:25544`, `moon`,
+`planet:saturn`), `skylens.night` forces the red night mode and `skylens.tab` opens
+`sky`, `objects` or `settings` first. Release builds ignore them.
 
 ## Build system: Lightbuild and the Android CLI
 
@@ -144,8 +146,8 @@ export ANDROID_CLI_BUILD=true
 android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
 android build test "astro:hostTest"     # 58 astronomy engine tests on the JVM
-android build test "ui:hostTest"        # 36 ui unit tests on the JVM
-android build test "ui:deviceTest"      # 28 Compose UI tests on the connected device
+android build test "ui:hostTest"        # 38 ui unit tests on the JVM
+android build test "ui:deviceTest"      # 29 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 
