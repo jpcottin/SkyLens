@@ -45,21 +45,21 @@ sourceSets:
       compile: 'off'
   - androidx.collection:collection-ktx:1.5.0:
       compile: 'off'
-  - androidx.compose.animation:animation:1.10.0:
+  - androidx.compose.animation:animation:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.animation:animation-android:1.10.0:
+  - androidx.compose.animation:animation-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.animation:animation-core:1.10.0:
+  - androidx.compose.animation:animation-core:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.animation:animation-core-android:1.10.0:
+  - androidx.compose.animation:animation-core-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.foundation:foundation:1.10.0:
+  - androidx.compose.foundation:foundation:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.foundation:foundation-android:1.10.0:
+  - androidx.compose.foundation:foundation-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.foundation:foundation-layout:1.10.0:
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.foundation:foundation-layout-android:1.10.0:
+  - androidx.compose.foundation:foundation-layout-android:1.13.0-alpha02:
       compile: 'off'
   - androidx.compose.material:material-icons-core:1.7.8:
       compile: 'off'
@@ -91,55 +91,57 @@ sourceSets:
       compile: 'off'
   - androidx.compose.material3.adaptive:adaptive-navigation3-android:1.3.0:
       compile: 'off'
-  - androidx.compose.runtime:runtime:1.12.1:
+  - androidx.compose.runtime:runtime:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-android:1.12.1:
+  - androidx.compose.runtime:runtime-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-annotation:1.12.1:
+  - androidx.compose.runtime:runtime-annotation:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-annotation-android:1.12.1:
+  - androidx.compose.runtime:runtime-annotation-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-retain:1.12.1:
+  - androidx.compose.runtime:runtime-retain:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-retain-android:1.12.1:
+  - androidx.compose.runtime:runtime-retain-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-saveable:1.12.1:
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.runtime:runtime-saveable-android:1.12.1:
+  - androidx.compose.runtime:runtime-saveable-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui:1.12.1:
+  - androidx.compose.ui:ui:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-android:1.12.1:
+  - androidx.compose.ui:ui-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-geometry:1.12.1:
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-geometry-android:1.12.1:
+  - androidx.compose.ui:ui-geometry-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-graphics:1.12.1:
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-graphics-android:1.12.1:
+  - androidx.compose.ui:ui-graphics-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-text:1.12.1:
+  - androidx.compose.ui:ui-text:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-text-android:1.12.1:
+  - androidx.compose.ui:ui-text-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-tooling-android:1.12.1:
+  - androidx.compose.ui:ui-text-google-fonts:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-tooling-data:1.12.1:
+  - androidx.compose.ui:ui-tooling-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-tooling-data-android:1.12.1:
+  - androidx.compose.ui:ui-tooling-data:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-tooling-preview:1.12.1:
+  - androidx.compose.ui:ui-tooling-data-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-tooling-preview-android:1.12.1:
+  - androidx.compose.ui:ui-tooling-preview:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-unit:1.12.1:
+  - androidx.compose.ui:ui-tooling-preview-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-unit-android:1.12.1:
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-util:1.12.1:
+  - androidx.compose.ui:ui-unit-android:1.13.0-alpha02:
       compile: 'off'
-  - androidx.compose.ui:ui-util-android:1.12.1:
+  - androidx.compose.ui:ui-util:1.13.0-alpha02:
+      compile: 'off'
+  - androidx.compose.ui:ui-util-android:1.13.0-alpha02:
       compile: 'off'
   - androidx.concurrent:concurrent-futures:1.1.0:
       compile: 'off'
@@ -181,7 +183,7 @@ sourceSets:
       compile: 'off'
   - androidx.exifinterface:exifinterface:1.4.2:
       compile: 'off'
-  - androidx.graphics:graphics-path:1.0.1:
+  - androidx.graphics:graphics-path:1.1.0:
       compile: 'off'
   - androidx.interpolator:interpolator:1.0.0:
       compile: 'off'
@@ -245,15 +247,15 @@ sourceSets:
       compile: 'off'
   - androidx.profileinstaller:profileinstaller:1.4.0:
       compile: 'off'
-  - androidx.savedstate:savedstate:1.4.0:
+  - androidx.savedstate:savedstate:1.5.0:
       compile: 'off'
-  - androidx.savedstate:savedstate-android:1.4.0:
+  - androidx.savedstate:savedstate-android:1.5.0:
       compile: 'off'
-  - androidx.savedstate:savedstate-compose:1.4.0:
+  - androidx.savedstate:savedstate-compose:1.5.0:
       compile: 'off'
-  - androidx.savedstate:savedstate-compose-android:1.4.0:
+  - androidx.savedstate:savedstate-compose-android:1.5.0:
       compile: 'off'
-  - androidx.savedstate:savedstate-ktx:1.4.0:
+  - androidx.savedstate:savedstate-ktx:1.5.0:
       compile: 'off'
   - androidx.startup:startup-runtime:1.2.0:
       compile: 'off'
@@ -270,6 +272,22 @@ sourceSets:
   - androidx.window:window-core:1.5.0:
       compile: 'off'
   - androidx.window:window-core-android:1.5.0:
+      compile: 'off'
+  - androidx.xr.glimmer:glimmer:1.0.0-alpha20:
+      compile: 'off'
+  - androidx.xr.glimmer:glimmer-google-fonts:1.0.0-alpha20:
+      compile: 'off'
+  - androidx.xr.projected:projected:1.0.0-alpha13:
+      compile: 'off'
+  - androidx.xr.projected:projected-binding:1.0.0-alpha13:
+      compile: 'off'
+  - androidx.xr.runtime:runtime:1.1.0-alpha01:
+      compile: 'off'
+  - androidx.xr.runtime:runtime-interfaces:1.1.0-alpha01:
+      compile: 'off'
+  - androidx.xr.runtime:runtime-manifest:1.1.0-alpha01:
+      compile: 'off'
+  - androidx.xr.runtime:runtime-openxr:1.1.0-alpha01:
       compile: 'off'
   - com.google.auto.value:auto-value-annotations:1.6.3:
       compile: 'off'
@@ -344,7 +362,7 @@ dependencies:
   - androidx.lifecycle:lifecycle-viewmodel-savedstate:2.11.0
   - androidx.navigationevent:navigationevent:1.1.1
   - androidx.profileinstaller:profileinstaller:1.4.0
-  - androidx.savedstate:savedstate:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
   - androidx.tracing:tracing:1.3.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
@@ -367,16 +385,16 @@ dependencies:
       cachePath: androidx/activity/activity-compose/1.13.0/activity-compose-1.13.0.pom
   transitiveDependencies:
   - androidx.activity:activity:1.13.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
   - androidx.lifecycle:lifecycle-common:2.11.0
   - androidx.lifecycle:lifecycle-runtime:2.11.0
   - androidx.lifecycle:lifecycle-runtime-compose:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel:2.11.0
   - androidx.navigationevent:navigationevent-compose:1.1.1
-  - androidx.savedstate:savedstate:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
 - id: androidx.activity:activity-ktx:1.13.0
@@ -399,7 +417,7 @@ dependencies:
   - androidx.activity:activity:1.13.0
   - androidx.lifecycle:lifecycle-runtime-ktx:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0
-  - androidx.savedstate:savedstate-ktx:1.4.0
+  - androidx.savedstate:savedstate-ktx:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.annotation:annotation:1.10.0
   resolvedVersion: 1.10.0
@@ -577,9 +595,9 @@ dependencies:
   - androidx.camera:camera-core:1.6.1
   - androidx.camera.viewfinder:viewfinder-compose:1.6.1
   - androidx.camera.viewfinder:viewfinder-core:1.6.1
-  - androidx.compose.foundation:foundation-layout:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
@@ -690,13 +708,13 @@ dependencies:
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.camera.viewfinder:viewfinder-core:1.6.1
-  - androidx.compose.foundation:foundation-layout:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-geometry:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
@@ -773,166 +791,166 @@ dependencies:
       cachePath: androidx/collection/collection-ktx/1.5.0/collection-ktx-1.5.0.pom
   transitiveDependencies:
   - androidx.collection:collection:1.5.0
-- id: androidx.compose.animation:animation:1.10.0
-  resolvedVersion: 1.10.0
+- id: androidx.compose.animation:animation:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.10.0/animation-1.10.0.module
-      sha256: 2158c1b57ce292ac2fd0d1541ece2cd08bbfbbd80aa6417a0668076693855458
-      cachePath: androidx/compose/animation/animation/1.10.0/animation-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.13.0-alpha02/animation-1.13.0-alpha02.module
+      sha256: 7643d47ad7923cc54bab58b9898c8198915ff97f3f63d08eb9ef21edf4b8bcf4
+      cachePath: androidx/compose/animation/animation/1.13.0-alpha02/animation-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.10.0/animation-1.10.0.pom
-      sha256: ac1c3ef4e26c377b0947e5a054a075ec0614b87823629b6bce0ca50b08ee56e4
-      cachePath: androidx/compose/animation/animation/1.10.0/animation-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.13.0-alpha02/animation-1.13.0-alpha02.pom
+      sha256: 45b1dec5de1e58040920a8a4a5a60affb2b94243b377405a73506e5be15e93e5
+      cachePath: androidx/compose/animation/animation/1.13.0-alpha02/animation-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.animation:animation-android:1.10.0
-- id: androidx.compose.animation:animation-android:1.10.0
-  resolvedVersion: 1.10.0
+  - androidx.compose.animation:animation-android:1.13.0-alpha02
+- id: androidx.compose.animation:animation-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.aar
-      sha256: 8a559dabdae5a4dcd45b9eba7fbc90df093135e43c7e29de2769911eec76eef9
-      cachePath: androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.aar
-      extracted: androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.aar
+      sha256: d28223920dd75f594677cdb7cacaa8eaf5464366ca1161dfe090e01493f2ae60
+      cachePath: androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.module
-      sha256: 048631961b8d45793f92705d8775d19e02824b120d1547b92852889678f5834b
-      cachePath: androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.module
+      sha256: 463135f68fae33a32cfbf33aa6034b7dac4c027f0d271bd1156b930b9599542c
+      cachePath: androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.pom
-      sha256: 0df8729ef973d6efbd3bb70a59475619e5ac534166ee749d9bbafbc637be8ac6
-      cachePath: androidx/compose/animation/animation-android/1.10.0/animation-android-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.pom
+      sha256: 66b55efdf7d7439b26bc35b79541abfd75d565f697dfdf99df43f5590e7cd344
+      cachePath: androidx/compose/animation/animation-android/1.13.0-alpha02/animation-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation-core:1.10.0
-  - androidx.compose.foundation:foundation-layout:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-geometry:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.animation:animation-core:1.13.0-alpha02
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.animation:animation-core:1.10.0
-  resolvedVersion: 1.10.0
+- id: androidx.compose.animation:animation-core:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.10.0/animation-core-1.10.0.module
-      sha256: 2560e6513e16978300d7f1cb2593e9cdc0f57dbb37b788efd2ee6769c12d7921
-      cachePath: androidx/compose/animation/animation-core/1.10.0/animation-core-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.13.0-alpha02/animation-core-1.13.0-alpha02.module
+      sha256: d6f914cd66d30774e5bd1d6a841955555d77d2ba098c345e8b9e5c8b7aad518d
+      cachePath: androidx/compose/animation/animation-core/1.13.0-alpha02/animation-core-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.10.0/animation-core-1.10.0.pom
-      sha256: cb5efb3eafb71a7cb0d0150bab4ea377d6788ac397d30a9cb94c3d77c130788f
-      cachePath: androidx/compose/animation/animation-core/1.10.0/animation-core-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.13.0-alpha02/animation-core-1.13.0-alpha02.pom
+      sha256: 555fd9b778e4477ae4f78e83d1c7b4fc4a2eff8bd6a2c9009e11d356f92e50ec
+      cachePath: androidx/compose/animation/animation-core/1.13.0-alpha02/animation-core-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.animation:animation-core-android:1.10.0
-- id: androidx.compose.animation:animation-core-android:1.10.0
-  resolvedVersion: 1.10.0
+  - androidx.compose.animation:animation-core-android:1.13.0-alpha02
+- id: androidx.compose.animation:animation-core-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.aar
-      sha256: 55d7bd5ba5796bc07d0552256734789a5be039555cd93991d0d26ce1a7671fef
-      cachePath: androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.aar
-      extracted: androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.aar
+      sha256: edf7be97bec19187e843028608dac46e93c875a026421c151bc3847e888d138a
+      cachePath: androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.module
-      sha256: c756a26751aa2dd8950ee29fea39ca81e419e4cd7d07a23b04c7158da9db33a2
-      cachePath: androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.module
+      sha256: 6500c113a11b3644eaf2264b257d7459c186a775732ced19bef51df7e39c9917
+      cachePath: androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.pom
-      sha256: f51a15d1041900dac6b83fb64b8b291d4743d38511c6b7b07321542fafb91108
-      cachePath: androidx/compose/animation/animation-core-android/1.10.0/animation-core-android-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.pom
+      sha256: dee90cf2a96be8dbe98c86911762183e0cfa13940fcb9e65eb8f84b5c0e19581
+      cachePath: androidx/compose/animation/animation-core-android/1.13.0-alpha02/animation-core-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
-- id: androidx.compose.foundation:foundation:1.10.0
-  resolvedVersion: 1.10.0
+- id: androidx.compose.foundation:foundation:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.10.0/foundation-1.10.0.module
-      sha256: b9f547775ab6920e06afeb371322840ab72d738b5a694a6f733ad7049675c452
-      cachePath: androidx/compose/foundation/foundation/1.10.0/foundation-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.13.0-alpha02/foundation-1.13.0-alpha02.module
+      sha256: 56b810c0060f8bffcafeb5f704c696d9ca3a47457b1c657af6a8ac8d06cee059
+      cachePath: androidx/compose/foundation/foundation/1.13.0-alpha02/foundation-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.10.0/foundation-1.10.0.pom
-      sha256: ce51c3ad01ae0b99a1b6c224c37ec2ff844a7f11a29f898c1a055b84b34d6601
-      cachePath: androidx/compose/foundation/foundation/1.10.0/foundation-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.13.0-alpha02/foundation-1.13.0-alpha02.pom
+      sha256: f2bcbabff9915ef68f9d23d703c553359d4ac61e2b9ad0acde895adfa79ff2c4
+      cachePath: androidx/compose/foundation/foundation/1.13.0-alpha02/foundation-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.foundation:foundation-android:1.10.0
-- id: androidx.compose.foundation:foundation-android:1.10.0
-  resolvedVersion: 1.10.0
+  - androidx.compose.foundation:foundation-android:1.13.0-alpha02
+- id: androidx.compose.foundation:foundation-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.aar
-      sha256: c7366032bb88f90f307ab50f58e3c87ad93e278f50cfdbd9bedb6f10bc6217a3
-      cachePath: androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.aar
-      extracted: androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.aar
+      sha256: e1ac8568ed134388a704efd3b47daa45e19819474fff9406364ab9cc20b4bfb5
+      cachePath: androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.module
-      sha256: d4d4ad1b52952463b0b1a5099f6591a8da70105249643ffe3b1fe59e311c3766
-      cachePath: androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.module
+      sha256: bb26ec894d975c6b75bc058b4675a63ed9f134f30529801bcd0aadea2d5d34b3
+      cachePath: androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.pom
-      sha256: e1abf54347a061e9dc57216c0dae704f421b912e895f0126ec7f1d4993a06b60
-      cachePath: androidx/compose/foundation/foundation-android/1.10.0/foundation-android-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.pom
+      sha256: 43a093231d9d1f60d05416bd82d61d87efbc66dc333a4e7271a469ca24542646
+      cachePath: androidx/compose/foundation/foundation-android/1.13.0-alpha02/foundation-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation:1.10.0
-  - androidx.compose.foundation:foundation-layout:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-text:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.animation:animation:1.13.0-alpha02
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-text:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core:1.19.1
   - androidx.emoji2:emoji2:1.4.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.foundation:foundation-layout:1.10.0
-  resolvedVersion: 1.10.0
+- id: androidx.compose.foundation:foundation-layout:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.10.0/foundation-layout-1.10.0.module
-      sha256: 421dccb4cf516955c206ca1cad456983934a9909b44b0e9a14f735a779a563d1
-      cachePath: androidx/compose/foundation/foundation-layout/1.10.0/foundation-layout-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.13.0-alpha02/foundation-layout-1.13.0-alpha02.module
+      sha256: 9a79f51f40c607453014bb94ce47b676f956a97e9195dfecb91b12fbb5d22a12
+      cachePath: androidx/compose/foundation/foundation-layout/1.13.0-alpha02/foundation-layout-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.10.0/foundation-layout-1.10.0.pom
-      sha256: 1c5d36f0b8b1fb516b5835b240e04bf3b2b72a2d7468fbaebbf1e9c534e01265
-      cachePath: androidx/compose/foundation/foundation-layout/1.10.0/foundation-layout-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.13.0-alpha02/foundation-layout-1.13.0-alpha02.pom
+      sha256: a5b24f5f7ddb4faab862a7fbae8e80dbb5a3bd4284d21cd2e0cb4e38c8dff3b0
+      cachePath: androidx/compose/foundation/foundation-layout/1.13.0-alpha02/foundation-layout-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.foundation:foundation-layout-android:1.10.0
-- id: androidx.compose.foundation:foundation-layout-android:1.10.0
-  resolvedVersion: 1.10.0
+  - androidx.compose.foundation:foundation-layout-android:1.13.0-alpha02
+- id: androidx.compose.foundation:foundation-layout-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.aar
-      sha256: 85513652dc9e458be47683dc0e61473e0bbbe24417d18c4eaf15b0c25a60318c
-      cachePath: androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.aar
-      extracted: androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.aar
+      sha256: 1d44668f343e4ced808d909e5c0eea880b7abb7fbb254190f7fae886f03e1fc4
+      cachePath: androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.module
-      sha256: a6979914bfa087650ece415d36b0b0d74669f86c3f453a2f9c05fcf47aeef61a
-      cachePath: androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.module
+      sha256: c3f66ab169aad3f08279a5159f07e171e4d33ffbb81e03de4a0c7663b11d44ed
+      cachePath: androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.pom
-      sha256: c98f8a732ce325841e522123fa9fff2ef34c4aaaefad6982b51e2c9d10a4010a
-      cachePath: androidx/compose/foundation/foundation-layout-android/1.10.0/foundation-layout-android-1.10.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.pom
+      sha256: d4af410a87022b6076602a7b2acbad289da049478d5030dbdc2d8b118ab32a4f
+      cachePath: androidx/compose/foundation/foundation-layout-android/1.13.0-alpha02/foundation-layout-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation-core:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.animation:animation-core:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core:1.19.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.compose.material:material-icons-core:1.7.8
@@ -965,7 +983,7 @@ dependencies:
       sha256: df671e1144120b43f83464e1e94ff828d0ded8132b3b15b86de07f1b82d0d932
       cachePath: androidx/compose/material/material-icons-core-android/1.7.8/material-icons-core-android-1.7.8.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.compose.material:material-icons-extended:1.7.8
   requestedVersion: 1.7.8
@@ -1032,10 +1050,10 @@ dependencies:
       cachePath: androidx/compose/material/material-ripple-android/1.8.1/material-ripple-android-1.8.1.pom
   transitiveDependencies:
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation:1.10.0
-  - androidx.compose.foundation:foundation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.animation:animation:1.13.0-alpha02
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.compose.material3:material3:1.4.0
   requestedVersion: 1.4.0
@@ -1111,14 +1129,14 @@ dependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation-core:1.10.0
-  - androidx.compose.foundation:foundation:1.10.0
-  - androidx.compose.foundation:foundation-layout:1.10.0
+  - androidx.compose.animation:animation-core:1.13.0-alpha02
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
   - androidx.compose.material:material-ripple:1.8.1
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-text:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-text:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-common-java8:2.11.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.compose.material3.adaptive:adaptive:1.3.0
@@ -1155,8 +1173,8 @@ dependencies:
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
-  - androidx.compose.foundation:foundation:1.10.0
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.window:window:1.5.0
   - androidx.window:window-core:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
@@ -1194,14 +1212,14 @@ dependencies:
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
-  - androidx.compose.animation:animation:1.10.0
-  - androidx.compose.animation:animation-core:1.10.0
-  - androidx.compose.foundation:foundation:1.10.0
-  - androidx.compose.foundation:foundation-layout:1.10.0
+  - androidx.compose.animation:animation:1.13.0-alpha02
+  - androidx.compose.animation:animation-core:1.13.0-alpha02
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
+  - androidx.compose.foundation:foundation-layout:1.13.0-alpha02
   - androidx.compose.material3.adaptive:adaptive:1.3.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-geometry:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02
   - androidx.core:core:1.19.1
   - androidx.window:window-core:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
@@ -1238,9 +1256,9 @@ dependencies:
   - androidx.activity:activity-compose:1.13.0
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
-  - androidx.compose.foundation:foundation:1.10.0
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
   - androidx.compose.material3.adaptive:adaptive-layout:1.3.0
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.compose.material3.adaptive:adaptive-navigation3:1.3.0
   requestedVersion: 1.3.0
@@ -1281,314 +1299,315 @@ dependencies:
   - androidx.navigation3:navigation3-ui:1.2.0
   - androidx.navigationevent:navigationevent-compose:1.1.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.runtime:runtime:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.runtime:runtime:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.12.1/runtime-1.12.1.module
-      sha256: 6229c46e743d284155b9a0d3dbbc9e61ec6ced6a4fbdbef85ce2619895dfbcae
-      cachePath: androidx/compose/runtime/runtime/1.12.1/runtime-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.13.0-alpha02/runtime-1.13.0-alpha02.module
+      sha256: bf73a47e6b25ab2dae39465220a046a5267be144d8adffc54e89ef60056779bf
+      cachePath: androidx/compose/runtime/runtime/1.13.0-alpha02/runtime-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.12.1/runtime-1.12.1.pom
-      sha256: 0bcb66c1b123a7421fd088d2620ee04d2e56213bb5d2c9c427a6b1a41a687fcb
-      cachePath: androidx/compose/runtime/runtime/1.12.1/runtime-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.13.0-alpha02/runtime-1.13.0-alpha02.pom
+      sha256: 1c5137d78618f6fc33e66fe5b4bc52d29128f83bd59539c4223196909b54ff00
+      cachePath: androidx/compose/runtime/runtime/1.13.0-alpha02/runtime-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime-android:1.12.1
-- id: androidx.compose.runtime:runtime-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.runtime:runtime-android:1.13.0-alpha02
+- id: androidx.compose.runtime:runtime-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.aar
-      sha256: 1701a61d06d2f6144f2cd8b015abbc5ad6952eacb70c24c208cdfd2bb188dde7
-      cachePath: androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.aar
-      extracted: androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.aar
+      sha256: 54b5b1e9798d0d8dfd8a5415e9457f372f172bb250ffc6fa1647253b20f6ed6f
+      cachePath: androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.module
-      sha256: f4940335f7c63859a749209c00d3778a18be97d2a03bd67f733253124cb2838f
-      cachePath: androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.module
+      sha256: cfa31f99e7d62cd8d2046488fd2b992040896a9d30f1669079a5d49ac1076b34
+      cachePath: androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.pom
-      sha256: 29840cf32960ed985bed82c072b7662b8066327187081e0fcfd5467cee5c6709
-      cachePath: androidx/compose/runtime/runtime-android/1.12.1/runtime-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.pom
+      sha256: 22579f6ecd6dce8d571b07fe6e0c306c77e10c1574c9918be7b964153dc09662
+      cachePath: androidx/compose/runtime/runtime-android/1.13.0-alpha02/runtime-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime-annotation:1.12.1
+  - androidx.compose.runtime:runtime-annotation:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
-- id: androidx.compose.runtime:runtime-annotation:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.runtime:runtime-annotation:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation/1.12.1/runtime-annotation-1.12.1.module
-      sha256: 43bcb5a97aa5cace0ab5d981a8f70618a875ec35b6071e7bb18d55d3ea127d8d
-      cachePath: androidx/compose/runtime/runtime-annotation/1.12.1/runtime-annotation-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation/1.13.0-alpha02/runtime-annotation-1.13.0-alpha02.module
+      sha256: 6e9390990dd4ed619fff5903c0c841a0392713b80bde9a3a112f1a823424b4f8
+      cachePath: androidx/compose/runtime/runtime-annotation/1.13.0-alpha02/runtime-annotation-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation/1.12.1/runtime-annotation-1.12.1.pom
-      sha256: 7e65281b333ab81af736debc19a8e4ea86ab7b6e82eb1cd7a4b3e8c6ca695c8f
-      cachePath: androidx/compose/runtime/runtime-annotation/1.12.1/runtime-annotation-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation/1.13.0-alpha02/runtime-annotation-1.13.0-alpha02.pom
+      sha256: aac34d727da79339086aaad8a4bcb207d2bad37d0b1fff092b90b02165a6f78d
+      cachePath: androidx/compose/runtime/runtime-annotation/1.13.0-alpha02/runtime-annotation-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime-annotation-android:1.12.1
-- id: androidx.compose.runtime:runtime-annotation-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.runtime:runtime-annotation-android:1.13.0-alpha02
+- id: androidx.compose.runtime:runtime-annotation-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.aar
-      sha256: 071d6200f5f34ffb5ce69cc19ee8db577c188832bb472779213d4633eca26565
-      cachePath: androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.aar
-      extracted: androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.aar
+      sha256: 27f0445d805d765a85f8628adc76bbeef8b11085ad08aa7d4b88e05c6819b07a
+      cachePath: androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.module
-      sha256: 8bc504767fb8c46477ea5773fd7ba795fe7cfeae86130491fd75c4b633b74cfb
-      cachePath: androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.module
+      sha256: 3ee6909a16321ca16f244506b04a1ed95e51ae1e60fca6547e02f1510a20ea7e
+      cachePath: androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.pom
-      sha256: 8407a3d85d7090d0baccc728050e7e822a34e9eb6076a469d397ebd27729e856
-      cachePath: androidx/compose/runtime/runtime-annotation-android/1.12.1/runtime-annotation-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.pom
+      sha256: 9e3eb26f6918b9aab1f9889b34fff42efa18907af9927e2627a2b4338ade4df5
+      cachePath: androidx/compose/runtime/runtime-annotation-android/1.13.0-alpha02/runtime-annotation-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.runtime:runtime-retain:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.runtime:runtime-retain:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain/1.12.1/runtime-retain-1.12.1.module
-      sha256: c6f8ad1d5450bb4e647b392b6bdba7795bb1d39e17ce627a2c83130b2087e946
-      cachePath: androidx/compose/runtime/runtime-retain/1.12.1/runtime-retain-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain/1.13.0-alpha02/runtime-retain-1.13.0-alpha02.module
+      sha256: 8b53ff61e416023a140cd88b1eacbf6bb08b3098cb67a9593da27cad3ddfef69
+      cachePath: androidx/compose/runtime/runtime-retain/1.13.0-alpha02/runtime-retain-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain/1.12.1/runtime-retain-1.12.1.pom
-      sha256: 7970172550ae0e9f3e7ab08599e49d8b7efcb696c6cb01e2b53c85fb9007a4ec
-      cachePath: androidx/compose/runtime/runtime-retain/1.12.1/runtime-retain-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain/1.13.0-alpha02/runtime-retain-1.13.0-alpha02.pom
+      sha256: d040449bd547ad9d97f046644ad0f8fa3fd28cbf73b5bf7d7c59a4c76c12fa9e
+      cachePath: androidx/compose/runtime/runtime-retain/1.13.0-alpha02/runtime-retain-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime-retain-android:1.12.1
-- id: androidx.compose.runtime:runtime-retain-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.runtime:runtime-retain-android:1.13.0-alpha02
+- id: androidx.compose.runtime:runtime-retain-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.aar
-      sha256: 6e32111eed0f67ef2ae70c2d9c83cb6bfb54095fe2fb2fdc800febd14d0d7a61
-      cachePath: androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.aar
-      extracted: androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.aar
+      sha256: d112741ef1a5cbb2876fc9a764dbb2c0aa89a11fb3adf38a8134aa6726b45df4
+      cachePath: androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.module
-      sha256: cff2dc5abcffa247616b70aee4c0733cfc90543ed8400bfd98dda0f164b06ae8
-      cachePath: androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.module
+      sha256: 8ca29856e8a3607df523a8747cd7a6fefc82e451f9104f34fcfd0bdc421b6ffa
+      cachePath: androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.pom
-      sha256: 6b6fd5244e038c4c1b182361e503a5e11cc1090ad582c9e29090ea46e98ace5b
-      cachePath: androidx/compose/runtime/runtime-retain-android/1.12.1/runtime-retain-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.pom
+      sha256: e282371b55020f9276373aad60d65eca1622e10aa9d386f32851288d63efdd1c
+      cachePath: androidx/compose/runtime/runtime-retain-android/1.13.0-alpha02/runtime-retain-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
-- id: androidx.compose.runtime:runtime-saveable:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.12.1/runtime-saveable-1.12.1.module
-      sha256: 7f2350cdbe4beb8a18fb168a75a2d980c3eae3ee0ac80eee0239793ce3e8671c
-      cachePath: androidx/compose/runtime/runtime-saveable/1.12.1/runtime-saveable-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.13.0-alpha02/runtime-saveable-1.13.0-alpha02.module
+      sha256: 86d78aabc527fbc214f1a3491dd0172b3ade381ba3e0bb5f955cf1e0874b6daf
+      cachePath: androidx/compose/runtime/runtime-saveable/1.13.0-alpha02/runtime-saveable-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.12.1/runtime-saveable-1.12.1.pom
-      sha256: bc2a53c601e1d310a067fd9cb7df780283389e1f5885690c28ce33363fa521ee
-      cachePath: androidx/compose/runtime/runtime-saveable/1.12.1/runtime-saveable-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.13.0-alpha02/runtime-saveable-1.13.0-alpha02.pom
+      sha256: 88e2589875f0385eafc5bb50974d1a05e1852e412cf4ee7d621e82308b152237
+      cachePath: androidx/compose/runtime/runtime-saveable/1.13.0-alpha02/runtime-saveable-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime-saveable-android:1.12.1
-- id: androidx.compose.runtime:runtime-saveable-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.runtime:runtime-saveable-android:1.13.0-alpha02
+- id: androidx.compose.runtime:runtime-saveable-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.aar
-      sha256: 0c83d47820fbc8ffb6e3e49311ccd4755676d6f94bb8c6d8564ab4c799df8779
-      cachePath: androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.aar
-      extracted: androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.aar
+      sha256: 224023b6c6aae8e762860b158f51d2588c55129d4a03c24f19a8058cd99cae75
+      cachePath: androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.module
-      sha256: ecd10065c77370b7f00a67df510e0c89b2279f0619bce55001770539039b8ad9
-      cachePath: androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.module
+      sha256: ecce4e94c32a5dcc8f3eead477661ffc6f1fcb4cbe0034f205ee5f3388531430
+      cachePath: androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.pom
-      sha256: b24f9d787b16e356331ab5aeee85363aeb3a008bdd674da12b0a1362236b8ee9
-      cachePath: androidx/compose/runtime/runtime-saveable-android/1.12.1/runtime-saveable-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.pom
+      sha256: e977f144d9699a7738f144bfd003f1fc66684bfa957714493e6ef60527d9a2bc
+      cachePath: androidx/compose/runtime/runtime-saveable-android/1.13.0-alpha02/runtime-saveable-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-runtime-compose:2.11.0
-  - androidx.savedstate:savedstate-compose:1.4.0
+  - androidx.savedstate:savedstate-compose:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui:1.12.1
+- id: androidx.compose.ui:ui:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.12.1/ui-1.12.1.module
-      sha256: 522b7fe3ad5c6f5e60319ac66c67fdff2dc47a0c78317f0efa3f87b105c8dc35
-      cachePath: androidx/compose/ui/ui/1.12.1/ui-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.13.0-alpha02/ui-1.13.0-alpha02.module
+      sha256: a2de23ab2d1ffe4e37af564cc0ef81832ceda193b353800d75f438aaaebbe6e5
+      cachePath: androidx/compose/ui/ui/1.13.0-alpha02/ui-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.12.1/ui-1.12.1.pom
-      sha256: 9e026fe4bcd75595b11bb2330568887c323c7559718c5b75847f627bf654f393
-      cachePath: androidx/compose/ui/ui/1.12.1/ui-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.13.0-alpha02/ui-1.13.0-alpha02.pom
+      sha256: 3375bd1acd8a130dbd628f8165d877c3bb182c88f3e9ab7cd9845cb51c63c26c
+      cachePath: androidx/compose/ui/ui/1.13.0-alpha02/ui-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-android:1.12.1
-- id: androidx.compose.ui:ui-android:1.12.1
+  - androidx.compose.ui:ui-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-android:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.aar
-      sha256: 3f1ae17e237d9dc0a2a0f42cb04b85b8de6e12f67adc5f5c12173fe31e501cb2
-      cachePath: androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.aar
+      sha256: 09ea0f19c952d84150a2c836157ad588b5533289cc480a4b99a8dca4469a41bb
+      cachePath: androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.module
-      sha256: 6429157dac41f36f6562878c54094b4f565f32b16dea36b2d901517d3695f994
-      cachePath: androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.module
+      sha256: 2156b67177865cbdb3aed94509e7ed0eee82b10944d91c5b8bf428238ce9c9f4
+      cachePath: androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.pom
-      sha256: 8cb01b7d4c70e2492012d1d212ea6d7701485dc79c199edcb560eafa4375dde7
-      cachePath: androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.pom
+      sha256: a470f5f4e3118e06eb6b6dd04c26c0cc1137b6102e3afea524acbba7b7ee5452
+      cachePath: androidx/compose/ui/ui-android/1.13.0-alpha02/ui-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.activity:activity-ktx:1.13.0
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.autofill:autofill:1.0.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-retain:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui-geometry:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-text:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-retain:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-text:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core:1.19.1
   - androidx.customview:customview-poolingcontainer:1.0.0
   - androidx.emoji2:emoji2:1.4.0
   - androidx.lifecycle:lifecycle-runtime-compose:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0
+  - androidx.navigationevent:navigationevent:1.1.1
   - androidx.profileinstaller:profileinstaller:1.4.0
-  - androidx.savedstate:savedstate-compose:1.4.0
-  - androidx.savedstate:savedstate-ktx:1.4.0
+  - androidx.savedstate:savedstate-compose:1.5.0
+  - androidx.savedstate:savedstate-ktx:1.5.0
   - androidx.window:window:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
   - org.jspecify:jspecify:1.0.0
-- id: androidx.compose.ui:ui-geometry:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-geometry:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.12.1/ui-geometry-1.12.1.module
-      sha256: 3f0f1c7f5ffdb0c0a029c0320691de75660c0c71e766ce8cb4d84f9463bc7d36
-      cachePath: androidx/compose/ui/ui-geometry/1.12.1/ui-geometry-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.13.0-alpha02/ui-geometry-1.13.0-alpha02.module
+      sha256: fbae41f090c46b5ddca5ad959b70f8f724a9943967855f2cfdcc3afb98079429
+      cachePath: androidx/compose/ui/ui-geometry/1.13.0-alpha02/ui-geometry-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.12.1/ui-geometry-1.12.1.pom
-      sha256: b02a764da7873e1bd46078821039c629c2ec9d666640ff3a6371223473539ad0
-      cachePath: androidx/compose/ui/ui-geometry/1.12.1/ui-geometry-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.13.0-alpha02/ui-geometry-1.13.0-alpha02.pom
+      sha256: 4491d9a5a726367305c4783e5003d8872ad01f335b886e809869ff3c54cdcc60
+      cachePath: androidx/compose/ui/ui-geometry/1.13.0-alpha02/ui-geometry-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-geometry-android:1.12.1
-- id: androidx.compose.ui:ui-geometry-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-geometry-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-geometry-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.aar
-      sha256: 09a23c76f5d52ea5ec61d4a78d4876940f0f033c975e5c604246f89a63532754
-      cachePath: androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.aar
+      sha256: 9cdf0b100b87967cf9a088d3ff5d18ff5cff774841d41751bcaab69e7a1c2206
+      cachePath: androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.module
-      sha256: fba69709be80d4eb33bdb017759acf616faa7725e6214ab9cdb29bdab634cc66
-      cachePath: androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.module
+      sha256: dcba2fd7ce81c400464f93c66ba493c87375f5d00ad87eca8df54d40ec562e83
+      cachePath: androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.pom
-      sha256: d7721b420b6bee2d7bbbd12581e0abff1cd02e8eaa2ea1805f11080b2eb82b22
-      cachePath: androidx/compose/ui/ui-geometry-android/1.12.1/ui-geometry-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.pom
+      sha256: 18057aa591f8acb3ac16adb0cb022223316e70de2b8ad81378a9ffbc12226ca6
+      cachePath: androidx/compose/ui/ui-geometry-android/1.13.0-alpha02/ui-geometry-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-graphics:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.12.1/ui-graphics-1.12.1.module
-      sha256: 34c86f9a4ac2d71bd509d229140ecec77cfc3b3590d0b1647751b27ee07ba9d4
-      cachePath: androidx/compose/ui/ui-graphics/1.12.1/ui-graphics-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.13.0-alpha02/ui-graphics-1.13.0-alpha02.module
+      sha256: 4982f1776de6949b97cb214882985248c1947bcfb122daa8964cf1d755d3bf91
+      cachePath: androidx/compose/ui/ui-graphics/1.13.0-alpha02/ui-graphics-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.12.1/ui-graphics-1.12.1.pom
-      sha256: 41b804f94842fe837ac84720cd7f8ab77f4b61b0dbb1964b647fa60be990ab43
-      cachePath: androidx/compose/ui/ui-graphics/1.12.1/ui-graphics-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.13.0-alpha02/ui-graphics-1.13.0-alpha02.pom
+      sha256: 61b072a0eca1b4a1fa16edafed23d75b22b1e12b2ec500e277abf039fe85c5a4
+      cachePath: androidx/compose/ui/ui-graphics/1.13.0-alpha02/ui-graphics-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-graphics-android:1.12.1
-- id: androidx.compose.ui:ui-graphics-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-graphics-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-graphics-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.aar
-      sha256: 1e6451f05ad569e306e7022b3c41d16aa75080bb2c99b59c4d67e7dbf6f428e7
-      cachePath: androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.aar
+      sha256: 6f5d561eca13a94f4cb030ad58c977e34913f7a51d7d26a54fd61a77b78fd3ae
+      cachePath: androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.module
-      sha256: 98c9f144b62d7e22b5427a8cc67e824521fabd43cb39e36526a05198d53de7c4
-      cachePath: androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.module
+      sha256: ed8895f047837b4357bf0473ad0c2faa0d46b4f6849e780395a78b5e7d43aa55
+      cachePath: androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.pom
-      sha256: 0de7f78d822c6fa1e37f855ba27bfc7d3043e77b5ea5b381a0d229feaa50c650
-      cachePath: androidx/compose/ui/ui-graphics-android/1.12.1/ui-graphics-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.pom
+      sha256: fdde299bbe2ecc6bd11c815039a3e4dbb9c964e911a7532c0857a17cfaf2c032
+      cachePath: androidx/compose/ui/ui-graphics-android/1.13.0-alpha02/ui-graphics-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core:1.19.1
-  - androidx.graphics:graphics-path:1.0.1
+  - androidx.graphics:graphics-path:1.1.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-test:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-test:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test/1.12.1/ui-test-1.12.1.module
-      sha256: 4f7008c6659cabba83cec0a89fafc8bbe2aa232b14de8b34b19e317b06175634
-      cachePath: androidx/compose/ui/ui-test/1.12.1/ui-test-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test/1.13.0-alpha02/ui-test-1.13.0-alpha02.module
+      sha256: 9d9eda34b98ab83587ef591f95bf3b23c2be0b6b1bf949a7783f91b6b17a047f
+      cachePath: androidx/compose/ui/ui-test/1.13.0-alpha02/ui-test-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test/1.12.1/ui-test-1.12.1.pom
-      sha256: 441dd40d0db17f40afc941858ac8abf9c5e12710701b9d6b4ccb8ffd648728ca
-      cachePath: androidx/compose/ui/ui-test/1.12.1/ui-test-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test/1.13.0-alpha02/ui-test-1.13.0-alpha02.pom
+      sha256: eb7f48900fe28745ef70affe362a4f0970d29324183ea61d67acaf7f91951133
+      cachePath: androidx/compose/ui/ui-test/1.13.0-alpha02/ui-test-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-test-android:1.12.1
-- id: androidx.compose.ui:ui-test-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-test-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-test-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.aar
-      sha256: 2beafe8ba6c4ac2335159a7bdc08ac3eaac205f183d5d6b29b2eb87a2458b7ff
-      cachePath: androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.aar
+      sha256: 494e02847380a29f0ba9d087102ed503dad43715483a9f52e16f4ca7422e2808
+      cachePath: androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.module
-      sha256: 6c685a3a642edfb6df97644df7d4d70eb327e8708cf947a2172fa55d5118a45d
-      cachePath: androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.module
+      sha256: ffb02c7c95238651141f5b7485c6391037a0df55d180ac1a0d4dbff2c755e226
+      cachePath: androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.pom
-      sha256: d97b4936a3dc95f070cd9287652c9d539758ffff2bb434bc6d40f2911f97eb8a
-      cachePath: androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.pom
+      sha256: 3ff20e09bcfa39560072009818195ba6330749056cf522217411bec1b61d2217
+      cachePath: androidx/compose/ui/ui-test-android/1.13.0-alpha02/ui-test-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.activity:activity-compose:1.13.0
   - androidx.annotation:annotation:1.10.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-text:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-text:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
   - androidx.test:monitor:1.8.0
   - androidx.test.espresso:espresso-core:3.7.0
@@ -1596,43 +1615,43 @@ dependencies:
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0
-- id: androidx.compose.ui:ui-test-junit4:1.12.1
+- id: androidx.compose.ui:ui-test-junit4:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4/1.12.1/ui-test-junit4-1.12.1.module
-      sha256: 58f9b48521da00580fd184c74b1dbbf7879055d55b14e3f46825d991033105f5
-      cachePath: androidx/compose/ui/ui-test-junit4/1.12.1/ui-test-junit4-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4/1.13.0-alpha02/ui-test-junit4-1.13.0-alpha02.module
+      sha256: a3311af1016e7136e2589a670afd14d2321caf88cce471d92418b871f7ae6633
+      cachePath: androidx/compose/ui/ui-test-junit4/1.13.0-alpha02/ui-test-junit4-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4/1.12.1/ui-test-junit4-1.12.1.pom
-      sha256: de466ca2084d38991c67dfdb760fc8c917f89ea513dcf3c5458416d747e1a778
-      cachePath: androidx/compose/ui/ui-test-junit4/1.12.1/ui-test-junit4-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4/1.13.0-alpha02/ui-test-junit4-1.13.0-alpha02.pom
+      sha256: 653413190f860dfaf9b4db8f0d00f98d774b28d3e44a07fcccf771779deaf956
+      cachePath: androidx/compose/ui/ui-test-junit4/1.13.0-alpha02/ui-test-junit4-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-test-junit4-android:1.12.1
-- id: androidx.compose.ui:ui-test-junit4-android:1.12.1
+  - androidx.compose.ui:ui-test-junit4-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-test-junit4-android:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.aar
-      sha256: bc01fda8b36dd259055e2768f7ba753f9ee9d95e9ce6feda284c913ad7bd8a4d
-      cachePath: androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.aar
+      sha256: 54c9ce8c38bc7e8bf71e2c4f2189f7232599d241d147c896c832e98cd940b466
+      cachePath: androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.module
-      sha256: 2fbcff1284ed93d46c98bbb8d2bc806b74032657a33dc017d756d95783a83f93
-      cachePath: androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.module
+      sha256: 812a1bc8ec1c49ddd107174c5058c433900cee7d7e055ddfa9596f56327517a1
+      cachePath: androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.pom
-      sha256: fd4e1fc49bd8ef446d5c73ae884b7eeec87b010c8c8cc66c4f247e3d3e191f65
-      cachePath: androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.pom
+      sha256: 434f00d59a70e4a4c75cf872dc130a3d382062685cba81d92344481ca9a9c959
+      cachePath: androidx/compose/ui/ui-test-junit4-android/1.13.0-alpha02/ui-test-junit4-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.activity:activity:1.13.0
   - androidx.activity:activity-compose:1.13.0
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui-test:1.12.1
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui-test:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-common:2.11.0
   - androidx.lifecycle:lifecycle-runtime:2.11.0
   - androidx.test:core:1.7.0
@@ -1643,250 +1662,274 @@ dependencies:
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0
-- id: androidx.compose.ui:ui-test-manifest:1.12.1
+- id: androidx.compose.ui:ui-test-manifest:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.aar
-      sha256: 9566508e7d2c8d90ada9b9e2c37e84ce035affab77a0b7678851e0de9054e3da
-      cachePath: androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.aar
-      extracted: androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.aar
+      sha256: 58ce8c2db5e514c4f4e4655b9e78b016cb3767a9be521276e37eae055390e366
+      cachePath: androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.module
-      sha256: 0aeccf96e9677127e4888eaaf7068f21e49f9d37d01ca654fd793572c088b2f0
-      cachePath: androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.module
+      sha256: c39aa874ab196f4e6f45e2b55c0c938ab443e7253e5402931825d0ab1d5aaee6
+      cachePath: androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.pom
-      sha256: d7e5a31377ee6bb198e72140726d1bc8f851c00128188d47ab78d1102687ada2
-      cachePath: androidx/compose/ui/ui-test-manifest/1.12.1/ui-test-manifest-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.pom
+      sha256: 458d1c0283e1993456b4d1dd96833eb852f87d48868e9f2710247a378651e117
+      cachePath: androidx/compose/ui/ui-test-manifest/1.13.0-alpha02/ui-test-manifest-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.activity:activity:1.13.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-text:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-text:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.12.1/ui-text-1.12.1.module
-      sha256: 74bf211926990ac0bc4ebdc4cd158ad496fa398834caaaf1bc6b856c96341c9d
-      cachePath: androidx/compose/ui/ui-text/1.12.1/ui-text-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.13.0-alpha02/ui-text-1.13.0-alpha02.module
+      sha256: 70b99c1bec419611083634767a1cfa09f000cded76a0a516639d75b182224bbf
+      cachePath: androidx/compose/ui/ui-text/1.13.0-alpha02/ui-text-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.12.1/ui-text-1.12.1.pom
-      sha256: 6dbbafb73dbee767ee4e1aac8aa8cc4fcdd3f0790cbc1f472969638dfb97c1c1
-      cachePath: androidx/compose/ui/ui-text/1.12.1/ui-text-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.13.0-alpha02/ui-text-1.13.0-alpha02.pom
+      sha256: 8736436821a59e26ef86dab5d76534ad4c9f9e019c74f264124e689b748b1334
+      cachePath: androidx/compose/ui/ui-text/1.13.0-alpha02/ui-text-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-text-android:1.12.1
-- id: androidx.compose.ui:ui-text-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-text-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-text-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.aar
-      sha256: e710a5776966537df09a2e5c4ca1dacc14ca11d7b20a6af16c0e992ddd3aecd3
-      cachePath: androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.aar
+      sha256: 78aab5b7331462ba3d4cd494d39f119217ec4d4de7300a6d694004e817a99733
+      cachePath: androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.module
-      sha256: 9317b9f7624bc02fccb22b7c7799c7bb68969861241bdb279342a4d9b439d2d8
-      cachePath: androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.module
+      sha256: 6a79cfccc1ac367b5b765ab3d6f658bf0e73207c679137c9352f717ae3bf4254
+      cachePath: androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.pom
-      sha256: 37c3f8b6d0fe79bef2a2cb83dcc4d690e99db282785ffb7f1ce6b1a64c6f7440
-      cachePath: androidx/compose/ui/ui-text-android/1.12.1/ui-text-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.pom
+      sha256: 77add983f9c945d3ce0bb4822635c8fa1a3bf20913197261d5ade36e76e39916
+      cachePath: androidx/compose/ui/ui-text-android/1.13.0-alpha02/ui-text-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui-graphics:1.12.1
-  - androidx.compose.ui:ui-unit:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui-graphics:1.13.0-alpha02
+  - androidx.compose.ui:ui-unit:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - androidx.core:core:1.19.1
   - androidx.emoji2:emoji2:1.4.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
-- id: androidx.compose.ui:ui-tooling:1.12.1
-  requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
-  artifacts:
-    module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling/1.12.1/ui-tooling-1.12.1.module
-      sha256: d7b1f7ee5eb75a958ea6a331b8e26bf282c65138e5e378865b73e6d6e76c3ef3
-      cachePath: androidx/compose/ui/ui-tooling/1.12.1/ui-tooling-1.12.1.module
-    pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling/1.12.1/ui-tooling-1.12.1.pom
-      sha256: 144fa69123cecab215163c29debe4e4d98cf5acf86d04e23d3c51b0536908baa
-      cachePath: androidx/compose/ui/ui-tooling/1.12.1/ui-tooling-1.12.1.pom
-  transitiveDependencies:
-  - androidx.compose.ui:ui-tooling-android:1.12.1
-- id: androidx.compose.ui:ui-tooling-android:1.12.1
-  requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-text-google-fonts:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.aar
-      sha256: 49584245c4dcba25b0edad0b770c193a6e8fe79da15c2f5be653db5552969bc5
-      cachePath: androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.aar
+      sha256: dae7e45643f3319379b39cedaf2eebf4416e271472a5c948305f3135c99807ac
+      cachePath: androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.module
-      sha256: 6b0ef871aad9f2650a7b77b6c34b75bfa344706a2f9ef7602ebe19660c6730b4
-      cachePath: androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.module
+      sha256: 2475f4a25ca6c71db9875bd618463cdfcae02be4c66b19f10986a25095093c33
+      cachePath: androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.pom
-      sha256: 0201abe83dd72c38be0b29f0d6fde30e351e645778514aab55f029df971959d1
-      cachePath: androidx/compose/ui/ui-tooling-android/1.12.1/ui-tooling-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.pom
+      sha256: a10cd74514046ae6c809fd17570e0887e97e60364b7282082f7a4bb48507a21d
+      cachePath: androidx/compose/ui/ui-text-google-fonts/1.13.0-alpha02/ui-text-google-fonts-1.13.0-alpha02.pom
+  transitiveDependencies:
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui-text:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
+  - androidx.core:core:1.19.1
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.compose.ui:ui-tooling:1.13.0-alpha02
+  requestedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
+  artifacts:
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling/1.13.0-alpha02/ui-tooling-1.13.0-alpha02.module
+      sha256: 743fa8fcc4aa79a606d0f5e5949da1360cd0234066d627e82f013a995442146b
+      cachePath: androidx/compose/ui/ui-tooling/1.13.0-alpha02/ui-tooling-1.13.0-alpha02.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling/1.13.0-alpha02/ui-tooling-1.13.0-alpha02.pom
+      sha256: 0accebeec2b973772d54b748079a7bc411ce1b983fc133c273e3950a877c085b
+      cachePath: androidx/compose/ui/ui-tooling/1.13.0-alpha02/ui-tooling-1.13.0-alpha02.pom
+  transitiveDependencies:
+  - androidx.compose.ui:ui-tooling-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-tooling-android:1.13.0-alpha02
+  requestedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.aar
+      sha256: 4892eaeba5bb63adcc94725a4d140b6fc55eb373a028ed4ffe469b3c6b099b75
+      cachePath: androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.module
+      sha256: 33f5cce0a6ba66a9b35553d21b505dabbe556d39a5a809ba16ee9de551334edf
+      cachePath: androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.pom
+      sha256: 53568f86d201a50345a0ec22370709464ab90889dcd3a6b8cff97b593330de8b
+      cachePath: androidx/compose/ui/ui-tooling-android/1.13.0-alpha02/ui-tooling-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.activity:activity-compose:1.13.0
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.animation:animation:1.10.0
+  - androidx.compose.animation:animation:1.13.0-alpha02
   - androidx.compose.material3:material3:1.4.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
-  - androidx.compose.ui:ui-tooling-data:1.12.1
-  - androidx.compose.ui:ui-tooling-preview:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.compose.ui:ui-tooling-data:1.13.0-alpha02
+  - androidx.compose.ui:ui-tooling-preview:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-common:2.11.0
-  - androidx.savedstate:savedstate-ktx:1.4.0
+  - androidx.navigationevent:navigationevent:1.1.1
+  - androidx.navigationevent:navigationevent-compose:1.1.1
+  - androidx.savedstate:savedstate-ktx:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-tooling-data:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-tooling-data:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data/1.12.1/ui-tooling-data-1.12.1.module
-      sha256: e348138e54d82f8c45904b602e49acf0098639c6e5129aa4338f53520aea2df1
-      cachePath: androidx/compose/ui/ui-tooling-data/1.12.1/ui-tooling-data-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data/1.13.0-alpha02/ui-tooling-data-1.13.0-alpha02.module
+      sha256: 8a014fc7078f2f4e558240061abd36ab533c15fe31d9fc4d35e07f68136c514f
+      cachePath: androidx/compose/ui/ui-tooling-data/1.13.0-alpha02/ui-tooling-data-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data/1.12.1/ui-tooling-data-1.12.1.pom
-      sha256: 0af65484f27314ae8664914fb4098451b4c142b2aef4874b0e66a3182431faee
-      cachePath: androidx/compose/ui/ui-tooling-data/1.12.1/ui-tooling-data-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data/1.13.0-alpha02/ui-tooling-data-1.13.0-alpha02.pom
+      sha256: f4cb31476ba0cda02a22f2830c2eb65e5bbd3eed46df2a062a6741f0b29da55d
+      cachePath: androidx/compose/ui/ui-tooling-data/1.13.0-alpha02/ui-tooling-data-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-tooling-data-android:1.12.1
-- id: androidx.compose.ui:ui-tooling-data-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-tooling-data-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-tooling-data-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.aar
-      sha256: 2b664eb063aedc3c07af2bdd912c8afa097abe323d4b43ee7f03657cd1ca5d22
-      cachePath: androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.aar
+      sha256: 4c06229a270e9ac6a19eeb28e7def879777276570bd1b93398f8249c39eb47c8
+      cachePath: androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.module
-      sha256: 8614cd4960c138eb4b512e42446bc2e4748e09075012ee95f210404ad2378e57
-      cachePath: androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.module
+      sha256: dd72f0e539ae8268adaea3e4dfd1e4b0f90c8706b95e2abde338aafe7e154df6
+      cachePath: androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.pom
-      sha256: ceecb6d2d91045ca2ea44bd3c40b9ff37031a0280ec0fdad169f86307fb8cad8
-      cachePath: androidx/compose/ui/ui-tooling-data-android/1.12.1/ui-tooling-data-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.pom
+      sha256: 7e7b2ff41aa6970a8bcae6d27d0d9387e8666199e716276ad8ab33e9756db886
+      cachePath: androidx/compose/ui/ui-tooling-data-android/1.13.0-alpha02/ui-tooling-data-android-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-tooling-preview:1.12.1
+- id: androidx.compose.ui:ui-tooling-preview:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.12.1/ui-tooling-preview-1.12.1.module
-      sha256: 03d92204383e3f611957922928c4d0319836562056aedde4986d2c9029d1534d
-      cachePath: androidx/compose/ui/ui-tooling-preview/1.12.1/ui-tooling-preview-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.13.0-alpha02/ui-tooling-preview-1.13.0-alpha02.module
+      sha256: e05e5156899e7650de82ada90c4e7ad3f2a64a24ad0e858f9472fae56cbe2289
+      cachePath: androidx/compose/ui/ui-tooling-preview/1.13.0-alpha02/ui-tooling-preview-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.12.1/ui-tooling-preview-1.12.1.pom
-      sha256: e9af8869db40b67102b66299b1cebcc0b5ffb1e8361b12ec9a0ce26d553090fa
-      cachePath: androidx/compose/ui/ui-tooling-preview/1.12.1/ui-tooling-preview-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.13.0-alpha02/ui-tooling-preview-1.13.0-alpha02.pom
+      sha256: 89287cabf1a417fe49536ed48ee19dc5c4b27a70f30f312cc1e3be95d97bf97e
+      cachePath: androidx/compose/ui/ui-tooling-preview/1.13.0-alpha02/ui-tooling-preview-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-tooling-preview-android:1.12.1
-- id: androidx.compose.ui:ui-tooling-preview-android:1.12.1
+  - androidx.compose.ui:ui-tooling-preview-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-tooling-preview-android:1.13.0-alpha02
   requestedVersion: 1.12.1
-  resolvedVersion: 1.12.1
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.aar
-      sha256: e5d8e697fcfda732734e01168296682682d31e085b77ec8245e72badbc673686
-      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.aar
+      sha256: b04da48d287db8ddc4ddc200c33824ee89ef07122b10a677b21333e471184d51
+      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.module
-      sha256: 58a57dc7500a8b72329c8a2f77a1ed8db70c6ae39feb59a314069ae36e5f120b
-      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.module
+      sha256: 5314e9c511c1af5b3de07428dac8bdb5400419ecbf4c182ebe642af802f2da8e
+      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.pom
-      sha256: 383b1d980d7d69383a8576dfa5dedb703441a90d2fadfcbd367302ce82525e7f
-      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.12.1/ui-tooling-preview-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.pom
+      sha256: ea31423f39ef5da8e160036b9f82c17d42b3a14e31f3dad32853e7d61fc72376
+      cachePath: androidx/compose/ui/ui-tooling-preview-android/1.13.0-alpha02/ui-tooling-preview-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-unit:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-unit:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.12.1/ui-unit-1.12.1.module
-      sha256: b450aa17675e16108b99dd4b11e10e2535ca68728dff8282da3b4a5aca14adc3
-      cachePath: androidx/compose/ui/ui-unit/1.12.1/ui-unit-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.13.0-alpha02/ui-unit-1.13.0-alpha02.module
+      sha256: 3f45b10a636b9115a4d9f2e1283ac4867f48c253961021a4b786f5df4557a00c
+      cachePath: androidx/compose/ui/ui-unit/1.13.0-alpha02/ui-unit-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.12.1/ui-unit-1.12.1.pom
-      sha256: b57b8f4ccce140913333bf2f82e0dc426d788f83b4269872618803cff05b4fe1
-      cachePath: androidx/compose/ui/ui-unit/1.12.1/ui-unit-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.13.0-alpha02/ui-unit-1.13.0-alpha02.pom
+      sha256: 4f8e90c0142812252f9dabb8c9e3d9eb2e88c3e733c4f924d65b44a226dcaa46
+      cachePath: androidx/compose/ui/ui-unit/1.13.0-alpha02/ui-unit-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-unit-android:1.12.1
-- id: androidx.compose.ui:ui-unit-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-unit-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-unit-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.aar
-      sha256: 97d2bf062395d981435bc8d571b1d5d75587a7f26f3444671b2287f233e18ae7
-      cachePath: androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.aar
+      sha256: a2a170c5ec99a1fc6fd462c6be1d1b3919642c662c7ab601fab6e70e300a7a6a
+      cachePath: androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.module
-      sha256: 430859996f0d63e233e3615d842e02f8f0c8c73491cef74089ca9a6cc0d9c55c
-      cachePath: androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.module
+      sha256: 7c34b8d4c22bc7b4c5e734158a5fc09dc16891ef6a66669d0a34968b9f5b39eb
+      cachePath: androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.pom
-      sha256: 8f5f5e53877101442ebdcfe03ff0c167c03362928ffcbeca5fef02573a535ac1
-      cachePath: androidx/compose/ui/ui-unit-android/1.12.1/ui-unit-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.pom
+      sha256: 36df6800ad2648f41050e9b0da0024f2a4d69e1a3ef7bd8fd51d30410df2f351
+      cachePath: androidx/compose/ui/ui-unit-android/1.13.0-alpha02/ui-unit-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
   - androidx.collection:collection-ktx:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui-geometry:1.12.1
-  - androidx.compose.ui:ui-util:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui-geometry:1.13.0-alpha02
+  - androidx.compose.ui:ui-util:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
-- id: androidx.compose.ui:ui-util:1.12.1
-  resolvedVersion: 1.12.1
+- id: androidx.compose.ui:ui-util:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.12.1/ui-util-1.12.1.module
-      sha256: 19714591bed384f1c6bacf8c6cde965715e002dcd4e2027d414805603e52a3c0
-      cachePath: androidx/compose/ui/ui-util/1.12.1/ui-util-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.13.0-alpha02/ui-util-1.13.0-alpha02.module
+      sha256: 38f095a1dbd6953a5d62107bfb155c87192521fdc11571c078081d91cd034ade
+      cachePath: androidx/compose/ui/ui-util/1.13.0-alpha02/ui-util-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.12.1/ui-util-1.12.1.pom
-      sha256: 220323318362065e7220d374dfda659ecead3a9bc71a67318cdfd0c95e11fc43
-      cachePath: androidx/compose/ui/ui-util/1.12.1/ui-util-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.13.0-alpha02/ui-util-1.13.0-alpha02.pom
+      sha256: 9450af73a59d08b30200323e1663c5c55bb019880dbcac1c64d4d3f0c20fc5c7
+      cachePath: androidx/compose/ui/ui-util/1.13.0-alpha02/ui-util-1.13.0-alpha02.pom
   transitiveDependencies:
-  - androidx.compose.ui:ui-util-android:1.12.1
-- id: androidx.compose.ui:ui-util-android:1.12.1
-  resolvedVersion: 1.12.1
+  - androidx.compose.ui:ui-util-android:1.13.0-alpha02
+- id: androidx.compose.ui:ui-util-android:1.13.0-alpha02
+  resolvedVersion: 1.13.0-alpha02
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.aar
-      sha256: cd47f06626c19a06086e16823a32e49e0a0c7d903451668da2f777d063507aa5
-      cachePath: androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.aar
-      extracted: androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.aar
+      sha256: f3f0c44d84c5235f206c3912693d11bfafeb6b163492bb1deae0c8533d47983e
+      cachePath: androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.aar
+      extracted: androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.module
-      sha256: d1d173207ef3d1a6cbd0abcdc6bdd5552953608334520c493b5498506e19e610
-      cachePath: androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.module
+      sha256: 8c57509637c25e9c48e2c29da780b40096a89d1043d81a43c86c86147cde897a
+      cachePath: androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.pom
-      sha256: 106eedaed281f62f2fc17bade34c966ddf8cb93ea45627b1592e2e964b027199
-      cachePath: androidx/compose/ui/ui-util-android/1.12.1/ui-util-android-1.12.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.pom
+      sha256: 1ce51c0d82f9ddde89e958b5b8deb2ed4d9d11f0f7b4f3c6738eb2f02d40df97
+      cachePath: androidx/compose/ui/ui-util-android/1.13.0-alpha02/ui-util-android-1.13.0-alpha02.pom
   transitiveDependencies:
   - androidx.annotation:annotation-experimental:1.5.1
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.concurrent:concurrent-futures:1.2.0
   resolvedVersion: 1.2.0
@@ -2280,23 +2323,24 @@ dependencies:
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - org.jspecify:jspecify:1.0.0
-- id: androidx.graphics:graphics-path:1.0.1
-  resolvedVersion: 1.0.1
+- id: androidx.graphics:graphics-path:1.1.0
+  resolvedVersion: 1.1.0
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.aar
-      sha256: 8ca4032b6d79b351f0b59ad4b580eddbb9423e1652f7c958830687f1eee2ec03
-      cachePath: androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.aar
-      extracted: androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.aar
+      sha256: d031370d45ba4129a175fe9de913328a512b01a3c267e0eaf6b9b759f35842ae
+      cachePath: androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.aar
+      extracted: androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.module
-      sha256: 3f6fc7e96f8a1fd21045da7f2e332aef528aa1f56b6455fb8f25043aafa0e1b8
-      cachePath: androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.module
+      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.module
+      sha256: 24c8535d6fe9b13f83f32a06debc28ac786ee32a53f65ef10beb3c390f704e9f
+      cachePath: androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.pom
-      sha256: 866fb357c7146f5f7678ad44e4bc6c2823d568defce1ed2805bb6c899606b228
-      cachePath: androidx/graphics/graphics-path/1.0.1/graphics-path-1.0.1.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.pom
+      sha256: 5f190798b00fe8fd49887962f2f9b7aab4315491f9087d8935449399bedbd3de
+      cachePath: androidx/graphics/graphics-path/1.1.0/graphics-path-1.1.0.pom
   transitiveDependencies:
+  - androidx.collection:collection:1.5.0
   - androidx.core:core:1.19.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.interpolator:interpolator:1.0.0
@@ -2523,7 +2567,7 @@ dependencies:
       cachePath: androidx/lifecycle/lifecycle-runtime-compose-android/2.11.0/lifecycle-runtime-compose-android-2.11.0.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-runtime:2.11.0
   - androidx.lifecycle:lifecycle-runtime-ktx:2.11.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
@@ -2632,9 +2676,9 @@ dependencies:
       cachePath: androidx/lifecycle/lifecycle-viewmodel-compose-android/2.11.0/lifecycle-viewmodel-compose-android-2.11.0.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-common:2.11.0
   - androidx.lifecycle:lifecycle-runtime-compose:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel:2.11.0
@@ -2695,14 +2739,14 @@ dependencies:
   transitiveDependencies:
   - androidx.activity:activity-compose:1.13.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-viewmodel:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel-savedstate:2.11.0
   - androidx.navigation3:navigation3-runtime:1.2.0
-  - androidx.savedstate:savedstate:1.4.0
-  - androidx.savedstate:savedstate-compose:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
+  - androidx.savedstate:savedstate-compose:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.lifecycle:lifecycle-viewmodel-savedstate:2.11.0
   resolvedVersion: 2.11.0
@@ -2740,7 +2784,7 @@ dependencies:
   - androidx.lifecycle:lifecycle-common:2.11.0
   - androidx.lifecycle:lifecycle-livedata-core:2.11.0
   - androidx.lifecycle:lifecycle-viewmodel:2.11.0
-  - androidx.savedstate:savedstate:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
@@ -2778,13 +2822,13 @@ dependencies:
       cachePath: androidx/navigation3/navigation3-runtime-android/1.2.0/navigation3-runtime-android-1.2.0.pom
   transitiveDependencies:
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
   - androidx.lifecycle:lifecycle-runtime:2.11.0
   - androidx.navigationevent:navigationevent:1.1.1
-  - androidx.savedstate:savedstate:1.4.0
-  - androidx.savedstate:savedstate-compose:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
+  - androidx.savedstate:savedstate-compose:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-serialization-core:1.11.0
 - id: androidx.navigation3:navigation3-ui:1.2.0
@@ -2822,16 +2866,16 @@ dependencies:
   - androidx.activity:activity-compose:1.13.0
   - androidx.annotation:annotation:1.10.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.animation:animation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.runtime:runtime-saveable:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.animation:animation:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.runtime:runtime-saveable:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.lifecycle:lifecycle-runtime:2.11.0
   - androidx.lifecycle:lifecycle-runtime-compose:2.11.0
   - androidx.navigation3:navigation3-runtime:1.2.0
   - androidx.navigationevent:navigationevent-compose:1.1.1
-  - androidx.savedstate:savedstate:1.4.0
-  - androidx.savedstate:savedstate-compose:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
+  - androidx.savedstate:savedstate-compose:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.navigationevent:navigationevent:1.1.1
   resolvedVersion: 1.1.1
@@ -2865,7 +2909,7 @@ dependencies:
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
   - androidx.collection:collection:1.5.0
-  - androidx.compose.runtime:runtime-annotation:1.12.1
+  - androidx.compose.runtime:runtime-annotation:1.13.0-alpha02
   - androidx.core:core-viewtree:1.0.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0
@@ -2900,8 +2944,8 @@ dependencies:
       sha256: b2abb117d0ef481087a4477d3b9e2ae4ba89e3127238780f8603b57c27acb2c6
       cachePath: androidx/navigationevent/navigationevent-compose-android/1.1.1/navigationevent-compose-android-1.1.1.pom
   transitiveDependencies:
-  - androidx.compose.runtime:runtime:1.12.1
-  - androidx.compose.ui:ui:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
   - androidx.navigationevent:navigationevent:1.1.1
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
@@ -2926,95 +2970,97 @@ dependencies:
   - androidx.concurrent:concurrent-futures:1.1.0
   - androidx.startup:startup-runtime:1.2.0
   - com.google.guava:listenablefuture:1.0
-- id: androidx.savedstate:savedstate:1.4.0
-  resolvedVersion: 1.4.0
+- id: androidx.savedstate:savedstate:1.5.0
+  resolvedVersion: 1.5.0
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.4.0/savedstate-1.4.0.module
-      sha256: a0f2ac5a076063f0c813cf75a46dfb780bd5a5a2c8677240bca8551554da8fd2
-      cachePath: androidx/savedstate/savedstate/1.4.0/savedstate-1.4.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.5.0/savedstate-1.5.0.module
+      sha256: 96b0bac10979afb038bb29f6c047d478acf036ef12c5aea65ded3c9f4327795d
+      cachePath: androidx/savedstate/savedstate/1.5.0/savedstate-1.5.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.4.0/savedstate-1.4.0.pom
-      sha256: d2b68a2d0cc76f23cebc6d4ea9bbf2d63fb536ffd94e05514ad9da6c5f530492
-      cachePath: androidx/savedstate/savedstate/1.4.0/savedstate-1.4.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.5.0/savedstate-1.5.0.pom
+      sha256: 39358d3aca843a62f18756e88b09a8ba76405fc7fea55e0d23f9534f3e90456e
+      cachePath: androidx/savedstate/savedstate/1.5.0/savedstate-1.5.0.pom
   transitiveDependencies:
-  - androidx.savedstate:savedstate-android:1.4.0
-- id: androidx.savedstate:savedstate-android:1.4.0
-  resolvedVersion: 1.4.0
+  - androidx.savedstate:savedstate-android:1.5.0
+- id: androidx.savedstate:savedstate-android:1.5.0
+  resolvedVersion: 1.5.0
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.aar
-      sha256: 1656ce62cd233d488bdbbd42e533b80b22435b7a690acae6dbe7302392512c14
-      cachePath: androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.aar
-      extracted: androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.aar
+      sha256: c191b2b0d3ed2f765743e634f213c0e8150825547810789fc13487332bfc9cd3
+      cachePath: androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.aar
+      extracted: androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.module
-      sha256: 0062514dcb80c2ea7e0411fa8be54550853bab7bf6b1bf14c2517c2ef874ff50
-      cachePath: androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.module
+      sha256: e88ce76a17869cff39a4952032a82838fb8976bf3bc91e69393ab8f590cc9a38
+      cachePath: androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.pom
-      sha256: b44b215b4cce24ca64b5faa58ff463f4b91abc02af95ba405ade488828f4f779
-      cachePath: androidx/savedstate/savedstate-android/1.4.0/savedstate-android-1.4.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.pom
+      sha256: 1b270ea1272838d496583dab77791f4706a3098f153e116eb23e919eeae33bfd
+      cachePath: androidx/savedstate/savedstate-android/1.5.0/savedstate-android-1.5.0.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
+  - androidx.collection:collection:1.5.0
   - androidx.core:core-ktx:1.19.1
   - androidx.core:core-viewtree:1.0.0
   - androidx.lifecycle:lifecycle-common:2.11.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
   - org.jetbrains.kotlinx:kotlinx-serialization-core:1.11.0
-- id: androidx.savedstate:savedstate-compose:1.4.0
-  resolvedVersion: 1.4.0
+- id: androidx.savedstate:savedstate-compose:1.5.0
+  resolvedVersion: 1.5.0
   artifacts:
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose/1.4.0/savedstate-compose-1.4.0.module
-      sha256: 7275211901a07ee3973e40a3455e8ad12955d1d234dc2489f8686fcfc820b8a8
-      cachePath: androidx/savedstate/savedstate-compose/1.4.0/savedstate-compose-1.4.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose/1.5.0/savedstate-compose-1.5.0.module
+      sha256: a6098f4eb8a10bb2d751366557b4c011741d2c67d12e9705fc945b51942ac5b3
+      cachePath: androidx/savedstate/savedstate-compose/1.5.0/savedstate-compose-1.5.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose/1.4.0/savedstate-compose-1.4.0.pom
-      sha256: b15f47b42585442c9b6a9d416afc30782c69dbf9a5760a2c37175f0024f0d17e
-      cachePath: androidx/savedstate/savedstate-compose/1.4.0/savedstate-compose-1.4.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose/1.5.0/savedstate-compose-1.5.0.pom
+      sha256: 23e1d1f34c6a80b067337e38f12d0474a1cdd227f2da88e866d0c0be2a9d4dc6
+      cachePath: androidx/savedstate/savedstate-compose/1.5.0/savedstate-compose-1.5.0.pom
   transitiveDependencies:
-  - androidx.savedstate:savedstate-compose-android:1.4.0
-- id: androidx.savedstate:savedstate-compose-android:1.4.0
-  resolvedVersion: 1.4.0
+  - androidx.savedstate:savedstate-compose-android:1.5.0
+- id: androidx.savedstate:savedstate-compose-android:1.5.0
+  resolvedVersion: 1.5.0
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.aar
-      sha256: 0f0ae3032d6c6eea834ee22179c8976160d09d841d30e47f53f56b1b3438774b
-      cachePath: androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.aar
-      extracted: androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.aar
+      sha256: 01682c0de6796d31f9c7863bb18e65443e512e4dc95a13cc8c3d0d4931c2c10b
+      cachePath: androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.aar
+      extracted: androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.module
-      sha256: 2be8c753a07c920cf2f5d63d66e8743fb08a933d04c02b7a388b77b66fca848f
-      cachePath: androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.module
+      sha256: b0f8ba0ba240caff738cba76eaf866b9c834c10915c5d10cf66044a085a8941d
+      cachePath: androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.pom
-      sha256: de19831dabb84a4d0e120e86dceb08cf62c08606b5d99e91a8f8e6b4a4658883
-      cachePath: androidx/savedstate/savedstate-compose-android/1.4.0/savedstate-compose-android-1.4.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.pom
+      sha256: e854c31eefbf8de709a1026fbdf6d07aed0f0c40adef0a178c3ca4bc9c23d1d3
+      cachePath: androidx/savedstate/savedstate-compose-android/1.5.0/savedstate-compose-android-1.5.0.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
-  - androidx.compose.runtime:runtime:1.12.1
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
   - androidx.core:core-ktx:1.19.1
-  - androidx.savedstate:savedstate:1.4.0
-- id: androidx.savedstate:savedstate-ktx:1.4.0
-  resolvedVersion: 1.4.0
+  - androidx.savedstate:savedstate:1.5.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.savedstate:savedstate-ktx:1.5.0
+  resolvedVersion: 1.5.0
   artifacts:
     aar:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.aar
-      sha256: 23593939446bc5a154a1e35fddd87b82f19e2adf072207f115bf29a8b431c1d3
-      cachePath: androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.aar
-      extracted: androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0-exploded
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.aar
+      sha256: 1de99f31e90d55828e1f00f856274410e6e3e997605a40d478e7065c38b3252e
+      cachePath: androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.aar
+      extracted: androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0-exploded
     module:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.module
-      sha256: 7cf86881220aa594c4ad1685ebd0f295e3d97b9c0fdc31b28300f4318a5045a8
-      cachePath: androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.module
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.module
+      sha256: 0cff213724980ad592d03252e5e5974926294b2ac79981550dd16453a32f7df7
+      cachePath: androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.module
     pom:
-      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.pom
-      sha256: b085af7cc4bb297ed0f25ca85d3629613ab253c0b532684c6cf77c2aee7471c5
-      cachePath: androidx/savedstate/savedstate-ktx/1.4.0/savedstate-ktx-1.4.0.pom
+      url: https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.pom
+      sha256: ea6df978e1dccaff1d96c95a3942fca040a2d6ed6060fdddeab2f4bb7d8e6d72
+      cachePath: androidx/savedstate/savedstate-ktx/1.5.0/savedstate-ktx-1.5.0.pom
   transitiveDependencies:
-  - androidx.savedstate:savedstate:1.4.0
+  - androidx.savedstate:savedstate:1.5.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: androidx.startup:startup-runtime:1.2.0
   resolvedVersion: 1.2.0
@@ -3289,6 +3335,182 @@ dependencies:
       cachePath: androidx/window/window-core-android/1.5.0/window-core-android-1.5.0.pom
   transitiveDependencies:
   - androidx.annotation:annotation:1.10.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.xr.glimmer:glimmer:1.0.0-alpha20
+  requestedVersion: 1.0.0-alpha20
+  resolvedVersion: 1.0.0-alpha20
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.aar
+      sha256: f66876cb1d8d7f285a9e196e76bddc74361f9efdcc9244e0d5e595073874efb0
+      cachePath: androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.aar
+      extracted: androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.module
+      sha256: d4ff34b1a001e1b901e792dbbb6883ffe432b3378c93df2c30b67b26f79698e0
+      cachePath: androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.pom
+      sha256: fb2d6505c4f1598ecebae1a5163260d8214c2458becaf1c5a6089e6ff47f3420
+      cachePath: androidx/xr/glimmer/glimmer/1.0.0-alpha20/glimmer-1.0.0-alpha20.pom
+  transitiveDependencies:
+  - androidx.annotation:annotation:1.10.0
+  - androidx.compose.foundation:foundation:1.13.0-alpha02
+  - androidx.compose.runtime:runtime:1.13.0-alpha02
+  - androidx.compose.ui:ui:1.13.0-alpha02
+  - androidx.lifecycle:lifecycle-runtime:2.11.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.xr.glimmer:glimmer-google-fonts:1.0.0-alpha20
+  requestedVersion: 1.0.0-alpha20
+  resolvedVersion: 1.0.0-alpha20
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.aar
+      sha256: 647e0a711c67cbfa0a72b8fc818586ff13387ce1490a8cf13808dbbb89bc3c0e
+      cachePath: androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.aar
+      extracted: androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.module
+      sha256: 232cf134b7f325226ae0821e1a9103b09ce8e7ee9de2836a45abc9960c7698a4
+      cachePath: androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.pom
+      sha256: d0f37be9c35ef4362b31208e380e0eb909b931eb6cf521e1f445ba47147e12d9
+      cachePath: androidx/xr/glimmer/glimmer-google-fonts/1.0.0-alpha20/glimmer-google-fonts-1.0.0-alpha20.pom
+  transitiveDependencies:
+  - androidx.compose.ui:ui-text-google-fonts:1.13.0-alpha02
+  - androidx.xr.glimmer:glimmer:1.0.0-alpha20
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.xr.projected:projected:1.0.0-alpha13
+  requestedVersion: 1.0.0-alpha13
+  resolvedVersion: 1.0.0-alpha13
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.aar
+      sha256: 4199cb6cc9e18f036884d1a7df370c7409b639dae1323c7c16e6254d09a1b6c1
+      cachePath: androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.aar
+      extracted: androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.module
+      sha256: 8f2732481a652db3113e4efd5b911dbd1db925b06a4c8a18b900896cec04b716
+      cachePath: androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.pom
+      sha256: 1d5f2a3ea9b4891aa24c93caf059ea9dbc5b63827045dbbe9099cd33b9810c88
+      cachePath: androidx/xr/projected/projected/1.0.0-alpha13/projected-1.0.0-alpha13.pom
+  transitiveDependencies:
+  - androidx.collection:collection:1.5.0
+  - androidx.lifecycle:lifecycle-runtime:2.11.0
+  - androidx.xr.projected:projected-binding:1.0.0-alpha13
+  - androidx.xr.runtime:runtime-interfaces:1.1.0-alpha01
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
+- id: androidx.xr.projected:projected-binding:1.0.0-alpha13
+  resolvedVersion: 1.0.0-alpha13
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.aar
+      sha256: 7cc26bb20e44a27c008c51c3aa6f77134f4c15c07eeeb1791a4014fd319b4f9f
+      cachePath: androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.aar
+      extracted: androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.module
+      sha256: 0ba13b061ca3fbb92a70efdf0e9cf40bfa749a3cb987a93ae5e0d273be07819f
+      cachePath: androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.pom
+      sha256: 63a985342d1146559c8dc6f5499436f9b91f57fd8c1fe199604a7bf8ecfa3a2b
+      cachePath: androidx/xr/projected/projected-binding/1.0.0-alpha13/projected-binding-1.0.0-alpha13.pom
+  transitiveDependencies:
+  - androidx.annotation:annotation:1.10.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
+- id: androidx.xr.runtime:runtime:1.1.0-alpha01
+  requestedVersion: 1.1.0-alpha01
+  resolvedVersion: 1.1.0-alpha01
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.aar
+      sha256: 9eeb176d939b0962333d43c2b2d5c29786362d36275b59365e06655c1aae157d
+      cachePath: androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.aar
+      extracted: androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.module
+      sha256: 650ca1e60459aa84505127d759b50b2d1d4f44c053618cdf3caa1c93fc355086
+      cachePath: androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.pom
+      sha256: f2086cc5608f096a94c1c24b4fe99eb6de5232f1b59762070ab318e570a26776
+      cachePath: androidx/xr/runtime/runtime/1.1.0-alpha01/runtime-1.1.0-alpha01.pom
+  transitiveDependencies:
+  - androidx.annotation:annotation:1.10.0
+  - androidx.core:core:1.19.1
+  - androidx.lifecycle:lifecycle-common:2.11.0
+  - androidx.lifecycle:lifecycle-runtime:2.11.0
+  - androidx.xr.runtime:runtime-interfaces:1.1.0-alpha01
+  - androidx.xr.runtime:runtime-manifest:1.1.0-alpha01
+  - androidx.xr.runtime:runtime-openxr:1.1.0-alpha01
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0
+- id: androidx.xr.runtime:runtime-interfaces:1.1.0-alpha01
+  resolvedVersion: 1.1.0-alpha01
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.aar
+      sha256: cb7df7f5bb1fc9f6b0f95c7dacdbacb8dd5ccc03be4c7137b66fb6ff82313c86
+      cachePath: androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.aar
+      extracted: androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.module
+      sha256: 3f0d9b7865cedb9fa97987f43074dd2022c03a07e697e5c51ec9368e8a51e2e8
+      cachePath: androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.pom
+      sha256: c43471c198c60300b2fd5378655a61b505507645c1a8fc5b2ab57659dac5d043
+      cachePath: androidx/xr/runtime/runtime-interfaces/1.1.0-alpha01/runtime-interfaces-1.1.0-alpha01.pom
+  transitiveDependencies:
+  - androidx.annotation:annotation:1.10.0
+  - androidx.lifecycle:lifecycle-common:2.11.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.xr.runtime:runtime-manifest:1.1.0-alpha01
+  resolvedVersion: 1.1.0-alpha01
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.aar
+      sha256: 7bcff44d34a6e86a38394f91ae64b8dfe7f4d51798177e068ca0cc8de8b29835
+      cachePath: androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.aar
+      extracted: androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.module
+      sha256: 0d7a0c1f23465d45c915bb4c495f7eea596af601c906b5c939e0890670e8c3ee
+      cachePath: androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.pom
+      sha256: b1f15783744d76c4ec2011c0736ca85f93c3afa48329dfd6546f3c5f4908b353
+      cachePath: androidx/xr/runtime/runtime-manifest/1.1.0-alpha01/runtime-manifest-1.1.0-alpha01.pom
+  transitiveDependencies:
+  - androidx.annotation:annotation:1.10.0
+  - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+- id: androidx.xr.runtime:runtime-openxr:1.1.0-alpha01
+  resolvedVersion: 1.1.0-alpha01
+  artifacts:
+    aar:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.aar
+      sha256: 2cbdd963ca6961319ce5de03537f9a40eb04b6c83c643be259bb7dc36d73b72a
+      cachePath: androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.aar
+      extracted: androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01-exploded
+    module:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.module
+      sha256: 686e78cd9013ab674683aeb6b6e4512904584dc95b2b3917d4e10174b75f03f9
+      cachePath: androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.module
+    pom:
+      url: https://dl.google.com/dl/android/maven2/androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.pom
+      sha256: 37cd8f5c774f20560eeffbe5b900ddcc3af15ad11bf12af7a0abda73124c7364
+      cachePath: androidx/xr/runtime/runtime-openxr/1.1.0-alpha01/runtime-openxr-1.1.0-alpha01.pom
+  transitiveDependencies:
+  - androidx.lifecycle:lifecycle-common:2.11.0
+  - androidx.lifecycle:lifecycle-runtime:2.11.0
+  - androidx.xr.runtime:runtime-interfaces:1.1.0-alpha01
   - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
 - id: app.cash.turbine:turbine:1.2.1
   requestedVersion: 1.2.1

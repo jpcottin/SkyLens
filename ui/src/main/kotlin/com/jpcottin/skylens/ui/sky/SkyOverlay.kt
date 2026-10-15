@@ -46,6 +46,10 @@ data class SkyOverlayOptions(
     val drawGrid: Boolean = false,
     /** Stars brighter than this get a name label. */
     val starLabelMagnitude: Double = 1.6,
+    /** Label text size; the glasses need at least 18 sp to be legible. */
+    val labelSizeSp: Float = 12f,
+    /** Scales markers (dots, diamonds) — larger on the lens. */
+    val markerScale: Float = 1f,
 )
 
 /**
@@ -98,11 +102,10 @@ private class SkyRenderer(
 ) {
     private val size = scope.size
     private val density = scope.density
-    private val labelStyle = TextStyle(color = palette.label, fontSize = 12.sp, fontWeight = FontWeight.Medium)
-    private val cardinalStyle = TextStyle(color = palette.cardinal, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-    private val smallStyle = TextStyle(color = palette.label, fontSize = 10.sp)
+    private val labelStyle = TextStyle(color = palette.label, fontSize = options.labelSizeSp.sp, fontWeight = FontWeight.Medium)
+    private val cardinalStyle = TextStyle(color = palette.cardinal, fontSize = (options.labelSizeSp + 2f).sp, fontWeight = FontWeight.Bold)
 
-    private fun dp(v: Float) = v * density
+    private fun dp(v: Float) = v * density * options.markerScale
 
     private fun project(h: Horizontal): Offset? = camera.project(h)?.let { SkyProjection.toOffset(it, size) }
 
