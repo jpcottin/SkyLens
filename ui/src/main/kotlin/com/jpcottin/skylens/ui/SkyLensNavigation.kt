@@ -83,8 +83,9 @@ fun SkyLensNavigation(
     state: SkyUiState,
     actions: ShellActions,
     cameraBackground: @Composable (Modifier) -> Unit = {},
+    startKey: NavKey = SkyKey,
 ) {
-    val backStack = rememberNavBackStack(SkyKey)
+    val backStack = rememberNavBackStack(startKey)
     val adaptiveInfo = currentWindowAdaptiveInfo()
     val isTabletop = adaptiveInfo.windowPosture.isTabletop
     val isWide = adaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)

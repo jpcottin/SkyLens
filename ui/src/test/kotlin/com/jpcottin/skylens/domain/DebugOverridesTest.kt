@@ -40,6 +40,12 @@ class DebugOverridesTest {
         assertFalse(DebugOverrides.fromIntent(null).isActive)
         assertTrue(DebugOverrides(selectId = "moon").isActive)
         assertTrue(DebugOverrides(nightMode = false).isActive)
+        assertTrue(DebugOverrides(startTab = "objects").isActive)
+    }
+
+    @Test
+    fun tabs_areTheThreeKnownNames() {
+        assertEquals(setOf("sky", "objects", "settings"), DebugOverrides.TABS)
     }
 
     @Test
