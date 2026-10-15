@@ -1,0 +1,32 @@
+group: com.jpcottin
+version: "1.0.0"
+platform: android
+type: library
+
+# Pure-Kotlin astronomy engine (TLE/SGP4, sun, moon, planets, stars, sky projection).
+# There is no Android code in this module; it is declared as an Android library only
+# because Lightbuild 0.0.20 cannot yet export `platform: jvm` modules to Gradle
+# (GradleExportTask fails and the module gets no build file). Its unit tests run on
+# the host JVM through `android build test "astro:hostTest"`.
+
+android:
+  namespace: com.jpcottin.skylens.astro
+  compileSdk:
+    version:
+      release:
+        apiLevel: 37
+  minSdk:
+    version:
+      release:
+        apiLevel: 34
+  dependencies:
+    maven:
+      # Lightbuild resolves every entry non-transitively, so the standard library must be
+      # declared for a module that has no other dependency bringing it in.
+      - org.jetbrains.kotlin:kotlin-stdlib:2.4.20
+
+  tests:
+    test:
+      dependencies:
+        maven:
+          - junit:junit:4.13.2

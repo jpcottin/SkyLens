@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Single-colour layer for Android 13+ themed icons: same glyph as the foreground. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M30,40 V30 H40 M68,30 H78 V40 M78,68 V78 H68 M40,78 H30 V68"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M34,66 Q54,30 76,44"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M51,46 H57 V54 H51 Z M39,48 H49 V52 H39 Z M59,48 H69 V52 H59 Z"
+        android:fillColor="#FF000000" />
+    <path
+        android:pathData="M40,38 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0
+                          M70,66 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0
+                          M44,70 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0"
+        android:fillColor="#FF000000" />
+</vector>

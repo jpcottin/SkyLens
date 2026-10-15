@@ -1,0 +1,19 @@
+project:
+  name: SkyLens
+
+modules:
+  - app
+  - ui
+  - astro
+
+repositories:
+  - google
+  - mavenCentral
+
+lightbuild:
+  version: "0.0.20-alpha02"
+
+build:
+  kotlin: 2.4.20
+  java:
+    version: 17

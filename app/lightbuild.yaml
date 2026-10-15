@@ -1,0 +1,33 @@
+group: com.jpcottin
+version: "1.0.0"
+platform: android
+type: application
+
+android:
+  namespace: com.jpcottin.skylens.app
+  dependencies:
+    module:
+      - //ui
+  compileSdk:
+    version:
+      release:
+        apiLevel: 37
+  minSdk:
+    version:
+      release:
+        apiLevel: 34
+  targetSdk:
+    version:
+      release:
+        apiLevel: 36
+  applicationId: com.jpcottin.skylens
+  versionCode: 1
+  versionName: "0.1"
+  packaging:
+    release:
+      # R8 full-mode shrinking for the release APK. `includeDefault` keeps the default
+      # rules (Compose, AndroidX, kotlinx.serialization) so the Nav3 back stack serialises.
+      optimization:
+        enable: true
+        keepRules:
+          includeDefault: true

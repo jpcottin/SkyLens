@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Settings (layers, manual position) follow the user to a new device; the orbit cache does not,
+     it is refreshed from Celestrak on first launch anyway. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="tle/" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="tle/" />
+    </device-transfer>
+</data-extraction-rules>
