@@ -24,6 +24,10 @@ layout_contains() {
   echo "ERROR: '$1' not found in layout ($2)"; cat "$OUT/$2.json"; return 1
 }
 
+# Crash/ANR dialogs from other apps (the launcher on a loaded runner) would steal the focus
+# and hide the app from the layout checks; dismiss any that is up and hide the next ones.
+adb shell settings put global hide_error_dialogs 1
+adb shell input keyevent KEYCODE_ESCAPE || true
 adb install -r "$DEBUG_APK"
 adb shell pm grant $PKG android.permission.ACCESS_FINE_LOCATION || true
 adb shell pm grant $PKG android.permission.CAMERA || true
