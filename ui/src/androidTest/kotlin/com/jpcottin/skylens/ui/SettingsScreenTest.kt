@@ -101,6 +101,17 @@ class SettingsScreenTest {
     }
 
     @Test
+    fun compassCorrection_resetsToZero() {
+        var latest = Settings(headingOffsetDeg = 12.0)
+        content(initial = latest, observe = { latest = it })
+        rule.onNodeWithTag("heading_offset_label").performScrollTo().assertIsDisplayed()
+        rule.onNodeWithText("Heading correction: +12°").assertIsDisplayed()
+        rule.onNodeWithTag("reset_heading").performScrollTo().assertIsEnabled().performClick()
+        assertEquals(0.0, latest.headingOffsetDeg, 1e-9)
+        rule.onNodeWithTag("reset_heading").assertIsNotEnabled()
+    }
+
+    @Test
     fun parseObserver_rules() {
         assertEquals(Observer(1.0, 2.0, 3.0), parseObserver("1", "2", "3"))
         assertEquals(Observer(1.0, 2.0, 0.0), parseObserver("1", "2", ""))

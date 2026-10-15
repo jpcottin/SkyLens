@@ -7,7 +7,9 @@ import com.jpcottin.skylens.astro.BodyKind
 import com.jpcottin.skylens.astro.Horizontal
 import com.jpcottin.skylens.astro.Observer
 import com.jpcottin.skylens.data.Clock
+import com.jpcottin.skylens.data.CompassAccuracy
 import com.jpcottin.skylens.data.DevicePose
+import com.jpcottin.skylens.data.PoseReading
 import com.jpcottin.skylens.data.LocationFix
 import com.jpcottin.skylens.data.SatelliteGroup
 import com.jpcottin.skylens.data.SettingsRepository
@@ -56,7 +58,7 @@ class SkyViewModelTest {
     private val dispatcher = StandardTestDispatcher()
     private val now = PreviewSky.NIGHT_MILLIS
     private val fixes = MutableSharedFlow<LocationFix>(replay = 1)
-    private val poses = MutableSharedFlow<DevicePose>(replay = 1)
+    private val poses = MutableSharedFlow<PoseReading>(replay = 1)
     private var permission = true
 
     @Before fun setMain() = Dispatchers.setMain(dispatcher)
@@ -133,16 +135,55 @@ class SkyViewModelTest {
     fun sensorPoses_driveTheCameraOnlyInArMode() = runTest(dispatcher) {
         val vm = viewModel()
         assertEquals(ViewMode.AR, vm.state.value.mode)
-        poses.emit(DevicePose.fromAngles(90.0, 10.0))
+        poses.emit(PoseReading(DevicePose.fromAngles(90.0, 10.0), CompassAccuracy.HIGH))
         settle()
         assertEquals(90.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
         vm.setMode(ViewMode.MAP)
-        poses.emit(DevicePose.fromAngles(270.0, 10.0))
+        poses.emit(PoseReading(DevicePose.fromAngles(270.0, 10.0), CompassAccuracy.HIGH))
         settle()
         assertEquals("map mode ignores the sensors", 90.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
         vm.panMap(-30.0, 20.0)
         assertEquals(60.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
         assertEquals(30.0, vm.state.value.pose.centre.elevationDeg, 1e-6)
+        vm.viewModelScopeCancel()
+    }
+
+    @Test
+    fun headingOffset_turnsSensorPoses_andAlignUsesTheRawHeading() = runTest(dispatcher) {
+        val vm = viewModel(DebugOverrides(location = PreviewSky.vancouver, timeMillis = now))
+        settle()
+        poses.emit(PoseReading(DevicePose.fromAngles(100.0, 35.0), CompassAccuracy.LOW))
+        settle()
+        assertEquals(100.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
+        assertEquals(CompassAccuracy.LOW, vm.state.value.compassAccuracy)
+        vm.setHeadingOffset(15.0)
+        settle()
+        assertEquals(15.0, vm.state.value.settings.headingOffsetDeg, 1e-9)
+        assertEquals(115.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
+        // Later sensor samples keep the correction.
+        poses.emit(PoseReading(DevicePose.fromAngles(200.0, 10.0), CompassAccuracy.HIGH))
+        settle()
+        assertEquals(215.0, vm.state.value.pose.centre.azimuthDeg, 1e-6)
+        // Align: the camera (raw 200°) is really on Saturn, so the offset becomes Saturn's azimuth − 200°.
+        val saturn = vm.state.value.snapshot!!.find("planet:saturn")!!
+        val offset = vm.alignHeadingTo("planet:saturn")!!
+        settle()
+        val expected = ((saturn.horizontal.azimuthDeg - 200.0 + 540.0) % 360.0) - 180.0
+        assertEquals(expected, offset, 1e-6)
+        assertEquals(saturn.horizontal.azimuthDeg, vm.state.value.pose.centre.azimuthDeg, 1e-6)
+        assertNull(vm.alignHeadingTo("no-such-object"))
+        // Wrapping: 370° is stored as 10°.
+        vm.setHeadingOffset(370.0)
+        settle()
+        assertEquals(10.0, vm.state.value.settings.headingOffsetDeg, 1e-9)
+        vm.viewModelScopeCancel()
+    }
+
+    @Test
+    fun align_withoutSensors_isNull() = runTest(dispatcher) {
+        val vm = viewModel(DebugOverrides(location = PreviewSky.vancouver, timeMillis = now), sensors = false)
+        settle()
+        assertNull(vm.alignHeadingTo("moon"))
         vm.viewModelScopeCancel()
     }
 

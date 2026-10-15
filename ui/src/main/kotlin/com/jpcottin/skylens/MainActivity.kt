@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                     val observer = lastObserver
                     if (observer != null) LocationSource.declinationDeg(observer, clock.nowMillis()) else 0.0
                 }
-                val poses: Flow<com.jpcottin.skylens.data.DevicePose>? = if (container.orientation.isAvailable) {
+                val poses: Flow<com.jpcottin.skylens.data.PoseReading>? = if (container.orientation.isAvailable) {
                     container.orientation.poses(displayRotation = { display?.rotation ?: 0 }, declinationDeg = declination)
                 } else {
                     null
@@ -93,6 +93,13 @@ class MainActivity : ComponentActivity() {
                 onToggleMode = viewModel::toggleMode,
                 onSelect = viewModel::select,
                 onSetTarget = viewModel::setTarget,
+                onAlignHeading = { id ->
+                    val offset = viewModel.alignHeadingTo(id)
+                    val name = state.snapshot?.find(id)?.obj?.name ?: id
+                    if (offset != null) {
+                        android.widget.Toast.makeText(this, getString(com.jpcottin.skylens.R.string.aligned_to, name, "%+.0f".format(offset)), android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                },
                 onRequestLocation = { locationLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)) },
                 onRequestCamera = { cameraLauncher.launch(Manifest.permission.CAMERA) },
                 onViewSizeChanged = { size ->

@@ -8,7 +8,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.click
 import com.jpcottin.skylens.astro.Horizontal
 import com.jpcottin.skylens.domain.LocationState
@@ -97,6 +99,35 @@ class SkyScreenTest {
         assertEquals(state.pose.centre.azimuthDeg, tapped!!.azimuthDeg, 0.5)
         assertEquals(state.pose.centre.elevationDeg, tapped!!.elevationDeg, 0.5)
         assertTrue("hit radius $radius", radius > 0.5 && radius < 10.0)
+    }
+
+    @Test
+    fun alignChip_onlyInArMode_andCallsBackWithTheObject() {
+        var aligned: String? = null
+        rule.setContent {
+            SkyLensTheme(dynamicColor = false) {
+                SkyScreen(PreviewSky.state(night = true, mode = ViewMode.AR, selectedId = "planet:saturn"), SkyActions(onAlignHeading = { aligned = it }))
+            }
+        }
+        rule.onNodeWithTag("align_heading").assertIsDisplayed().performClick()
+        assertEquals("planet:saturn", aligned)
+    }
+
+    @Test
+    fun alignChip_absentInMapMode() {
+        rule.setContent { SkyLensTheme(dynamicColor = false) { SkyScreen(PreviewSky.state(night = true, mode = ViewMode.MAP, selectedId = "moon"), SkyActions()) } }
+        rule.onAllNodes(hasTestTag("align_heading")).assertCountEquals(0)
+    }
+
+    @Test
+    fun lowCompassAccuracy_showsTheFigureEightHint() {
+        rule.setContent {
+            SkyLensTheme(dynamicColor = false) {
+                SkyScreen(PreviewSky.state(night = true, mode = ViewMode.AR).copy(compassAccuracy = com.jpcottin.skylens.data.CompassAccuracy.LOW), SkyActions())
+            }
+        }
+        rule.onNodeWithTag("compass_warning").assertIsDisplayed()
+        rule.onNodeWithText("figure eight", substring = true).assertIsDisplayed()
     }
 
     @Test

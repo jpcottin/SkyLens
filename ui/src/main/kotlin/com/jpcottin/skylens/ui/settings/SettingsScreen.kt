@@ -132,6 +132,22 @@ fun SettingsScreen(
                 )
             }
 
+            SectionHeader(stringResource(R.string.settings_compass))
+            Column(Modifier.padding(horizontal = 16.dp)) {
+                val offset = settings.headingOffsetDeg
+                Text(stringResource(R.string.settings_heading_offset, (if (offset > 0) "+" else "") + "%.0f".format(offset)), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("heading_offset_label"))
+                Slider(
+                    value = offset.toFloat(),
+                    onValueChange = { v -> onUpdate { it.copy(headingOffsetDeg = Math.round(v).toDouble()) } },
+                    valueRange = -180f..180f,
+                    modifier = Modifier.testTag("slider_heading"),
+                )
+                Text(stringResource(R.string.settings_heading_hint), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Button(onClick = { onUpdate { it.copy(headingOffsetDeg = 0.0) } }, enabled = offset != 0.0, modifier = Modifier.padding(top = 8.dp).testTag("reset_heading")) {
+                    Text(stringResource(R.string.settings_heading_reset))
+                }
+            }
+
             SectionHeader(stringResource(R.string.settings_location))
             SwitchRow(stringResource(R.string.settings_use_manual), settings.useManualLocation, { v -> onUpdate { it.copy(useManualLocation = v) } }, testTag = "switch_manual_location")
             ManualLocationEditor(current = settings.manualLocation, onSave = { observer -> onUpdate { it.copy(manualLocation = observer, useManualLocation = true) } })

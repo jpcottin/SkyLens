@@ -13,7 +13,10 @@ import com.jpcottin.skylens.astro.SkySnapshot
 import com.jpcottin.skylens.astro.StarCatalog
 import com.jpcottin.skylens.astro.Tle
 import com.jpcottin.skylens.astro.angularSeparationDegrees
+import com.jpcottin.skylens.astro.angularDifferenceDegrees
 import com.jpcottin.skylens.data.Clock
+import com.jpcottin.skylens.data.CompassAccuracy
+import com.jpcottin.skylens.data.PoseReading
 import com.jpcottin.skylens.data.DevicePose
 import com.jpcottin.skylens.data.LocationFix
 import com.jpcottin.skylens.data.Settings
@@ -73,6 +76,8 @@ data class SkyUiState(
     /** Object the user asked to be guided to ("Point me"). */
     val targetId: String? = null,
     val satelliteCount: Int = 0,
+    /** Accuracy the platform reports for the magnetic heading (AR mode only). */
+    val compassAccuracy: CompassAccuracy = CompassAccuracy.UNKNOWN,
 ) {
     val camera: SkyCamera get() = pose.toCamera(fov.horizontalDeg, fov.verticalDeg)
     val selected: SkyPosition? get() = selectedId?.let { snapshot?.find(it) }
@@ -86,7 +91,7 @@ class SkyViewModel(
     private val catalogLoader: suspend () -> StarCatalog,
     private val locationFixes: Flow<LocationFix>,
     private val hasLocationPermission: () -> Boolean,
-    private val sensorPoses: Flow<DevicePose>?,
+    private val sensorPoses: Flow<PoseReading>?,
     private val clock: Clock,
     private val debug: DebugOverrides = DebugOverrides(),
     private val computeDispatcher: CoroutineDispatcher = Dispatchers.Default,
@@ -110,6 +115,9 @@ class SkyViewModel(
     private var locationJob: Job? = null
     private var sensorJob: Job? = null
     private var engineKey: Pair<List<Tle>, Int>? = null
+
+    /** Last pose straight from the sensors, before the compass correction. */
+    private var rawSensorPose: DevicePose? = null
 
     init {
         viewModelScope.launch {
@@ -167,8 +175,12 @@ class SkyViewModel(
         sensorJob?.cancel()
         if (debug.pose != null || sensorPoses == null) return
         sensorJob = viewModelScope.launch {
-            sensorPoses.catch { }.collect { pose ->
-                if (state.value.mode == ViewMode.AR) _state.update { it.copy(pose = pose) }
+            sensorPoses.catch { }.collect { reading ->
+                rawSensorPose = reading.pose
+                _state.update { s ->
+                    if (s.mode != ViewMode.AR) s
+                    else s.copy(pose = reading.pose.yawed(s.settings.headingOffsetDeg), compassAccuracy = reading.accuracy)
+                }
             }
         }
     }
@@ -230,6 +242,26 @@ class SkyViewModel(
     fun select(id: String?) = _state.update { it.copy(selectedId = id) }
 
     fun setTarget(id: String?) = _state.update { it.copy(targetId = id, selectedId = id ?: it.selectedId) }
+
+    /**
+     * Compass calibration: the user points the camera at [objectId] and the correction becomes
+     * whatever turns the raw sensor heading onto that object's azimuth. Returns the new offset,
+     * or null when there is no sensor pose or no such object.
+     */
+    fun alignHeadingTo(objectId: String): Double? {
+        val raw = rawSensorPose ?: return null
+        val target = state.value.snapshot?.find(objectId) ?: return null
+        val offset = angularDifferenceDegrees(target.horizontal.azimuthDeg, raw.centre.azimuthDeg)
+        setHeadingOffset(offset)
+        return offset
+    }
+
+    /** Sets the compass correction (wrapped to (-180, 180]) and re-applies it to the current pose. */
+    fun setHeadingOffset(degrees: Double) {
+        val wrapped = angularDifferenceDegrees(degrees, 0.0)
+        rawSensorPose?.let { raw -> _state.update { if (it.mode == ViewMode.AR) it.copy(pose = raw.yawed(wrapped)) else it } }
+        updateSettings { it.copy(headingOffsetDeg = wrapped) }
+    }
 
     /** Picks the object nearest to a sky direction within `maxSeparationDeg`, or clears the selection. */
     fun selectNearest(direction: Horizontal, maxSeparationDeg: Double) {

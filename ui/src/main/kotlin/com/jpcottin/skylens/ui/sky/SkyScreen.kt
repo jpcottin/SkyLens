@@ -76,6 +76,8 @@ data class SkyActions(
     val onToggleMode: () -> Unit = {},
     val onSelect: (String?) -> Unit = {},
     val onSetTarget: (String?) -> Unit = {},
+    /** Compass calibration: the camera is pointed at this object right now. */
+    val onAlignHeading: (String) -> Unit = {},
     val onOpenDetails: (String) -> Unit = {},
     val onRequestLocation: () -> Unit = {},
     val onRequestCamera: () -> Unit = {},
@@ -209,6 +211,17 @@ private fun SkyHud(state: SkyUiState, actions: SkyActions, compact: Boolean, mod
                 }
             }
         }
+        if (state.mode == ViewMode.AR && state.compassAccuracy.needsCalibration) {
+            Spacer(Modifier.height(6.dp))
+            Surface(shape = MaterialTheme.shapes.small, color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.9f), modifier = Modifier.testTag("compass_warning")) {
+                Text(
+                    stringResource(R.string.compass_low_accuracy),
+                    Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                )
+            }
+        }
     }
 }
 
@@ -249,7 +262,14 @@ fun SelectedObjectCard(position: SkyPosition, state: SkyUiState, actions: SkyAct
             }
             Text(describePosition(position), style = MaterialTheme.typography.bodyMedium)
             Text(describeDetails(position), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
+                if (state.mode == ViewMode.AR && state.sensorsAvailable) {
+                    // Calibration: the user has the camera on this object, so its azimuth is the truth.
+                    TextButton(onClick = { actions.onAlignHeading(position.obj.id) }, modifier = Modifier.testTag("align_heading")) {
+                        Icon(Icons.Rounded.Explore, contentDescription = null, Modifier.padding(end = 4.dp))
+                        Text(stringResource(R.string.align_heading))
+                    }
+                }
                 TextButton(onClick = { actions.onOpenDetails(position.obj.id) }) { Text(stringResource(R.string.details)) }
                 Spacer(Modifier.width(4.dp))
                 AssistChip(
@@ -317,6 +337,14 @@ fun SkyScreenSelectedPreview() {
 fun SkyScreenNightVisionPreview() {
     val settings = com.jpcottin.skylens.data.Settings(nightMode = true)
     SkyLensTheme(dynamicColor = false, nightMode = true) { SkyScreen(PreviewSky.state(night = true, settings = settings, selectedId = "moon"), SkyActions()) }
+}
+
+@Preview(name = "AR, compass needs calibration", showBackground = true)
+@Composable
+fun SkyScreenCompassWarningPreview() {
+    SkyLensTheme(dynamicColor = false) {
+        SkyScreen(PreviewSky.state(night = true, mode = ViewMode.AR, selectedId = "planet:saturn").copy(compassAccuracy = com.jpcottin.skylens.data.CompassAccuracy.LOW), SkyActions())
+    }
 }
 
 @Preview(name = "Needs location", showBackground = true)

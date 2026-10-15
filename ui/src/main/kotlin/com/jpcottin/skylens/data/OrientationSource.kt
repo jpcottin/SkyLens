@@ -10,7 +10,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-/** Device orientation from the rotation-vector sensor as a stream of [DevicePose]s. */
+/** Device orientation from the rotation-vector sensor as a stream of [PoseReading]s. */
 class OrientationSource(context: Context) {
     private val sensorManager = context.getSystemService(SensorManager::class.java)
 
@@ -23,7 +23,7 @@ class OrientationSource(context: Context) {
      * mid-stream is honoured.
      * @param declinationDeg magnetic declination at the observer, east positive.
      */
-    fun poses(displayRotation: () -> Int, declinationDeg: () -> Double, smoothingAlpha: Double = 0.3): Flow<DevicePose> = callbackFlow {
+    fun poses(displayRotation: () -> Int, declinationDeg: () -> Double, smoothingAlpha: Double = 0.3): Flow<PoseReading> = callbackFlow {
         val manager = sensorManager ?: run { close(); return@callbackFlow }
         val sensor = manager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
             ?: manager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
@@ -31,6 +31,7 @@ class OrientationSource(context: Context) {
         val rotation = FloatArray(9)
         val remapped = FloatArray(9)
         var previous: DevicePose? = null
+        var accuracy = CompassAccuracy.UNKNOWN
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {
                 SensorManager.getRotationMatrixFromVector(rotation, event.values)
@@ -43,10 +44,12 @@ class OrientationSource(context: Context) {
                 SensorManager.remapCoordinateSystem(rotation, axisX, axisY, remapped)
                 val pose = DevicePose.smooth(previous, DevicePose.fromRotationMatrix(remapped, declinationDeg()), smoothingAlpha)
                 previous = pose
-                trySend(pose)
+                trySend(PoseReading(pose, accuracy))
             }
 
-            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
+            override fun onAccuracyChanged(sensor: Sensor?, status: Int) {
+                accuracy = CompassAccuracy.fromSensorStatus(status)
+            }
         }
         manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME)
         awaitClose { manager.unregisterListener(listener) }
