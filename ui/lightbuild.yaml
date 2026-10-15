@@ -31,6 +31,11 @@ android:
       - androidx.compose.material3.adaptive:adaptive-navigation3:1.3.0
       - androidx.compose.material3:material3-adaptive-navigation-suite:1.4.0
       - androidx.window:window:1.5.0
+      # Display AI Glasses: projected activity + Glimmer UI toolkit.
+      - androidx.xr.runtime:runtime:1.1.0-alpha01
+      - androidx.xr.projected:projected:1.0.0-alpha13
+      - androidx.xr.glimmer:glimmer:1.0.0-alpha20
+      - androidx.xr.glimmer:glimmer-google-fonts:1.0.0-alpha20
       - androidx.compose.material:material-icons-extended:1.7.8
       - androidx.navigation3:navigation3-ui:1.2.0
       - androidx.navigation3:navigation3-runtime:1.2.0

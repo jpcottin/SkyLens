@@ -12,7 +12,13 @@ import com.jpcottin.skylens.data.OrientationSource
 import com.jpcottin.skylens.data.SatelliteGroup
 import com.jpcottin.skylens.data.SettingsRepository
 import com.jpcottin.skylens.data.TleRepository
+import android.os.Build
+import androidx.xr.projected.ProjectedContext
+import androidx.xr.projected.experimental.ExperimentalProjectedApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 import java.io.File
 
@@ -35,6 +41,21 @@ class AppContainer(private val context: Context) {
     val orientation: OrientationSource by lazy { OrientationSource(context) }
 
     val cameraFov: CameraInfo.SensorFov? by lazy { CameraInfo.backCameraFov(context) }
+
+    /**
+     * The object the user asked to be guided to, shared between the phone and the glasses
+     * surfaces so "Point me" on the phone lights up the same target on the lens.
+     */
+    val sharedTarget = MutableStateFlow<String?>(null)
+
+    /** Whether Display AI Glasses are connected to this phone (always false before Android 16). */
+    @OptIn(ExperimentalProjectedApi::class)
+    fun glassesConnected(): Flow<Boolean> =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+            runCatching { ProjectedContext.isProjectedDeviceConnected(context, Dispatchers.Main) }.getOrElse { flowOf(false) }
+        } else {
+            flowOf(false)
+        }
 
     private var catalog: StarCatalog? = null
 

@@ -78,6 +78,8 @@ data class SkyUiState(
     val satelliteCount: Int = 0,
     /** Accuracy the platform reports for the magnetic heading (AR mode only). */
     val compassAccuracy: CompassAccuracy = CompassAccuracy.UNKNOWN,
+    /** Display AI Glasses connected: the phone offers to launch the lens view. */
+    val glassesConnected: Boolean = false,
 ) {
     val camera: SkyCamera get() = pose.toCamera(fov.horizontalDeg, fov.verticalDeg)
     val selected: SkyPosition? get() = selectedId?.let { snapshot?.find(it) }
@@ -94,6 +96,8 @@ class SkyViewModel(
     private val sensorPoses: Flow<PoseReading>?,
     private val clock: Clock,
     private val debug: DebugOverrides = DebugOverrides(),
+    /** Target shared with the other surface (phone ↔ glasses); null when running alone. */
+    private val sharedTarget: MutableStateFlow<String?>? = null,
     private val computeDispatcher: CoroutineDispatcher = Dispatchers.Default,
     /** How often the sky is recomputed. Satellites move ≈ 1°/s at the zenith, so twice a second. */
     private val tickMillis: Long = 500L,
@@ -105,7 +109,8 @@ class SkyViewModel(
             mode = if (debug.mapMode == true || sensorPoses == null) ViewMode.MAP else ViewMode.AR,
             sensorsAvailable = sensorPoses != null,
             pose = debug.pose ?: DevicePose.fromAngles(0.0, 30.0),
-            selectedId = debug.selectId,
+            selectedId = debug.selectId ?: sharedTarget?.value,
+            targetId = sharedTarget?.value,
         ),
     )
     val state: StateFlow<SkyUiState> = _state.asStateFlow()
@@ -146,6 +151,9 @@ class SkyViewModel(
             }
         }
         debug.nightMode?.let { night -> viewModelScope.launch { settingsRepository.update { it.copy(nightMode = night) } } }
+        sharedTarget?.let { shared ->
+            viewModelScope.launch { shared.collect { id -> _state.update { if (it.targetId == id) it else it.copy(targetId = id, selectedId = id ?: it.selectedId) } } }
+        }
         startSensors()
         viewModelScope.launch { computeLoop() }
     }
@@ -241,7 +249,12 @@ class SkyViewModel(
 
     fun select(id: String?) = _state.update { it.copy(selectedId = id) }
 
-    fun setTarget(id: String?) = _state.update { it.copy(targetId = id, selectedId = id ?: it.selectedId) }
+    fun setTarget(id: String?) {
+        _state.update { it.copy(targetId = id, selectedId = id ?: it.selectedId) }
+        sharedTarget?.value = id
+    }
+
+    fun setGlassesConnected(connected: Boolean) = _state.update { if (it.glassesConnected == connected) it else it.copy(glassesConnected = connected) }
 
     /**
      * Compass calibration: the user points the camera at [objectId] and the correction becomes
@@ -278,6 +291,24 @@ class SkyViewModel(
 
     fun updateSettings(transform: (Settings) -> Settings) {
         viewModelScope.launch { settingsRepository.update(transform) }
+    }
+
+    /**
+     * The next passes of every loaded satellite, soonest first, for the glasses' pass list.
+     * ≈ 170 satellites × 12 h is a few hundred thousand propagations: a second or two off the
+     * main thread, so callers cache the result.
+     */
+    suspend fun upcomingPasses(hours: Int = 12, limit: Int = 12): List<SatellitePass> {
+        val observer = state.value.observer ?: return emptyList()
+        val minEl = state.value.settings.minPassElevationDeg
+        val tles = engine?.propagators?.map { it.tle } ?: return emptyList()
+        val now = clock.nowMillis()
+        return withContext(computeDispatcher) {
+            val predictor = PassPredictor()
+            tles.flatMap { tle -> predictor.nextPasses(tle, observer, now, hours, minEl, maxPasses = 2) }
+                .sortedBy { it.riseMillis }
+                .take(limit)
+        }
     }
 
     /** Next passes of a satellite for the current observer, computed off the main thread. */
