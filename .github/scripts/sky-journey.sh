@@ -6,7 +6,7 @@
 # 1. installs the debug APK and launches it with a frozen clock (2026-10-14 05:00 UTC), a fixed
 #    observer (Vancouver) and a fixed pose (east, 35° up) in map mode;
 # 2. asserts through `android layout` that the HUD shows that pose and that the satellites loaded;
-# 3. opens the Objects tab and asserts the ISS is listed;
+# 3. opens the Objects tab through the launch extra and asserts the list is shown;
 # 4. if a release APK is given, installs it, launches it and checks the process survives.
 set -eu
 OUT="$1"; DEBUG_APK="$2"; RELEASE_APK="${3:-}"
@@ -30,16 +30,13 @@ adb shell pm grant $PKG android.permission.CAMERA || true
 adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true"
 layout_contains "E 100" sky-hud
 layout_contains "satellites" sky-status
-# Objects tab: the ISS comes from the bundled element sets, so it is there even offline.
-adb shell "am start -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true" >/dev/null
-sleep 2
-adb shell input keyevent KEYCODE_TAB; adb shell input keyevent KEYCODE_TAB; adb shell input keyevent KEYCODE_ENTER
-layout_contains "ISS" objects || {
-  # Keyboard navigation differs between layouts (rail vs bar): fall back to tapping the second nav item.
-  W=$(adb shell wm size | sed 's/.*: //' | cut -dx -f1 | tr -d '\r'); H=$(adb shell wm size | sed 's/.*: //' | cut -dx -f2 | tr -d '\r')
-  adb shell input tap $((W / 2)) $((H - 90))
-  layout_contains "ISS" objects-tap
-}
+# Objects tab, opened through the launch extra so the check does not depend on where the
+# navigation bar or rail puts the item. The header and the search field are always composed
+# (the ISS itself may be far down the lazy list and therefore absent from the layout tree).
+adb shell am force-stop $PKG
+adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab objects" >/dev/null
+layout_contains "Satellites" objects
+layout_contains "Search the sky" objects-search
 
 if [ -n "$RELEASE_APK" ]; then
   # Lightbuild writes an unsigned release APK; sign it with the debug keystore so it installs.

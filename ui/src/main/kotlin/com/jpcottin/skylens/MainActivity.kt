@@ -115,6 +115,11 @@ class MainActivity : ComponentActivity() {
                         onSetTarget = viewModel::setTarget,
                     ),
                     cameraBackground = { modifier -> CameraBackground(modifier) },
+                    startKey = when (debug.startTab) {
+                        "objects" -> com.jpcottin.skylens.ui.ObjectsKey
+                        "settings" -> com.jpcottin.skylens.ui.SettingsKey
+                        else -> com.jpcottin.skylens.ui.SkyKey
+                    },
                 )
             }
         }

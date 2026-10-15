@@ -11,7 +11,8 @@ import com.jpcottin.skylens.data.DevicePose
  * ```
  * adb shell am start -n com.jpcottin.skylens/com.jpcottin.skylens.MainActivity \
  *   --el skylens.time 1791921600000 --es skylens.location 49.2827,-123.1207,70 \
- *   --es skylens.pose 180,45,0 --ez skylens.map true --es skylens.select sat:25544 --ez skylens.night false
+ *   --es skylens.pose 180,45,0 --ez skylens.map true --es skylens.select sat:25544 --ez skylens.night false \
+ *   --es skylens.tab objects
  * ```
  */
 data class DebugOverrides(
@@ -26,8 +27,11 @@ data class DebugOverrides(
     val selectId: String? = null,
     /** Force the red night mode on or off. */
     val nightMode: Boolean? = null,
+    /** Tab to open at launch: `sky` (default), `objects` or `settings`. */
+    val startTab: String? = null,
 ) {
-    val isActive: Boolean get() = timeMillis != null || location != null || pose != null || mapMode != null || selectId != null || nightMode != null
+    val isActive: Boolean
+        get() = timeMillis != null || location != null || pose != null || mapMode != null || selectId != null || nightMode != null || startTab != null
 
     companion object {
         const val EXTRA_TIME = "skylens.time"
@@ -36,6 +40,8 @@ data class DebugOverrides(
         const val EXTRA_MAP = "skylens.map"
         const val EXTRA_SELECT = "skylens.select"
         const val EXTRA_NIGHT = "skylens.night"
+        const val EXTRA_TAB = "skylens.tab"
+        val TABS = setOf("sky", "objects", "settings")
 
         fun fromIntent(intent: Intent?): DebugOverrides {
             if (intent == null) return DebugOverrides()
@@ -45,7 +51,8 @@ data class DebugOverrides(
             val map = if (intent.hasExtra(EXTRA_MAP)) intent.getBooleanExtra(EXTRA_MAP, false) else null
             val select = intent.getStringExtra(EXTRA_SELECT)?.takeIf { it.isNotBlank() }
             val night = if (intent.hasExtra(EXTRA_NIGHT)) intent.getBooleanExtra(EXTRA_NIGHT, false) else null
-            return DebugOverrides(time, location, pose, map, select, night)
+            val tab = intent.getStringExtra(EXTRA_TAB)?.lowercase()?.takeIf { it in TABS }
+            return DebugOverrides(time, location, pose, map, select, night, tab)
         }
 
         /** "lat,lon[,altitude]" */

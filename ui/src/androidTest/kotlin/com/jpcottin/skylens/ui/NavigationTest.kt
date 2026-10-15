@@ -47,6 +47,13 @@ class NavigationTest {
     }
 
     @Test
+    fun startKey_opensThatTabFirst() {
+        rule.setContent { SkyLensTheme(dynamicColor = false) { SkyLensNavigation(PreviewSky.state(night = true), actions(), startKey = ObjectsKey) } }
+        rule.onNodeWithTag("objects_list").assertIsDisplayed()
+        rule.onNodeWithText("Satellites").assertIsDisplayed()
+    }
+
+    @Test
     fun selectedCard_detailsButtonOpensTheDetail() {
         rule.setContent { SkyLensTheme(dynamicColor = false) { SkyLensNavigation(PreviewSky.state(night = true, selectedId = "moon"), actions()) } }
         rule.onNodeWithText("Details").performClick()
