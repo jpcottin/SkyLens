@@ -170,10 +170,13 @@ jobs:
           disable-animations: true
           emulator-boot-timeout: 900
           script: |
+            # A launcher ANR dialog on a loaded runner steals the window focus and once hid the
+            # app from the journey's layout checks.
+            adb shell settings put global hide_error_dialogs 1
             adb install -r ui/build/outputs/apk/androidTest/debug/ui-debug-androidTest.apk
             adb shell am instrument -w com.jpcottin.skylens.test/androidx.test.runner.AndroidJUnitRunner 2>&1 | tee instrument_output.txt
             grep -q "OK (" instrument_output.txt
-            sh .github/scripts/sky-journey.sh journey app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release.apk
+            sh .github/scripts/sky-journey.sh journey app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release-unsigned.apk
 
       - name: Upload journey evidence
         if: always()
