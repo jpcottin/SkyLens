@@ -22,6 +22,7 @@ import androidx.compose.material.icons.rounded.Explore
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.NearMe
 import androidx.compose.material.icons.rounded.NearMeDisabled
+import androidx.compose.material.icons.rounded.Visibility
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -78,6 +79,7 @@ data class SkyActions(
     val onSetTarget: (String?) -> Unit = {},
     /** Compass calibration: the camera is pointed at this object right now. */
     val onAlignHeading: (String) -> Unit = {},
+    val onLaunchOnGlasses: () -> Unit = {},
     val onOpenDetails: (String) -> Unit = {},
     val onRequestLocation: () -> Unit = {},
     val onRequestCamera: () -> Unit = {},
@@ -179,11 +181,18 @@ private fun SkyHud(state: SkyUiState, actions: SkyActions, compact: Boolean, mod
                     )
                 }
             }
-            FilledTonalIconButton(onClick = actions.onToggleMode, modifier = Modifier.testTag("mode_toggle")) {
-                if (state.mode == ViewMode.AR) {
-                    Icon(Icons.Rounded.Map, contentDescription = stringResource(R.string.switch_to_map))
-                } else {
-                    Icon(Icons.Rounded.CameraAlt, contentDescription = stringResource(R.string.switch_to_ar))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (state.glassesConnected) {
+                    FilledTonalIconButton(onClick = actions.onLaunchOnGlasses, modifier = Modifier.testTag("launch_glasses")) {
+                        Icon(Icons.Rounded.Visibility, contentDescription = stringResource(R.string.launch_on_glasses))
+                    }
+                }
+                FilledTonalIconButton(onClick = actions.onToggleMode, modifier = Modifier.testTag("mode_toggle")) {
+                    if (state.mode == ViewMode.AR) {
+                        Icon(Icons.Rounded.Map, contentDescription = stringResource(R.string.switch_to_map))
+                    } else {
+                        Icon(Icons.Rounded.CameraAlt, contentDescription = stringResource(R.string.switch_to_ar))
+                    }
                 }
             }
         }
@@ -337,6 +346,12 @@ fun SkyScreenSelectedPreview() {
 fun SkyScreenNightVisionPreview() {
     val settings = com.jpcottin.skylens.data.Settings(nightMode = true)
     SkyLensTheme(dynamicColor = false, nightMode = true) { SkyScreen(PreviewSky.state(night = true, settings = settings, selectedId = "moon"), SkyActions()) }
+}
+
+@Preview(name = "Glasses connected", showBackground = true)
+@Composable
+fun SkyScreenGlassesConnectedPreview() {
+    SkyLensTheme(dynamicColor = false) { SkyScreen(PreviewSky.state(night = true).copy(glassesConnected = true), SkyActions()) }
 }
 
 @Preview(name = "AR, compass needs calibration", showBackground = true)

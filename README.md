@@ -14,9 +14,11 @@ approximate elements for the planets. The only network traffic is the periodic d
 the element sets from Celestrak, with a bundled copy as fallback.
 
 > **Status:** phone app complete — AR (camera + sensors) and drawn-sky modes, objects list
-> with search, satellite pass prediction, settings with layers, night mode and a manual
-> position; adaptive to phones, foldables (list-detail when unfolded, split layout in tabletop
-> posture), tablets and desktop windows. Glasses projection is the next milestone.
+> with search, satellite pass prediction, compass calibration, settings with layers, night mode
+> and a manual position; adaptive to phones, foldables (list-detail when unfolded, split layout
+> in tabletop posture), tablets and desktop windows. **Display AI Glasses:** a projected Glimmer
+> activity shows the sky window where the wearer looks, with one card for what is in front of
+> them and a list of upcoming passes.
 
 ## Screenshots
 
@@ -34,6 +36,15 @@ through the debug launch extras described below, so the pictures are reproducibl
 <p>
 <img src="docs/screenshots/settings-phone.png" width="240" alt="Settings: layers, star magnitude slider, satellite groups, display options, manual position, orbit data status">
 <img src="docs/screenshots/sky-night-vision-phone.png" width="240" alt="Night mode: the same sky drawn in red on black">
+</p>
+
+On the Display AI Glasses emulator (the phone's projection display, 450 × 394 at 160 dpi):
+
+<p>
+<img src="docs/screenshots/lens-saturn.png" width="300" alt="Lens: Saturn ringed in the sky window, Neptune labelled nearby, the heading chip and the Saturn card">
+<img src="docs/screenshots/lens-target.png" width="300" alt="Lens: the ISS chosen as target on the phone, its card with range and shadow state">
+<img src="docs/screenshots/lens-passes.png" width="300" alt="Lens: the next passes list, visible passes first, with countdowns">
+<img src="docs/screenshots/lens-live.png" width="300" alt="Lens driven by the sensors: horizon line, N marker, two rocket bodies with their trajectories">
 </p>
 
 ## What it shows
@@ -120,6 +131,29 @@ difference is under a second.
   landscape and the folded cover screen, plus previews of every state (no location, no
   camera, selected object, night mode, loading passes, missing object, orbit update error).
 
+## On Display AI Glasses
+
+When glasses are connected, the sky HUD on the phone shows a *Show on glasses* button. The
+projected activity (`GlassesActivity`, declared with `xr_projected`) runs on the phone but its
+context is the glasses': the rotation-vector sensor it reads is the one in the glasses, so the
+**sky window follows the wearer's head**. Location still comes from the phone.
+
+Built with Jetpack Compose Glimmer for the additive display: pure black root, the overlay drawn
+with 18 sp labels and larger markers, and **one bottom-aligned card** naming what is in front of
+the wearer (a satellite, a planet, the Moon or a bright star within a few degrees of the centre,
+or the target chosen with *Point me* on the phone). A tap on the card switches to the **next
+passes** list for every loaded satellite, visible passes first; selecting one makes it the target
+and returns to the sky; system back also returns.
+
+```sh
+# Deterministic launch on the glasses (debuggable builds), from the paired phone AVD:
+adb -s emulator-5554 shell am start --display 9 -n com.jpcottin.skylens/.ui.glasses.GlassesActivity \
+  --el skylens.time 1791954000000 --es skylens.location "49.2827,-123.1207,70" --es skylens.pose "100,35,0"
+# The lens is the phone's virtual ProjectionDisplay (the glasses AVD's own framebuffer stays black):
+LENS=$(adb -s emulator-5554 shell dumpsys SurfaceFlinger --display-id | grep 'displayName="ProjectionDisplay"' | awk '{print $2}')
+adb -s emulator-5554 shell screencap -d "$LENS" -p /sdcard/lens.png && adb -s emulator-5554 pull /sdcard/lens.png
+```
+
 ## Deterministic launches
 
 Debuggable builds honour launch extras that freeze the inputs, which is how the screenshots
@@ -188,6 +222,9 @@ code is unreliable for `test`, `query` and `resolve`, so CI runs every build thr
   decorators, scene strategies.
 - **edge-to-edge** — `enableEdgeToEdge()` with `safeDrawingPadding` on the HUD and cards.
 - **camerax** — `CameraXViewfinder` bound to the lifecycle for the passthrough.
+- **display-glasses-with-jetpack-compose-glimmer** — projected activity, `GlimmerTheme` with
+  Google Sans Flex, `Card`, `TitleChip`, `ListItem` and `GlimmerLazyColumn`, black root,
+  one thing at a time, system back to leave the list.
 - **testing-setup** — JVM, instrumented and journey tests, previews for every state.
 
 ## License

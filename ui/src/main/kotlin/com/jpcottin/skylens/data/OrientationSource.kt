@@ -14,9 +14,16 @@ import kotlinx.coroutines.flow.callbackFlow
 class OrientationSource(context: Context) {
     private val sensorManager = context.getSystemService(SensorManager::class.java)
 
-    val isAvailable: Boolean
-        get() = sensorManager?.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null ||
-            sensorManager?.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null
+    val isAvailable: Boolean get() = sensorManager?.let(::pickSensor) != null
+
+    /**
+     * The rotation vector first, then the geomagnetic one (no gyro, still north-referenced);
+     * the game rotation vector last, since it drifts in heading without a magnetometer.
+     */
+    private fun pickSensor(manager: SensorManager): Sensor? =
+        manager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+            ?: manager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)
+            ?: manager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
 
     /**
      * @param displayRotation one of `Surface.ROTATION_*`, read per event so a fold or a rotation
@@ -25,9 +32,7 @@ class OrientationSource(context: Context) {
      */
     fun poses(displayRotation: () -> Int, declinationDeg: () -> Double, smoothingAlpha: Double = 0.3): Flow<PoseReading> = callbackFlow {
         val manager = sensorManager ?: run { close(); return@callbackFlow }
-        val sensor = manager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-            ?: manager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
-            ?: run { close(); return@callbackFlow }
+        val sensor = pickSensor(manager) ?: run { close(); return@callbackFlow }
         val rotation = FloatArray(9)
         val remapped = FloatArray(9)
         var previous: DevicePose? = null
