@@ -284,12 +284,14 @@ jobs:
           sh .github/scripts/android-build.sh "app:app-debug.apk"
           sh .github/scripts/android-build.sh "app:app-release.apk"
 
+      # This leg runs Lightbuild again after the emulator boots (the device tests go through
+      # `android build test`), so the Gradle and Lightbuild caches must stay: only the unused
+      # toolchains go.
       - name: Free disk space for the emulator
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
             /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
             "$AGENT_TOOLSDIRECTORY/go" || true
-          rm -rf ~/.gradle/caches .lightbuild/cache || true
           sudo docker image prune --all --force > /dev/null 2>&1 || true
           df -h / | tail -1
 
