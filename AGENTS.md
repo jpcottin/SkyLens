@@ -28,6 +28,11 @@ Rough edges to remember (Lightbuild 0.0.20-alpha02, Android CLI 1.0.16500706):
 - A `ViewModel` test must never `advanceUntilIdle()`: the sky recompute loop runs forever on
   virtual time. Step the clock with `advanceTimeBy` and cancel `viewModelScope` at the end.
 
+CI scripts: `.github/scripts/sky-journey.sh` (HUD, Objects, Settings via launch extras, then the
+signed release smoke launch) and `.github/scripts/snapshot-multirun.sh <emulator> <avd> <apk>
+<out> [cycles]` (quickboot snapshot cycles, app launched once). Both read the verdict from
+`android layout`, so they need the `android` CLI on PATH.
+
 Deterministic launches for screenshots and CI (debuggable builds only):
 
 ```sh

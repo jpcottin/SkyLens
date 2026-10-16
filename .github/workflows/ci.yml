@@ -5,7 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  # The Android CLI and Lightbuild update independently of this repository.
+  # The Android CLI, Lightbuild, the canary emulator and the preview images all move on their
+  # own; the daily run catches toolchain changes between commits.
   schedule:
     - cron: '23 6 * * *'
 
@@ -49,7 +50,7 @@ jobs:
       - name: Astronomy engine unit tests (SGP4, Sun, Moon, planets, stars, passes, projection)
         run: sh .github/scripts/android-build.sh test "astro:hostTest"
 
-      - name: UI unit tests (ViewModel, TLE repository, FOV, pose, debug extras)
+      - name: UI unit tests (ViewModel, TLE repository, FOV, pose, glasses model, debug extras)
         run: sh .github/scripts/android-build.sh test "ui:hostTest"
 
       - name: Upload unit test results
@@ -89,6 +90,7 @@ jobs:
           curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
+      # Guards the R8 configuration; the emulator legs below also launch the minified APK.
       - name: Build minified release APK
         run: sh .github/scripts/android-build.sh "app:app-release.apk"
 
@@ -102,18 +104,57 @@ jobs:
             app/build/outputs/mapping/release/
           if-no-files-found: error
 
+  # Stable images gate PRs; the API 37.x legs run on preview 16 KB page-size system images
+  # (the only API 37 images on hosted runners) with the stable or canary emulator, as
+  # non-blocking data points. Every leg runs the Compose tests, the deterministic journey and
+  # the release smoke launch.
   instrumented-tests:
-    name: Instrumented Tests (API ${{ matrix.api-level }})
+    name: Instrumented Tests (API ${{ matrix.api-level }}${{ matrix.suffix && format(' {0}', matrix.suffix) || '' }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    continue-on-error: ${{ matrix.experimental || false }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - api-level: 34
+          - api-level: '34'
             target: google_apis
-          - api-level: 36
+            gpu: swiftshader_indirect
+          - api-level: '35'
             target: google_apis
+            gpu: swiftshader_indirect
+          - api-level: '36'
+            target: google_apis
+            gpu: swiftshader_indirect
+          - api-level: '37.0'
+            suffix: 'stable-lavapipe'
+            target: google_apis_ps16k
+            gpu: lavapipe
+            ram-size: 4096M
+            cores: 4
+            disk-size: 8192M
+            experimental: true
+            extra-options: -memory 4096
+          - api-level: '37.0'
+            suffix: 'canary-auto'
+            target: google_apis_ps16k
+            channel: canary
+            gpu: auto
+            ram-size: 4096M
+            cores: 4
+            disk-size: 8192M
+            experimental: true
+            extra-options: -memory 4096
+          - api-level: '37.1'
+            suffix: 'canary-lavapipe'
+            target: google_apis_ps16k
+            channel: canary
+            gpu: lavapipe
+            ram-size: 4096M
+            cores: 4
+            disk-size: 8192M
+            experimental: true
+            extra-options: -memory 4096
     steps:
       - uses: actions/checkout@v7
 
@@ -153,12 +194,25 @@ jobs:
           sudo docker image prune --all --force > /dev/null 2>&1 || true
           df -h / | tail -1
 
+      # The runner image ships an outdated avdmanager that writes target=android-0 for
+      # minor-versioned packages (android-37.x); the emulator clamps that to API 3 and skips the
+      # Vulkan/GLDirectMem auto-enable the ps16k images need.
+      - name: Update SDK cmdline-tools
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          yes | "$SDK/cmdline-tools/latest/bin/sdkmanager" --install "cmdline-tools;latest" > /dev/null
+          if [ -d "$SDK/cmdline-tools/latest-2" ]; then
+            rm -rf "$SDK/cmdline-tools/latest"
+            mv "$SDK/cmdline-tools/latest-2" "$SDK/cmdline-tools/latest"
+          fi
+          "$SDK/cmdline-tools/latest/bin/avdmanager" list device > /dev/null
+
       # The androidTest APK is self-instrumenting (library module). `am instrument -w` exits 0
       # even when tests fail, hence the explicit check for the "OK (N tests)" summary line.
-      # Then the deterministic journey: launch the debug app with a frozen clock, a fixed
-      # position and a fixed pose, and read the HUD and the objects list back with
-      # `android layout`; finally smoke-launch the minified release APK (an R8 regression once
-      # produced a release that crashed on launch while every build job stayed green).
+      # Then the journey: launch the debug app with a frozen clock, a fixed position and a fixed
+      # pose, read the HUD, the Objects and the Settings tabs back with `android layout`, and
+      # smoke-launch the minified release APK (an R8 regression once produced a release that
+      # crashed on launch while every build job stayed green).
       - name: Run instrumented tests and the sky journey
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -166,12 +220,15 @@ jobs:
           target: ${{ matrix.target }}
           arch: x86_64
           profile: pixel_6
-          emulator-options: -no-snapshot -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          channel: ${{ matrix.channel || 'stable' }}
+          ram-size: ${{ matrix.ram-size }}
+          cores: ${{ matrix.cores || 2 }}
+          disk-size: ${{ matrix.disk-size }}
+          emulator-options: -no-snapshot -no-window -gpu ${{ matrix.gpu }} -noaudio -no-boot-anim -camera-back none -verbose -show-kernel -debug-metrics -metrics-collection ${{ matrix.extra-options || '' }}
           disable-animations: true
           emulator-boot-timeout: 900
           script: |
-            # A launcher ANR dialog on a loaded runner steals the window focus and once hid the
-            # app from the journey's layout checks.
+            echo "===== AVD root ini ====="; cat "$HOME/.android/avd/test.ini" 2>/dev/null || echo "(test.ini not found)"
             adb shell settings put global hide_error_dialogs 1
             adb install -r ui/build/outputs/apk/androidTest/debug/ui-debug-androidTest.apk
             adb shell am instrument -w com.jpcottin.skylens.test/androidx.test.runner.AndroidJUnitRunner 2>&1 | tee instrument_output.txt
@@ -182,8 +239,377 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: sky-journey-api-${{ matrix.api-level }}
+          name: sky-journey-api-${{ matrix.api-level }}${{ matrix.suffix && format('-{0}', matrix.suffix) || '' }}
           path: |
             journey/
             instrument_output.txt
+          if-no-files-found: warn
+
+  # Drives the whole emulator flow with the Android CLI (https://d.android.com/tools/agents/android-cli)
+  # instead of sdkmanager/avdmanager and the emulator-runner action: `android sdk install
+  # --canary`, `android emulator create/start/stop`, and the instrumented tests through
+  # Lightbuild's own device-test runner (`android build test "ui:deviceTest"`).
+  android-cli:
+    name: Android CLI (API 37.0 canary emulator, Lightbuild device tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Install Android CLI
+        run: |
+          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Android CLI diagnostics
+        run: |
+          android --version
+          android info
+
+      - name: Build the APKs with Lightbuild
+        run: |
+          sh .github/scripts/android-build.sh "ui:deviceTest"
+          sh .github/scripts/android-build.sh "app:app-debug.apk"
+          sh .github/scripts/android-build.sh "app:app-release.apk"
+
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
+            "$AGENT_TOOLSDIRECTORY/go" || true
+          rm -rf ~/.gradle/caches .lightbuild/cache || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h / | tail -1
+
+      - name: Install canary emulator and API 37.0 ps16k image with the CLI
+        run: |
+          android sdk install --canary emulator platform-tools system-images/android-37.0/google_apis_ps16k/x86_64
+          android sdk list | grep -iE "^  emulator|android-37" || true
+
+      # 'android emulator create' is profile-based with no way to pin an image (it picks
+      # google_apis_playstore, whose first-boot Play overlays steal window focus). An AVD is just
+      # ini files, so create the profile with the CLI and retarget it at the pinned image.
+      - name: Create AVD with the CLI and retarget it to API 37.0 ps16k
+        run: |
+          android emulator create medium_phone
+          DEVICE="$(android emulator list | head -n1)"
+          AVD_DIR="$HOME/.android/avd/$DEVICE.avd"
+          [ -n "$DEVICE" ] && [ -d "$AVD_DIR" ] || { echo "ERROR: created AVD not found (DEVICE='$DEVICE')"; ls -la "$HOME/.android/avd/" || true; exit 1; }
+          CFG="$AVD_DIR/config.ini"
+          set_ini() {
+            if grep -q "^$1=" "$CFG"; then sed -i "s#^$1=.*#$1=$2#" "$CFG"; else echo "$1=$2" >> "$CFG"; fi
+          }
+          sed -i 's/^target=.*/target=android-37.0/' "$HOME/.android/avd/$DEVICE.ini"
+          set_ini image.sysdir.1 'system-images/android-37.0/google_apis_ps16k/x86_64/'
+          set_ini tag.id google_apis
+          set_ini tag.display 'Google APIs'
+          set_ini PlayStore.enabled false
+          set_ini hw.ramSize 4096
+          set_ini hw.cpu.ncore 4
+          set_ini disk.dataPartition.size 8192M
+          if grep -q '^tag.ids=' "$CFG"; then sed -i 's/^tag.ids=.*/tag.ids=google_apis,page_size_16kb/' "$CFG"; fi
+          if grep -q '^tag.displaynames=' "$CFG"; then sed -i 's/^tag.displaynames=.*/tag.displaynames=Google APIs,16 KB Page Size/' "$CFG"; fi
+          echo "===== root ini ====="; cat "$HOME/.android/avd/$DEVICE.ini"
+          echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
+
+      # 'android emulator start' passes neither -noaudio nor -no-window, so the runner needs
+      # libpulse and an X display.
+      - name: Install emulator host dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libpulse0 xvfb
+          Xvfb :99 -screen 0 1280x800x24 &
+          echo "DISPLAY=:99" >> "$GITHUB_ENV"
+
+      - name: Start emulator with the CLI
+        timeout-minutes: 15
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export PATH="$SDK/platform-tools:$PATH"
+          android emulator start --cold "$DEVICE"
+          for _ in $(seq 1 30); do adb get-state >/dev/null 2>&1 && break; sleep 2; done
+          adb get-state >/dev/null 2>&1 || { cat "$HOME/.android/$DEVICE/emulator.log" 2>/dev/null; exit 1; }
+          for _ in $(seq 1 60); do
+            [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ] && break
+            sleep 5
+          done
+          [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ] || { echo "boot timeout"; cat "$HOME/.android/$DEVICE/emulator.log" 2>/dev/null; exit 1; }
+          adb devices
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb shell settings put global hide_error_dialogs 1 || true
+          adb logcat -v time > "${{ github.workspace }}/emulator_logcat.txt" &
+
+      - name: Run instrumented tests through the CLI
+        run: sh .github/scripts/android-build.sh test "ui:deviceTest"
+
+      - name: Run the sky journey and the release smoke launch
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export PATH="$SDK/platform-tools:$PATH"
+          sh .github/scripts/sky-journey.sh journey app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Stop emulator
+        if: always()
+        run: android emulator stop "$DEVICE" || true
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-cli-artifacts
+          path: |
+            journey/
+            emulator_logcat.txt
+            ui/build/outputs/androidTest-results/
+          if-no-files-found: ignore
+
+  # Runs the new "Android Emulator (Preview)" SDK package (emulators;latest, installing to
+  # emulators/latest/, API 37+ only) by launching its binary directly, since the emulator-runner
+  # action hard-codes the classic package.
+  emulator-preview:
+    name: Emulator Preview (emulators/latest, API 37.0)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: temurin
+
+      - name: Install Android CLI
+        run: |
+          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build the APKs with Lightbuild
+        run: |
+          sh .github/scripts/android-build.sh "ui:deviceTest"
+          sh .github/scripts/android-build.sh "app:app-debug.apk"
+          sh .github/scripts/android-build.sh "app:app-release.apk"
+
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
+            "$AGENT_TOOLSDIRECTORY/go" || true
+          rm -rf ~/.gradle/caches .lightbuild/cache || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h / | tail -1
+
+      - name: Set up Android Emulator Preview
+        uses: ./.github/actions/preview-emulator
+
+      - name: Boot preview emulator
+        timeout-minutes: 12
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export ANDROID_HOME="$SDK" ANDROID_SDK_ROOT="$SDK"
+          export PATH="$SDK/platform-tools:$PATH"
+          "$SDK/emulators/latest/emulator" @test -no-snapshot -no-window -gpu auto -noaudio -no-boot-anim -camera-back none -memory 4096 -verbose -show-kernel -debug-metrics -metrics-collection > "${{ github.workspace }}/emulator_stdout.txt" 2>&1 &
+          EMU_PID=$!
+          for _ in $(seq 1 36); do
+            kill -0 "$EMU_PID" 2>/dev/null || { echo "ERROR: emulator process exited early"; tail -40 "${{ github.workspace }}/emulator_stdout.txt"; exit 1; }
+            adb get-state >/dev/null 2>&1 && break
+            sleep 5
+          done
+          adb get-state >/dev/null 2>&1 || { echo "ERROR: no device after 180s"; exit 1; }
+          for _ in $(seq 1 48); do
+            [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ] && break
+            sleep 10
+          done
+          [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ] || { echo "===== boot timeout ====="; tail -60 "${{ github.workspace }}/emulator_stdout.txt"; exit 1; }
+          adb devices
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb shell settings put global hide_error_dialogs 1 || true
+          adb logcat -v time > "${{ github.workspace }}/emulator_logcat.txt" &
+
+      - name: Run instrumented tests
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export PATH="$SDK/platform-tools:$PATH"
+          adb install -r ui/build/outputs/apk/androidTest/debug/ui-debug-androidTest.apk
+          adb shell am instrument -w com.jpcottin.skylens.test/androidx.test.runner.AndroidJUnitRunner 2>&1 | tee instrument_output.txt
+          grep -q "OK (" instrument_output.txt
+
+      - name: Run the sky journey and the release smoke launch
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export PATH="$SDK/platform-tools:$PATH"
+          sh .github/scripts/sky-journey.sh journey app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release-unsigned.apk
+
+      - name: Stop emulator
+        if: always()
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          "$SDK/platform-tools/adb" emu kill || true
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: emulator-preview-artifacts
+          path: |
+            journey/
+            instrument_output.txt
+            emulator_stdout.txt
+            emulator_logcat.txt
+          if-no-files-found: ignore
+
+  # Snapshot save/restore of the live app: four boot cycles with quickboot snapshots enabled,
+  # the app launched only in cycle 1 (frozen clock, fixed position and pose), and every later
+  # cycle checks whether the snapshot brought it back by itself — still running and still
+  # rendering, judged by a focused window and the HUD in the layout tree. One job uses the
+  # Emulator Preview package, the other the canary emulator installed through the Android CLI,
+  # so the same experiment can be compared across both.
+  emulator-preview-multirun:
+    name: Emulator Preview multi-run (snapshot cycles, API 37.0)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: temurin
+
+      - name: Install Android CLI
+        run: |
+          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build debug APK with Lightbuild
+        run: sh .github/scripts/android-build.sh "app:app-debug.apk"
+
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
+            "$AGENT_TOOLSDIRECTORY/go" || true
+          rm -rf ~/.gradle/caches .lightbuild/cache || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h / | tail -1
+
+      - name: Set up Android Emulator Preview
+        uses: ./.github/actions/preview-emulator
+
+      - name: Snapshot multi-run cycles
+        timeout-minutes: 30
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export ANDROID_HOME="$SDK" ANDROID_SDK_ROOT="$SDK"
+          export PATH="$SDK/platform-tools:$PATH"
+          sh .github/scripts/snapshot-multirun.sh "$SDK/emulators/latest/emulator" test app/build/outputs/apk/debug/app-debug.apk multirun 4
+
+      - name: Upload multi-run evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview-multirun-evidence
+          path: multirun/
+          if-no-files-found: warn
+
+  android-cli-multirun:
+    name: Android CLI multi-run (snapshot cycles, canary emulator, API 37.0)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: temurin
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Install Android CLI
+        run: |
+          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build debug APK with Lightbuild
+        run: sh .github/scripts/android-build.sh "app:app-debug.apk"
+
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift /usr/local/julia* \
+            "$AGENT_TOOLSDIRECTORY/go" || true
+          rm -rf ~/.gradle/caches .lightbuild/cache || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          df -h / | tail -1
+
+      - name: Install canary emulator and API 37.0 ps16k image with the CLI
+        run: android sdk install --canary emulator platform-tools system-images/android-37.0/google_apis_ps16k/x86_64
+
+      - name: Create AVD with the CLI and retarget it to API 37.0 ps16k
+        run: |
+          android emulator create medium_phone
+          DEVICE="$(android emulator list | head -n1)"
+          AVD_DIR="$HOME/.android/avd/$DEVICE.avd"
+          [ -n "$DEVICE" ] && [ -d "$AVD_DIR" ] || { echo "ERROR: created AVD not found (DEVICE='$DEVICE')"; exit 1; }
+          CFG="$AVD_DIR/config.ini"
+          set_ini() {
+            if grep -q "^$1=" "$CFG"; then sed -i "s#^$1=.*#$1=$2#" "$CFG"; else echo "$1=$2" >> "$CFG"; fi
+          }
+          sed -i 's/^target=.*/target=android-37.0/' "$HOME/.android/avd/$DEVICE.ini"
+          set_ini image.sysdir.1 'system-images/android-37.0/google_apis_ps16k/x86_64/'
+          set_ini tag.id google_apis
+          set_ini tag.display 'Google APIs'
+          set_ini PlayStore.enabled false
+          set_ini hw.ramSize 4096
+          set_ini hw.cpu.ncore 4
+          set_ini disk.dataPartition.size 8192M
+          if grep -q '^tag.ids=' "$CFG"; then sed -i 's/^tag.ids=.*/tag.ids=google_apis,page_size_16kb/' "$CFG"; fi
+          if grep -q '^tag.displaynames=' "$CFG"; then sed -i 's/^tag.displaynames=.*/tag.displaynames=Google APIs,16 KB Page Size/' "$CFG"; fi
+          echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
+
+      - name: Install emulator host dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libpulse0
+
+      # The canary emulator binary the CLI installed, launched directly so the snapshot flags
+      # are the same as in the preview job.
+      - name: Snapshot multi-run cycles
+        timeout-minutes: 30
+        run: |
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export ANDROID_HOME="$SDK" ANDROID_SDK_ROOT="$SDK"
+          export PATH="$SDK/platform-tools:$PATH"
+          "$SDK/emulator/emulator" -version | head -3 || true
+          sh .github/scripts/snapshot-multirun.sh "$SDK/emulator/emulator" "$DEVICE" app/build/outputs/apk/debug/app-debug.apk multirun 4
+
+      - name: Upload multi-run evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: cli-multirun-evidence
+          path: multirun/
           if-no-files-found: warn

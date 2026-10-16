@@ -6,7 +6,7 @@
 # 1. installs the debug APK and launches it with a frozen clock (2026-10-14 05:00 UTC), a fixed
 #    observer (Vancouver) and a fixed pose (east, 35° up) in map mode;
 # 2. asserts through `android layout` that the HUD shows that pose and that the satellites loaded;
-# 3. opens the Objects tab through the launch extra and asserts the list is shown;
+# 3. opens the Objects and Settings tabs through the launch extra and asserts their content;
 # 4. if a release APK is given, installs it, launches it and checks the process survives.
 set -eu
 OUT="$1"; DEBUG_APK="$2"; RELEASE_APK="${3:-}"
@@ -41,6 +41,10 @@ adb shell am force-stop $PKG
 adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab objects" >/dev/null
 layout_contains "Satellites" objects
 layout_contains "Search the sky" objects-search
+# Settings tab: the orbit data status and the compass section are composed near the top.
+adb shell am force-stop $PKG
+adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab settings" >/dev/null
+layout_contains "Layers" settings
 
 if [ -n "$RELEASE_APK" ]; then
   # Lightbuild writes an unsigned release APK; sign it with the debug keystore so it installs.
