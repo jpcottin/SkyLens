@@ -1,6 +1,48 @@
 # SkyLens
 
 [![CI](https://github.com/jpcottin/SkyLens/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jpcottin/SkyLens/actions/workflows/ci.yml)
+[![Release](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml/badge.svg)](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml)
+
+<details>
+<summary><b>CI details</b> — Lightbuild through the Android CLI, emulator matrix API 34 → 37.1, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
+
+Every job builds with Lightbuild through the `android` CLI (no Gradle files in the repository).
+Instrumented legs run the 39 Compose tests, then a deterministic journey (frozen clock, fixed
+position and pose; the HUD, Objects and Settings read back with `android layout`), then a smoke
+launch of the minified release APK:
+
+| Leg | Image | Emulator | GPU | Gating |
+|---|---|---|---|---|
+| API 34, 35, 36 | `google_apis` x86_64 | stable (emulator-runner) | swiftshader | ✅ blocking |
+| API 37.0 stable | `google_apis_ps16k` (16 KB page size) | stable | lavapipe | non-blocking |
+| API 37.0 canary | `google_apis_ps16k` | canary (`--channel=3`) | auto | non-blocking |
+| API 37.1 canary | `google_apis_ps16k` | canary | lavapipe | non-blocking |
+| Android CLI | `google_apis_ps16k` 37.0 | canary, `android sdk install` / `emulator create` / `emulator start` | default | non-blocking |
+| Emulator Preview | `google_apis_ps16k` 37.0 | `emulators;latest` package, binary launched directly | auto | non-blocking |
+| Emulator Preview multi-run | `google_apis_ps16k` 37.0 | preview package, 4 snapshot cycles | auto | non-blocking |
+| Android CLI multi-run | `google_apis_ps16k` 37.0 | canary, 4 snapshot cycles | auto | non-blocking |
+
+The Android CLI leg runs the Compose tests through Lightbuild's own device-test runner
+(`android build test "ui:deviceTest"`) instead of `adb` + `am instrument`.
+
+The two multi-run jobs boot the same AVD four times with quickboot snapshots enabled, launch the
+app only in the first cycle, and in every later cycle check that the snapshot brought it back by
+itself: process alive, window focused, HUD present in the layout tree. The app is never
+relaunched after a restore, since that is the thing being measured. A frozen clock makes every
+cycle render the same sky.
+
+Hosted runners are left with ~5 GB after the Lightbuild caches and the three APKs, less than
+the emulator needs for its userdata partition, so every emulator job removes unused toolchains
+and the build caches before booting. The runner's old `avdmanager` writes `target=android-0`
+for minor-versioned packages (android-37.x); the matrix legs update `cmdline-tools` first.
+`android build test` / `resolve` exit 1 even when they succeed, so every build goes through
+`.github/scripts/android-build.sh`, which reads the verdict from the output.
+
+Also: a daily scheduled run (the CLI, Lightbuild and the preview images move on their own),
+dependency review on pull requests, and a tagged release workflow that signs the Lightbuild
+release APK and publishes it with its R8 mapping file.
+
+</details>
 
 Raise your phone at the sky and SkyLens shows what is up there: **satellites with their
 trajectory**, the **Sun, the Moon and the planets**, and the **bright stars**, drawn over the
@@ -202,7 +244,8 @@ code is unreliable for `test`, `query` and `resolve`, so CI runs every build thr
 | `astro:hostTest` | JVM | SGP4 against `python-sgp4` reference states (position to 1 µm, velocity to 1 nm/s); Sun, Moon and planets against skyfield/DE421 at six instants and three sites; sidereal time; frames; TLE parsing and checksums; star catalogue; pass prediction; camera projection; the sky engine's determinism |
 | `ui:hostTest` | JVM | `SkyViewModel` with fakes (location states, debug overrides, AR/map modes, selection, settings, passes); `TleRepository` with MockWebServer (bundled fallback, cache, courtesy interval, failures); FOV fitting; device pose from rotation matrices and declination; debug extras parsing; the glasses model (which object gets the lens card, pass ordering, countdowns); the sensor fallback from the glasses to the phone |
 | `ui:deviceTest` | emulator | Compose UI tests: sky HUD, overlay semantics, tap hit-testing, selected card, location and camera prompts; objects list, search and sections; detail with passes; settings switches, groups, manual position validation, orbit refresh; navigation between tabs, list → detail → *Point me* → sky; the Glimmer glasses screen (heading chip, focused-object card, tap to the pass list, pass selection, loading and empty states) |
-| CI journey | emulator | Launches the debug APK with frozen inputs, reads the HUD and the objects list back with `android layout`, then smoke-launches the minified release APK and checks the process survives |
+| CI journey | emulator | Launches the debug APK with frozen inputs, reads the HUD, the Objects and the Settings tabs back with `android layout`, then smoke-launches the signed release APK and checks the process survives |
+| CI multi-runs | emulator | Four snapshot cycles on the preview and the canary emulators: the app launched once, then checked alive and rendering after every restore |
 
 ## Data and credits
 
