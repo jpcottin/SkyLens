@@ -90,6 +90,13 @@
     <string name="align_heading">Align</string>
     <string name="aligned_to">Compass aligned to %1$s (%2$s°)</string>
     <string name="compass_low_accuracy">Compass accuracy low — move the phone in a figure eight</string>
+    <string name="launch_on_glasses">Show on glasses</string>
+    <string name="glasses_launch_failed">Could not start on the glasses: %1$s</string>
+    <string name="glasses_waiting_position">Waiting for position</string>
+    <string name="glasses_nothing_here">Sky</string>
+    <string name="glasses_satellites_up">%1$d satellites above the horizon</string>
+    <string name="glasses_tap_for_passes">Tap for next passes</string>
+    <string name="glasses_no_passes">No pass in the next 12 hours</string>
     <string name="settings_about">About</string>
     <string name="settings_credits">Orbital elements from Celestrak. Star positions from the HYG database v4.1 (CC BY-SA 4.0). Sun, Moon and planet positions computed on the device (Meeus; JPL approximate elements).</string>
 </resources>

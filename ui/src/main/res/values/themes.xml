@@ -3,4 +3,11 @@
     <style name="Theme.SkyLens" parent="android:Theme.Material.NoActionBar">
         <item name="android:windowBackground">@android:color/black</item>
     </style>
+
+    <!-- Glasses have an additive display: black renders as fully transparent, so the window
+         background must be pure black to avoid blocking the user's view. -->
+    <style name="Theme.SkyLens.Glasses" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
+    </style>
 </resources>

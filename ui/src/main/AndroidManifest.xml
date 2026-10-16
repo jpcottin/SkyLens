@@ -25,6 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Projected activity rendered on Display AI Glasses with Jetpack Compose Glimmer.
+             xr_projected tells the system to run it with a projected context so that its
+             sensors are the glasses' own and its UI goes to the lens. -->
+        <activity
+            android:name=".ui.glasses.GlassesActivity"
+            android:exported="true"
+            android:requiredDisplayCategory="xr_projected"
+            android:theme="@style/Theme.SkyLens.Glasses">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -37,4 +37,15 @@ adb shell am start -n com.jpcottin.skylens/.MainActivity \
   --es skylens.select sat:25544 --ez skylens.night false --es skylens.tab objects
 ```
 
+Display AI Glasses: develop against the paired AVDs `P10F-CAN` (phone, emulator-5554) and
+`Display_Glasses_P10Fcan` (glasses, emulator-5556). Never wipe their data (it breaks the
+pairing); restart them with `android emulator start <name>`, phone first. Launch the projected
+activity with `am start --display <ProjectionDisplay id>` on the phone and capture the lens with
+`screencap -d <SurfaceFlinger id of ProjectionDisplay>`; when `dumpsys display` on the
+phone shows the ProjectionDisplay `state OFF`, send key code 266 (ToggleWakeSleep) to the glasses
+AVD (`adb -s emulator-5556 shell input keyevent 266`) and relaunch the activity: the glasses
+sysui overlay takes the display when it wakes. The glasses emulator's virtual rotation-vector
+sensor registers but never reports (BAD_VALUE in its sensorservice), which is why the lens
+falls back to the phone's sensors after three seconds (`PoseSources.withFallback`).
+
 Never add AI attribution (Co-Authored-By, "Generated with…") to commits, PRs or files.

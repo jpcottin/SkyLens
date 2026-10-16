@@ -80,6 +80,9 @@ class MainActivity : ComponentActivity() {
                 viewModel.onCameraPermission(granted)
             }
             LaunchedEffect(Unit) {
+                container.glassesConnected().collect(viewModel::setGlassesConnected)
+            }
+            LaunchedEffect(Unit) {
                 viewModel.onCameraPermission(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
                 if (!container.location.hasPermission() && debug.location == null && !state.settings.useManualLocation) {
                     locationLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
@@ -98,6 +101,11 @@ class MainActivity : ComponentActivity() {
                     val name = state.snapshot?.find(id)?.obj?.name ?: id
                     if (offset != null) {
                         android.widget.Toast.makeText(this, getString(com.jpcottin.skylens.R.string.aligned_to, name, "%+.0f".format(offset)), android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                },
+                onLaunchOnGlasses = {
+                    com.jpcottin.skylens.ui.glasses.GlassesLauncher.launch(this, intent).onFailure { e ->
+                        android.widget.Toast.makeText(this, getString(com.jpcottin.skylens.R.string.glasses_launch_failed, e.message ?: e.javaClass.simpleName), android.widget.Toast.LENGTH_LONG).show()
                     }
                 },
                 onRequestLocation = { locationLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)) },
