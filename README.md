@@ -18,8 +18,8 @@ launch of the minified release APK:
 | API 37.0 canary | `google_apis_ps16k` | canary (`--channel=3`) | auto | non-blocking |
 | API 37.1 canary | `google_apis_ps16k` | canary | lavapipe | non-blocking |
 | API 37.2 canary | `google_apis_ps16k` | canary | lavapipe, auto | non-blocking |
-| Android CLI | `google_apis_ps16k` 37.0 | canary, `android sdk install` / `emulator create` / `emulator start` | default | non-blocking |
-| Emulator Preview | `google_apis_ps16k` 37.0 | `emulators;latest` package, binary launched directly | auto | non-blocking |
+| Android CLI | `google_apis_ps16k` 37.0, 37.2 | canary, `android sdk install` / `emulator create` / `emulator start` | default | non-blocking |
+| Emulator Preview | `google_apis_ps16k` 37.0, 37.2 | `emulators;latest` package, binary launched directly | auto | non-blocking |
 | Emulator Preview multi-run | `google_apis_ps16k` 37.0 | preview package, 4 snapshot cycles | auto | non-blocking |
 | Android CLI multi-run | `google_apis_ps16k` 37.0 | canary, 4 snapshot cycles | auto | non-blocking |
 
