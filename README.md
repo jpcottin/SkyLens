@@ -4,7 +4,7 @@
 [![Release](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml/badge.svg)](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml)
 
 <details>
-<summary><b>CI details</b> — Lightbuild through the Android CLI, emulator matrix API 34 → 37.1, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
+<summary><b>CI details</b> — Lightbuild through the Android CLI, emulator matrix API 34 → 37.2, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
 
 Every job builds with Lightbuild through the `android` CLI (no Gradle files in the repository).
 Instrumented legs run the 39 Compose tests, then a deterministic journey (frozen clock, fixed
@@ -13,10 +13,11 @@ launch of the minified release APK:
 
 | Leg | Image | Emulator | GPU | Gating |
 |---|---|---|---|---|
-| API 34, 35, 36 | `google_apis` x86_64 | stable (emulator-runner) | swiftshader | ✅ blocking |
+| API 34, 35, 36 | `google_apis` x86_64 | stable (emulator-runner) | lavapipe | ✅ blocking |
 | API 37.0 stable | `google_apis_ps16k` (16 KB page size) | stable | lavapipe | non-blocking |
 | API 37.0 canary | `google_apis_ps16k` | canary (`--channel=3`) | auto | non-blocking |
 | API 37.1 canary | `google_apis_ps16k` | canary | lavapipe | non-blocking |
+| API 37.2 canary | `google_apis_ps16k` | canary | lavapipe, auto | non-blocking |
 | Android CLI | `google_apis_ps16k` 37.0 | canary, `android sdk install` / `emulator create` / `emulator start` | default | non-blocking |
 | Emulator Preview | `google_apis_ps16k` 37.0 | `emulators;latest` package, binary launched directly | auto | non-blocking |
 | Emulator Preview multi-run | `google_apis_ps16k` 37.0 | preview package, 4 snapshot cycles | auto | non-blocking |
