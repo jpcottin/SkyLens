@@ -13,12 +13,23 @@ OUT="$1"; DEBUG_APK="$2"; RELEASE_APK="${3:-}"
 PKG=com.jpcottin.skylens
 mkdir -p "$OUT"
 
+# A loaded runner's emulator drops its adb connection now and then (`adb: device offline`)
+# and is back within seconds; every phase waits for it rather than failing on the first
+# command that meets the gap. Polls up to 60 s.
+wait_online() {
+  for _ in $(seq 1 30); do
+    [ "$(adb get-state 2>/dev/null | tr -d '\r')" = "device" ] && return 0
+    sleep 2
+  done
+  echo "ERROR: device still offline after 60 s"; adb devices; return 1
+}
+
 layout_contains() {
   # $1 = pattern, $2 = evidence name; polls up to 60 s.
   for _ in $(seq 1 12); do
     android layout > "$OUT/$2.json" 2>/dev/null || true
     adb shell screencap -p /data/local/tmp/j.png >/dev/null 2>&1 && adb pull /data/local/tmp/j.png "$OUT/$2.png" >/dev/null 2>&1 || true
-    if grep -qi -- "$1" "$OUT/$2.json"; then return 0; fi
+    if grep -qi -- "$1" "$OUT/$2.json"; then wait_online; return; fi
     sleep 5
   done
   echo "ERROR: '$1' not found in layout ($2)"; cat "$OUT/$2.json"; return 1
@@ -26,6 +37,7 @@ layout_contains() {
 
 # Crash/ANR dialogs from other apps (the launcher on a loaded runner) would steal the focus
 # and hide the app from the layout checks; dismiss any that is up and hide the next ones.
+wait_online
 adb shell settings put global hide_error_dialogs 1
 adb shell input keyevent KEYCODE_ESCAPE || true
 adb install -r "$DEBUG_APK"
@@ -54,6 +66,7 @@ if [ -n "$RELEASE_APK" ]; then
   SIGNED="$OUT/app-release-signed.apk"
   "$APKSIGNER" sign --ks "$HOME/.android/debug.keystore" --ks-pass pass:android --ks-key-alias androiddebugkey --key-pass pass:android --out "$SIGNED" "$RELEASE_APK"
   # The debug build was signed by Lightbuild's own key: an in-place update is refused.
+  wait_online
   adb uninstall $PKG >/dev/null 2>&1 || true
   adb install "$SIGNED"
   adb logcat -c
