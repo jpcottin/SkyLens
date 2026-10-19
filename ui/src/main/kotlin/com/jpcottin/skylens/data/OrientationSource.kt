@@ -40,12 +40,7 @@ class OrientationSource(context: Context) {
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {
                 SensorManager.getRotationMatrixFromVector(rotation, event.values)
-                val (axisX, axisY) = when (displayRotation()) {
-                    Surface.ROTATION_90 -> SensorManager.AXIS_Y to SensorManager.AXIS_MINUS_X
-                    Surface.ROTATION_180 -> SensorManager.AXIS_MINUS_X to SensorManager.AXIS_MINUS_Y
-                    Surface.ROTATION_270 -> SensorManager.AXIS_MINUS_Y to SensorManager.AXIS_X
-                    else -> SensorManager.AXIS_X to SensorManager.AXIS_Y
-                }
+                val (axisX, axisY) = remapAxesFor(displayRotation())
                 SensorManager.remapCoordinateSystem(rotation, axisX, axisY, remapped)
                 val pose = DevicePose.smooth(previous, DevicePose.fromRotationMatrix(remapped, declinationDeg()), smoothingAlpha)
                 previous = pose
@@ -59,4 +54,16 @@ class OrientationSource(context: Context) {
         manager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME)
         awaitClose { manager.unregisterListener(listener) }
     }
+}
+
+/**
+ * The sensor axes that map onto the screen's X and Y for a display rotation (one of
+ * `Surface.ROTATION_*`), as [SensorManager.remapCoordinateSystem] wants them, so the pose
+ * follows the screen and not the device body when the phone is turned or unfolded.
+ */
+internal fun remapAxesFor(displayRotation: Int): Pair<Int, Int> = when (displayRotation) {
+    Surface.ROTATION_90 -> SensorManager.AXIS_Y to SensorManager.AXIS_MINUS_X
+    Surface.ROTATION_180 -> SensorManager.AXIS_MINUS_X to SensorManager.AXIS_MINUS_Y
+    Surface.ROTATION_270 -> SensorManager.AXIS_MINUS_Y to SensorManager.AXIS_X
+    else -> SensorManager.AXIS_X to SensorManager.AXIS_Y
 }
