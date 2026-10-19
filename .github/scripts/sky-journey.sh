@@ -24,12 +24,25 @@ wait_online() {
   echo "ERROR: device still offline after 60 s"; adb devices; return 1
 }
 
+# An "isn't responding" dialog from another app (the launcher, on a loaded runner) can
+# come up over the app after the launch, whatever hide_error_dialogs says, and then the
+# layout holds nothing but the dialog. Press its Wait button and look again.
+dismiss_anr() {
+  # $1 = layout json
+  c=$(grep -oE '"text": ?"Wait"[^{}]*"center": ?"\[[0-9]+,[0-9]+\]"' "$1" | grep -oE '[0-9]+,[0-9]+' | tail -1)
+  [ -n "$c" ] || return 0
+  echo "not-responding dialog over the app, pressing Wait at $c"
+  adb shell input tap "${c%,*}" "${c#*,}" || true
+  sleep 2
+}
+
 layout_contains() {
   # $1 = pattern, $2 = evidence name; polls up to 60 s.
   for _ in $(seq 1 12); do
     android layout > "$OUT/$2.json" 2>/dev/null || true
     adb shell screencap -p /data/local/tmp/j.png >/dev/null 2>&1 && adb pull /data/local/tmp/j.png "$OUT/$2.png" >/dev/null 2>&1 || true
     if grep -qi -- "$1" "$OUT/$2.json"; then wait_online; return; fi
+    dismiss_anr "$OUT/$2.json"
     sleep 5
   done
   echo "ERROR: '$1' not found in layout ($2)"; cat "$OUT/$2.json"; return 1
