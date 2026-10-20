@@ -32,9 +32,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Android CLI diagnostics
         run: |
@@ -86,9 +84,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       # Guards the R8 configuration; the emulator legs below also launch the minified APK.
       - name: Build minified release APK
@@ -190,9 +186,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Build the APKs with Lightbuild
         run: |
@@ -293,9 +287,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Android CLI diagnostics
         run: |
@@ -424,9 +416,7 @@ jobs:
           distribution: temurin
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Build the APKs with Lightbuild
         run: |
@@ -526,9 +516,7 @@ jobs:
           distribution: temurin
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Build debug APK with Lightbuild
         run: sh .github/scripts/android-build.sh "app:app-debug.apk"
@@ -581,9 +569,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Install Android CLI
-        run: |
-          curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: sh .github/scripts/install-android-cli.sh
 
       - name: Build debug APK with Lightbuild
         run: sh .github/scripts/android-build.sh "app:app-debug.apk"

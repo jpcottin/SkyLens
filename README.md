@@ -38,6 +38,8 @@ and the build caches before booting. The runner's old `avdmanager` writes `targe
 for minor-versioned packages (android-37.x); the matrix legs update `cmdline-tools` first.
 `android build test` / `resolve` exit 1 even when they succeed, so every build goes through
 `.github/scripts/android-build.sh`, which reads the verdict from the output.
+The CLI installer's download drops now and then on a loaded runner, so
+`.github/scripts/install-android-cli.sh` retries the install before a leg goes red.
 
 Also: a daily scheduled run (the CLI, Lightbuild and the preview images move on their own),
 dependency review on pull requests, and a tagged release workflow that signs the Lightbuild
