@@ -62,7 +62,7 @@ class GlassesActivity : ComponentActivity() {
                 val viewModel: SkyViewModel = viewModel {
                     val clock = debug.clock()
                     val declination = {
-                        val observer = lastObserver
+                        val observer = container.lastObserver.value
                         if (observer != null) LocationSource.declinationDeg(observer, clock.nowMillis()) else 0.0
                     }
                     // The glasses' own sensors when they report, else the phone's (the emulator's
@@ -86,7 +86,7 @@ class GlassesActivity : ComponentActivity() {
                     )
                 }
                 val state by viewModel.state.collectAsStateWithLifecycle()
-                lastObserver = state.observer
+                container.lastObserver.value = state.observer
                 // On the lens a debug selection is a target: it gets the card and the guide arrow.
                 // Sensors, location and the sky computation run only while the screen is visible.
                 LifecycleStartEffect(Unit) {
@@ -123,8 +123,6 @@ class GlassesActivity : ComponentActivity() {
         }
     }
 
-    @Volatile
-    private var lastObserver: com.jpcottin.skylens.astro.Observer? = null
 
     private companion object {
         const val LENS_FOV_DEG = 40.0

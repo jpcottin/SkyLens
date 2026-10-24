@@ -3,6 +3,8 @@ package com.jpcottin.skylens
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Display
+import android.hardware.display.DisplayManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -50,15 +52,19 @@ class MainActivity : ComponentActivity() {
         val debug = if (container.isDebuggable) DebugOverrides.fromIntent(intent) else DebugOverrides()
 
         setContent {
+            // The display's rotation by id through the application's DisplayManager: the lambda
+            // below outlives this activity and must not keep it.
+            val displayId = display?.displayId ?: Display.DEFAULT_DISPLAY
+            val displays = applicationContext.getSystemService(DisplayManager::class.java)
             val viewModel: SkyViewModel = viewModel {
                 val clock = debug.clock()
                 val declination = {
                     // Updated lazily from the latest fix; the declination changes by well under a degree across a city.
-                    val observer = lastObserver
+                    val observer = container.lastObserver.value
                     if (observer != null) LocationSource.declinationDeg(observer, clock.nowMillis()) else 0.0
                 }
                 val poses: Flow<com.jpcottin.skylens.data.PoseReading>? = if (container.orientation.isAvailable) {
-                    container.orientation.poses(displayRotation = { display?.rotation ?: 0 }, declinationDeg = declination)
+                    container.orientation.poses(displayRotation = { displays.getDisplay(displayId)?.rotation ?: 0 }, declinationDeg = declination)
                 } else {
                     null
                 }
@@ -74,7 +80,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
             val state by viewModel.state.collectAsStateWithLifecycle()
-            lastObserver = state.observer
+            container.lastObserver.value = state.observer
 
             val locationLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
                 viewModel.onLocationPermissionResult()
@@ -155,8 +161,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Volatile
-    private var lastObserver: com.jpcottin.skylens.astro.Observer? = null
 }
 
 /** Binds a CameraX preview to the lifecycle for as long as it is composed and shows it full-bleed. */
