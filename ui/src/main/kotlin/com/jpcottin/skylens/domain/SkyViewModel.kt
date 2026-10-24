@@ -131,13 +131,11 @@ class SkyViewModel(
         viewModelScope.launch {
             tleRepository.state.collect { t -> _state.update { it.copy(tle = t) } }
         }
-        viewModelScope.launch {
-            catalog = catalogLoader()
-            val groups = state.value.settings.satelliteGroups
-            tleRepository.loadLocal(groups)
-            tleRepository.refresh(groups)
-        }
-        // Reload element sets when the chosen groups change.
+        viewModelScope.launch { catalog = catalogLoader() }
+        // Load the element sets for the chosen groups, and reload them when the choice
+        // changes. The first emission covers startup, with the groups actually saved; a
+        // second startup load here would race it (two fetches per group, and whichever
+        // finished last decided which groups were shown).
         viewModelScope.launch {
             settingsRepository.settings.map { it.satelliteGroups }.distinctUntilChanged().collectLatest { groups ->
                 tleRepository.loadLocal(groups)
