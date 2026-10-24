@@ -11,16 +11,10 @@ const val RAD_TO_DEG: Double = 180.0 / PI
 const val TWO_PI: Double = 2.0 * PI
 
 /** Normalises an angle in degrees to [0, 360). */
-fun normalizeDegrees(deg: Double): Double {
-    val r = deg % 360.0
-    return if (r < 0) r + 360.0 else r
-}
+fun normalizeDegrees(deg: Double): Double = ((deg % 360.0) + 360.0) % 360.0   // a tiny negative must not round up to 360.0
 
 /** Normalises an angle in radians to [0, 2π). */
-fun normalizeRadians(rad: Double): Double {
-    val r = rad % TWO_PI
-    return if (r < 0) r + TWO_PI else r
-}
+fun normalizeRadians(rad: Double): Double = ((rad % TWO_PI) + TWO_PI) % TWO_PI
 
 /** Signed difference `a - b` in degrees, wrapped to (-180, 180]. */
 fun angularDifferenceDegrees(a: Double, b: Double): Double {

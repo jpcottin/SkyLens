@@ -228,8 +228,8 @@ There are no Gradle files in this repository. The project is described by
 export ANDROID_CLI_BUILD=true
 android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
-android build test "astro:hostTest"     # 60 astronomy engine tests on the JVM
-android build test "ui:hostTest"        # 62 ui unit tests on the JVM
+android build test "astro:hostTest"     # 61 astronomy engine tests on the JVM
+android build test "ui:hostTest"        # 65 ui unit tests on the JVM
 android build test "ui:deviceTest"      # 39 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```

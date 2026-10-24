@@ -2,6 +2,8 @@ package com.jpcottin.skylens.domain
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.jpcottin.skylens.astro.StarCatalog
@@ -28,7 +30,12 @@ class AppContainer(private val context: Context) {
     val isDebuggable: Boolean = (context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
 
     val settings: SettingsRepository by lazy {
-        SettingsRepository(PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("settings") })
+        SettingsRepository(
+            PreferenceDataStoreFactory.create(
+                // A corrupt file is replaced by an empty one, so reads and writes both recover.
+                corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
+            ) { context.preferencesDataStoreFile("settings") },
+        )
     }
 
     val tles: TleRepository by lazy {
