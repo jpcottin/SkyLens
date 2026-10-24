@@ -60,4 +60,14 @@ class NavigationTest {
         rule.onNodeWithTag("detail_list").assertIsDisplayed()
         rule.onNodeWithText("illuminated", substring = true).assertIsDisplayed()
     }
+
+    @Test
+    fun back_fromAnotherTab_returnsToTheSky() {
+        rule.setContent { SkyLensTheme(dynamicColor = false) { SkyLensNavigation(PreviewSky.state(night = true), actions()) } }
+        rule.onNodeWithTag("nav_objects").performClick()
+        rule.onNodeWithTag("objects_list").assertIsDisplayed()
+        rule.activityRule.scenario.onActivity { it.onBackPressedDispatcher.onBackPressed() }
+        rule.onNodeWithTag("hud_pointing").assertIsDisplayed()
+    }
+
 }

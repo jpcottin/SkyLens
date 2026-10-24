@@ -35,7 +35,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import android.app.Activity
+import android.content.ContextWrapper
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.core.view.WindowCompat
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +49,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -107,6 +112,20 @@ fun SkyScreen(
     // progress. They are keyed on the mode only and read the current camera through this.
     val currentCamera = rememberUpdatedState(camera)
     val usesCamera = state.mode == ViewMode.AR && state.cameraPermissionGranted && state.settings.cameraPassthrough
+    // The sky is dark whatever the theme: light status-bar icons while it shows, the
+    // automatic appearance back when it leaves.
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        DisposableEffect(view) {
+            val window = generateSequence(view.context) { (it as? ContextWrapper)?.baseContext }
+                .filterIsInstance<Activity>().firstOrNull()?.window
+                ?: return@DisposableEffect onDispose {}
+            val controller = WindowCompat.getInsetsController(window, view)
+            val previous = controller.isAppearanceLightStatusBars
+            controller.isAppearanceLightStatusBars = false
+            onDispose { controller.isAppearanceLightStatusBars = previous }
+        }
+    }
     Box(modifier.fillMaxSize().background(Color.Black)) {
         if (usesCamera) {
             background(Modifier.fillMaxSize())

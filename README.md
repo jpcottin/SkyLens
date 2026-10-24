@@ -230,8 +230,8 @@ export ANDROID_CLI_BUILD=true
 android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
 android build test "astro:hostTest"     # 62 astronomy engine tests on the JVM
-android build test "ui:hostTest"        # 66 ui unit tests on the JVM
-android build test "ui:deviceTest"      # 39 Compose UI tests on the connected device
+android build test "ui:hostTest"        # 67 ui unit tests on the JVM
+android build test "ui:deviceTest"      # 42 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 

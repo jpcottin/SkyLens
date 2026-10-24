@@ -7,6 +7,8 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.isToggleable
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -119,4 +121,12 @@ class SettingsScreenTest {
         assertNull(parseObserver("1", "-181", ""))
         assertNull(parseObserver("", "", ""))
     }
+
+    @Test
+    fun switchRows_areOneLabelledToggleable() {
+        content()
+        rule.onNode(hasText("Stars") and isToggleable()).assertIsOn().performClick()
+        rule.onNode(hasText("Stars") and isToggleable()).assertIsOff()
+    }
+
 }

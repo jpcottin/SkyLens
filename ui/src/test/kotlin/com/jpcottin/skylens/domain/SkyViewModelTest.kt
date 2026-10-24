@@ -309,4 +309,22 @@ class SkyViewModelTest {
 
     /** The compute loop would keep the test scope alive forever: cancel the ViewModel's scope. */
     private fun SkyViewModel.viewModelScopeCancel() = viewModelScope.cancel()
+
+    @Test
+    fun mapMode_releasesTheSensors() = runTest(dispatcher) {
+        val vm = viewModel()
+        try {
+            settle()
+            assertEquals(1, poses.subscriptionCount.value)
+            vm.setMode(ViewMode.MAP)
+            settle()
+            assertEquals(0, poses.subscriptionCount.value)
+            vm.setMode(ViewMode.AR)
+            settle()
+            assertEquals(1, poses.subscriptionCount.value)
+        } finally {
+            vm.viewModelScopeCancel()   // a failed assertion must not leave the collector running
+        }
+    }
+
 }

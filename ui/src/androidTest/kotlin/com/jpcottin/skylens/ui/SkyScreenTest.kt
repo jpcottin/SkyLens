@@ -2,6 +2,11 @@ package com.jpcottin.skylens.ui
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
+import org.junit.Assert.assertFalse
+import androidx.core.view.WindowCompat
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -164,4 +169,19 @@ class SkyScreenTest {
         rule.onNodeWithText("Allow camera").performClick()
         assertTrue(asked)
     }
+
+    @Test
+    fun sky_forcesLightStatusBarIcons_andRestoresThemWhenItLeaves() {
+        val activity = rule.activity
+        fun light() = WindowCompat.getInsetsController(activity.window, activity.window.decorView).isAppearanceLightStatusBars
+        rule.runOnUiThread { WindowCompat.getInsetsController(activity.window, activity.window.decorView).isAppearanceLightStatusBars = true }
+        var showSky by mutableStateOf(true)
+        rule.setContent { SkyLensTheme(dynamicColor = false) { if (showSky) SkyScreen(PreviewSky.state(night = true), SkyActions()) } }
+        rule.waitForIdle()
+        rule.runOnUiThread { assertFalse(light()) }
+        showSky = false
+        rule.waitForIdle()
+        rule.runOnUiThread { assertTrue(light()) }
+    }
+
 }
