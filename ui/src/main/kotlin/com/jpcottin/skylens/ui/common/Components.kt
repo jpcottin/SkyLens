@@ -19,9 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.toggleableState
-import androidx.compose.ui.state.ToggleableState
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.jpcottin.skylens.astro.BodyKind
 
@@ -37,18 +36,21 @@ fun BodyKind.icon(): ImageVector = when (this) {
 /** A labelled switch row used throughout Settings. */
 @Composable
 fun SwitchRow(title: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit, modifier: Modifier = Modifier, subtitle: String? = null, testTag: String? = null) {
+    // One toggleable row: a screen reader hears "Sun, switch, on" and a double-tap on the
+    // title flips it; the switch itself only draws the state.
     Row(
         modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp)
-            .semantics { toggleableState = if (checked) ToggleableState.On else ToggleableState.Off },
+            .toggleable(value = checked, role = Role.Switch, onValueChange = onCheckedChange)
+            .then(if (testTag != null) Modifier.testTag(testTag) else Modifier)
+            .padding(horizontal = 16.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
             Text(title, style = MaterialTheme.typography.bodyLarge)
             if (subtitle != null) Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Switch(checked = checked, onCheckedChange = onCheckedChange, modifier = if (testTag != null) Modifier.testTag(testTag) else Modifier)
+        Switch(checked = checked, onCheckedChange = null)
     }
 }
 

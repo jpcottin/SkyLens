@@ -85,7 +85,9 @@ fun SkyLensNavigation(
     cameraBackground: @Composable (Modifier) -> Unit = {},
     startKey: NavKey = SkyKey,
 ) {
-    val backStack = rememberNavBackStack(startKey)
+    // The Sky tab sits under every other tab, so back from Objects or Settings returns to it
+    // (with the predictive animation) instead of leaving the app.
+    val backStack = rememberNavBackStack(*listOfNotNull(SkyKey, startKey.takeIf { it != SkyKey }).toTypedArray())
     val adaptiveInfo = currentWindowAdaptiveInfo()
     val isTabletop = adaptiveInfo.windowPosture.isTabletop
     val isWide = adaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
@@ -95,9 +97,10 @@ fun SkyLensNavigation(
     }
     fun switchTab(key: NavKey) {
         backStack.clear()
-        backStack.add(key)
+        backStack.add(SkyKey)
+        if (key != SkyKey) backStack.add(key)
     }
-    val currentTab = backStack.firstOrNull() ?: SkyKey
+    val currentTab = backStack.firstOrNull { it == ObjectsKey || it == SettingsKey } ?: SkyKey
     val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
 
     NavigationSuiteScaffold(

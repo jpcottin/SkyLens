@@ -203,8 +203,9 @@ class SkyViewModel(
     }
 
     private fun startSensors() {
-        sensorJob?.cancel()
-        if (debug.pose != null || sensorPoses == null) return
+        sensorJob?.cancel(); sensorJob = null
+        // The drawn sky does not use the pose: no fusion at 50 Hz while in map mode.
+        if (debug.pose != null || sensorPoses == null || state.value.mode != ViewMode.AR) return
         sensorJob = viewModelScope.launch {
             sensorPoses.catch { }.collect { reading ->
                 rawSensorPose = reading.pose
@@ -249,7 +250,7 @@ class SkyViewModel(
 
     fun setMode(mode: ViewMode) {
         _state.update { it.copy(mode = mode) }
-        if (mode == ViewMode.AR) startSensors()
+        startSensors()   // registers in AR, unregisters in MAP
     }
 
     fun toggleMode() = setMode(if (state.value.mode == ViewMode.AR) ViewMode.MAP else ViewMode.AR)
