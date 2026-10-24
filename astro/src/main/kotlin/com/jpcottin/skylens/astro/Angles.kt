@@ -82,7 +82,18 @@ data class Equatorial(val raDeg: Double, val decDeg: Double) {
 }
 
 /** Observer on the WGS84 ellipsoid. */
-data class Observer(val latitudeDeg: Double, val longitudeDeg: Double, val altitudeM: Double = 0.0)
+data class Observer(val latitudeDeg: Double, val longitudeDeg: Double, val altitudeM: Double = 0.0) {
+    /**
+     * This observer snapped to a grid of [stepDeg] degrees (and 100 m in altitude): a key for
+     * work that depends on the location only coarsely, such as pass predictions, so a GPS fix
+     * that moves by a few metres every ten seconds does not redo it.
+     */
+    fun roundedTo(stepDeg: Double): Observer = Observer(
+        Math.round(latitudeDeg / stepDeg) * stepDeg,
+        Math.round(longitudeDeg / stepDeg) * stepDeg,
+        Math.round(altitudeM / 100.0) * 100.0,
+    )
+}
 
 /** Compass point for an azimuth, e.g. "NNE". */
 fun compassPoint(azimuthDeg: Double): String {

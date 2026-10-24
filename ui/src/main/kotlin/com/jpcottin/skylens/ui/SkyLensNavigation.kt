@@ -160,7 +160,9 @@ fun SkyLensNavigation(
                     val position = state.snapshot?.find(key.id)
                     var passes by remember(key.id) { mutableStateOf<PassesState>(if (position?.obj is SatelliteObject) PassesState.Loading else PassesState.NotApplicable) }
                     val tle = (position?.obj as? SatelliteObject)?.tle
-                    LaunchedEffect(tle?.catalogNumber, state.observer) {
+                    // Keyed on a coarse position: a fresh GPS fix every ten seconds must not
+                    // flash "Computing passes" and redo the list for a move of a few metres.
+                    LaunchedEffect(tle?.catalogNumber, state.observer?.roundedTo(PASS_OBSERVER_STEP_DEG)) {
                         if (tle != null) {
                             passes = PassesState.Loading
                             passes = PassesState.Ready(actions.passesFor(tle))
@@ -239,3 +241,6 @@ fun TabletopSkyPreview() {
         Row(Modifier.fillMaxSize()) { TabletopSky(PreviewSky.state(night = true, selectedId = "moon"), SkyActions(), {}) }
     }
 }
+
+/** About 5 km: pass times do not change meaningfully within it. */
+internal const val PASS_OBSERVER_STEP_DEG = 0.05
