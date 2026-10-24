@@ -64,6 +64,7 @@ class SkyEngine(
                 magnitude = -12.0,
                 distanceKm = moonVector.length,
                 illuminatedFraction = Moon.illuminatedFraction(jd),
+                waxing = Moon.isWaxing(jd),
             )
         }
 

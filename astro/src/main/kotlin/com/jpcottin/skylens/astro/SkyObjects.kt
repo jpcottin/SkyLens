@@ -53,6 +53,8 @@ data class SkyPosition(
     val track: List<Horizontal> = emptyList(),
     /** Moon only: illuminated fraction 0..1. */
     val illuminatedFraction: Double? = null,
+    /** Moon only: true while the lit part grows (waxing), false while it shrinks (waning). */
+    val waxing: Boolean? = null,
     /** Satellite only: ground speed in km/s. */
     val speedKmPerSec: Double? = null,
 ) {
