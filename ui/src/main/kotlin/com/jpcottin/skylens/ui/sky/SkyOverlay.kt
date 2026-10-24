@@ -230,7 +230,7 @@ private class SkyRenderer(
         val fraction = (p.illuminatedFraction ?: 1.0).coerceIn(0.0, 1.0)
         // Lit disc, then the shadow: a half disc on the dark side plus an ellipse of the terminator.
         scope.drawCircle(palette.moon, r, pos)
-        val waxing = isWaxing(p)
+        val waxing = p.waxing ?: true
         val darkSide = if (waxing) -1f else 1f // waxing: dark limb on the left (northern hemisphere view)
         val shadow = Path()
         shadow.addArc(androidx.compose.ui.geometry.Rect(pos.x - r, pos.y - r, pos.x + r, pos.y + r), if (darkSide < 0) 90f else -90f, 180f)
@@ -249,11 +249,6 @@ private class SkyRenderer(
         scope.drawCircle(palette.moonShadow.copy(alpha = 0.6f), r, pos, style = Stroke(dp(1f)))
         if (options.showLabels) drawLabel("Moon", pos, r + dp(2f))
     }
-
-    private fun isWaxing(p: SkyPosition): Boolean = (p.illuminatedFraction ?: 0.0) <= 1.0 && waxingHint
-
-    /** Set per frame by the screen when known; false means waning. */
-    var waxingHint: Boolean = true
 
     private fun drawPlanet(p: SkyPosition) {
         if (p.horizontal.elevationDeg < -2.0) return

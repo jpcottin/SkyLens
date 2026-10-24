@@ -60,6 +60,17 @@ class SkyEngineTest {
     }
 
     @Test
+    fun moon_carriesThePhaseDirection() {
+        // Every reference instant: the snapshot says waxing exactly when the Moon model does,
+        // so the overlay can put the dark limb on the right side.
+        for (site in BodyFixtures.sites) {
+            val jd = JulianDate.fromEpochMillis(site.epochMillis)
+            val moon = engine.compute(site.observer, site.epochMillis).find("moon")!!
+            assertEquals(Moon.isWaxing(jd), moon.waxing)
+        }
+    }
+
+    @Test
     fun satellites_haveRangeSpeedAndTrack() {
         val snap = engine.compute(vancouver, t0)
         val iss = snap.find("sat:25544")!!
