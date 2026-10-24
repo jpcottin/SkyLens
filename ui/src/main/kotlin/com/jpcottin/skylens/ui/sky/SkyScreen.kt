@@ -36,6 +36,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -101,6 +102,10 @@ fun SkyScreen(
 ) {
     val palette = if (state.settings.nightMode) SkyPalette.NightVision else SkyPalette.Default
     val camera = state.camera
+    // The gesture detectors below must not restart on every state change (a clock tick, a
+    // sensor reading at 50 Hz, the pan itself): a restarted detector drops the gesture in
+    // progress. They are keyed on the mode only and read the current camera through this.
+    val currentCamera = rememberUpdatedState(camera)
     val usesCamera = state.mode == ViewMode.AR && state.cameraPermissionGranted && state.settings.cameraPassthrough
     Box(modifier.fillMaxSize().background(Color.Black)) {
         if (usesCamera) {
@@ -125,18 +130,19 @@ fun SkyScreen(
                 .fillMaxSize()
                 .testTag("sky_overlay")
                 .onSizeChanged(actions.onViewSizeChanged)
-                .pointerInput(camera, state.mode) {
+                .pointerInput(state.mode) {
                     detectTapGestures { offset ->
+                        val cam = currentCamera.value
                         val size = androidx.compose.ui.geometry.Size(this.size.width.toFloat(), this.size.height.toFloat())
-                        val direction = camera.unproject(SkyProjection.toScreenPoint(offset, size))
-                        val radiusDeg = SkyProjection.degreesPerPixel(camera, size) * with(density) { 28.dp.toPx() }
+                        val direction = cam.unproject(SkyProjection.toScreenPoint(offset, size))
+                        val radiusDeg = SkyProjection.degreesPerPixel(cam, size) * with(density) { 28.dp.toPx() }
                         actions.onTap(direction, radiusDeg)
                     }
                 }
-                .pointerInput(camera, state.mode) {
+                .pointerInput(state.mode) {
                     if (state.mode != ViewMode.MAP) return@pointerInput
                     detectDragGestures { _, drag ->
-                        val degPerPx = camera.horizontalFovDeg / this.size.width
+                        val degPerPx = currentCamera.value.horizontalFovDeg / this.size.width
                         actions.onPan(-drag.x * degPerPx, drag.y * degPerPx)
                     }
                 },
