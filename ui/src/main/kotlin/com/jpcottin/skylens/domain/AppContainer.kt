@@ -17,6 +17,7 @@ import androidx.xr.projected.ProjectedContext
 import androidx.xr.projected.experimental.ExperimentalProjectedApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import com.jpcottin.skylens.astro.Observer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
@@ -47,6 +48,14 @@ class AppContainer(private val context: Context) {
      * surfaces so "Point me" on the phone lights up the same target on the lens.
      */
     val sharedTarget = MutableStateFlow<String?>(null)
+
+    /**
+     * The latest observer any screen has seen, for callbacks that outlive a screen (the sensor
+     * flow's declination). Kept here rather than in an activity: the view model factory runs
+     * once, and a lambda reading an activity's field would keep the first instance alive and
+     * read its stale value after a recreation.
+     */
+    val lastObserver = MutableStateFlow<Observer?>(null)
 
     /** Whether Display AI Glasses are connected to this phone (always false before Android 16). */
     @OptIn(ExperimentalProjectedApi::class)
