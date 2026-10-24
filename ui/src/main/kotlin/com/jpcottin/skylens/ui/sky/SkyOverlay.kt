@@ -131,18 +131,21 @@ private class SkyRenderer(
             }
         }
         scope.drawPath(path, palette.horizon, style = Stroke(width = dp(1.5f)))
-        // Ticks every 10°, labels at the cardinal and intercardinal points.
+        // Ticks every 10°.
         for (az in 0 until 360 step 10) {
             val base = project(Horizontal(az.toDouble(), 0.0)) ?: continue
             val tickLen = if (az % 90 == 0) 2.0 else if (az % 30 == 0) 1.2 else 0.6
             val top = project(Horizontal(az.toDouble(), tickLen)) ?: continue
             if (!onCanvas(base) && !onCanvas(top)) continue
             scope.drawLine(palette.horizon, base, top, strokeWidth = dp(1.5f))
-            if (az % 45 == 0) {
-                val label = when (az) { 0 -> "N"; 45 -> "NE"; 90 -> "E"; 135 -> "SE"; 180 -> "S"; 225 -> "SW"; 270 -> "W"; else -> "NW" }
-                val labelPos = project(Horizontal(az.toDouble(), 3.5)) ?: continue
-                drawCentredText(label, labelPos, cardinalStyle)
-            }
+        }
+        // Labels at the cardinal and intercardinal points (their own loop: 45° is not a
+        // multiple of 10°, so the tick loop never reached NE, SE, SW and NW).
+        for (az in 0 until 360 step 45) {
+            val label = when (az) { 0 -> "N"; 45 -> "NE"; 90 -> "E"; 135 -> "SE"; 180 -> "S"; 225 -> "SW"; 270 -> "W"; else -> "NW" }
+            val labelPos = project(Horizontal(az.toDouble(), 3.5)) ?: continue
+            if (!onCanvas(labelPos)) continue
+            drawCentredText(label, labelPos, cardinalStyle)
         }
     }
 
