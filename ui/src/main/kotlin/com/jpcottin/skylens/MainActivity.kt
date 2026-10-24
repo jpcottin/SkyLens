@@ -16,6 +16,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.lifecycle.awaitInstance
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.compose.LifecycleStartEffect
 import com.jpcottin.skylens.domain.LocationState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.getValue
@@ -80,6 +81,11 @@ class MainActivity : ComponentActivity() {
             }
             val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
                 viewModel.onCameraPermission(granted)
+            }
+            // Sensors, location and the sky computation run only while the screen is visible.
+            LifecycleStartEffect(Unit) {
+                viewModel.setForeground(true)
+                onStopOrDispose { viewModel.setForeground(false) }
             }
             LaunchedEffect(Unit) {
                 container.glassesConnected().collect(viewModel::setGlassesConnected)
