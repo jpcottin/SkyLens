@@ -191,12 +191,13 @@ passes** list for every loaded satellite, visible passes first; selecting one ma
 and returns to the sky; system back also returns.
 
 ```sh
-# Deterministic launch on the glasses (debuggable builds), from the paired phone AVD:
-adb -s emulator-5554 shell am start --display 9 -n com.jpcottin.skylens/.ui.glasses.GlassesActivity \
+# Deterministic launch on the glasses (debuggable builds), from the paired phone AVD
+# (PHONE is its serial from `adb devices`):
+adb -s $PHONE shell am start --display 9 -n com.jpcottin.skylens/.ui.glasses.GlassesActivity \
   --el skylens.time 1791954000000 --es skylens.location "49.2827,-123.1207,70" --es skylens.pose "100,35,0"
 # The lens is the phone's virtual ProjectionDisplay (the glasses AVD's own framebuffer stays black):
-LENS=$(adb -s emulator-5554 shell dumpsys SurfaceFlinger --display-id | grep 'displayName="ProjectionDisplay"' | awk '{print $2}')
-adb -s emulator-5554 shell screencap -d "$LENS" -p /sdcard/lens.png && adb -s emulator-5554 pull /sdcard/lens.png
+LENS=$(adb -s $PHONE shell dumpsys SurfaceFlinger --display-id | grep 'displayName="ProjectionDisplay"' | awk '{print $2}')
+adb -s $PHONE shell screencap -d "$LENS" -p /sdcard/lens.png && adb -s $PHONE pull /sdcard/lens.png
 ```
 
 ## Deterministic launches
