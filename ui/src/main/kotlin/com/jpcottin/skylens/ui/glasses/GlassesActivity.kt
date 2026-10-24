@@ -8,6 +8,7 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.LaunchedEffect
+import com.jpcottin.skylens.ui.PASS_OBSERVER_STEP_DEG
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -90,7 +91,7 @@ class GlassesActivity : ComponentActivity() {
 
                 var mode by rememberSaveable { mutableStateOf(GlassesMode.SKY) }
                 var passes by remember { mutableStateOf<PassesState>(PassesState.NotApplicable) }
-                LaunchedEffect(mode, state.observer, state.satelliteCount) {
+                LaunchedEffect(mode, state.observer?.roundedTo(PASS_OBSERVER_STEP_DEG), state.satelliteCount) {
                     if (mode == GlassesMode.PASSES && state.observer != null) {
                         passes = PassesState.Loading
                         passes = PassesState.Ready(GlassesModel.orderForLens(viewModel.upcomingPasses()))

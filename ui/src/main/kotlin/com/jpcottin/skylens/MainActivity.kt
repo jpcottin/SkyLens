@@ -16,6 +16,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.lifecycle.awaitInstance
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.jpcottin.skylens.domain.LocationState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -84,7 +86,14 @@ class MainActivity : ComponentActivity() {
             }
             LaunchedEffect(Unit) {
                 viewModel.onCameraPermission(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
-                if (!container.location.hasPermission() && debug.location == null && !state.settings.useManualLocation) {
+            }
+            // Ask for location only once the view model, having read the saved settings, says it
+            // needs one: deciding on the defaults at first composition asked again on every cold
+            // start of someone who had declined and set a manual position.
+            var locationAsked by rememberSaveable { mutableStateOf(false) }
+            LaunchedEffect(state.location) {
+                if (!locationAsked && state.location is LocationState.PermissionNeeded && debug.location == null) {
+                    locationAsked = true
                     locationLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
                 }
             }
