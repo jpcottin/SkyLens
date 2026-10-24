@@ -84,4 +84,9 @@ class SettingsRepositoryTest {
         val repo = SettingsRepository(BrokenDataStore())
         assertEquals(Settings(), repo.settings.first())
     }
+
+    @Test
+    fun aFailedWriteDoesNotThrow() = runTest {
+        SettingsRepository(BrokenDataStore()).update { it.copy(nightMode = true) }
+    }
 }

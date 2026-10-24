@@ -1,6 +1,7 @@
 package com.jpcottin.skylens.astro
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
@@ -21,5 +22,14 @@ class AnglesTest {
         assertEquals(100.0, a.altitudeM, 1e-9)
         assertEquals(a, b)
         assertNotEquals(a, Observer(49.35, -123.1207).roundedTo(0.05))
+    }
+
+    @Test
+    fun normalizeDegrees_neverReturns360() {
+        assertTrue(normalizeDegrees(-1e-14) < 360.0)
+        assertTrue(normalizeDegrees(-0.0) >= 0.0)
+        assertEquals(0.0, normalizeDegrees(720.0), 0.0)
+        assertTrue(Horizontal.fromUnitVector(Horizontal(360.0, 30.0).toUnitVector()).azimuthDeg < 360.0)
+        assertTrue(normalizeRadians(-1e-16) < TWO_PI)
     }
 }

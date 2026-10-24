@@ -74,6 +74,15 @@ class SettingsRepository(private val dataStore: DataStore<Preferences>) {
         .map { p -> fromPreferences(p) }
 
     suspend fun update(transform: (Settings) -> Settings) {
+        // A write that fails (a full disk, a file the corruption handler is replacing) keeps
+        // the in-memory settings; thrown from a view-model launch it would end the process.
+        try {
+            edit(transform)
+        } catch (_: IOException) {
+        }
+    }
+
+    private suspend fun edit(transform: (Settings) -> Settings) {
         dataStore.edit { p ->
             val next = transform(fromPreferences(p))
             p[Keys.showSun] = next.showSun

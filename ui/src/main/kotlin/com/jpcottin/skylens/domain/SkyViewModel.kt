@@ -120,6 +120,7 @@ class SkyViewModel(
     private var locationJob: Job? = null
     private var sensorJob: Job? = null
     private var computeJob: Job? = null
+    private var foreground = true
     private var engineKey: Pair<List<Tle>, Int>? = null
 
     /** Last pose straight from the sensors, before the compass correction. */
@@ -163,6 +164,7 @@ class SkyViewModel(
      * the screen, and nothing would otherwise release them until the process died.
      */
     fun setForeground(active: Boolean) {
+        foreground = active
         if (active) {
             if (computeJob?.isActive == true) return
             startSensors()
@@ -178,6 +180,9 @@ class SkyViewModel(
 
     private fun restartLocation(useManual: Boolean, manual: Observer?) {
         locationJob?.cancel()
+        // A settings emission (the first one, on a cold disk) can land after the screen
+        // has stopped: the listener must not come back until the foreground does.
+        if (!foreground) return
         debug.location?.let { fixed ->
             _state.update { it.copy(location = LocationState.Manual(fixed)) }
             return

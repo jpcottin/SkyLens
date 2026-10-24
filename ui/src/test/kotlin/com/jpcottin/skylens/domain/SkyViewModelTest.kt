@@ -271,6 +271,15 @@ class SkyViewModelTest {
     }
 
     @Test
+    fun background_settingsEmissionDoesNotRearmLocation() = runTest(dispatcher) {
+        val vm = viewModel()          // the init coroutines are queued, nothing has run yet
+        vm.setForeground(false)       // the screen stops before the first settings emission
+        settle()
+        assertEquals(0, fixes.subscriptionCount.value)
+        vm.viewModelScopeCancel()
+    }
+
+    @Test
     fun passes_areComputedForTheObserver() = runTest(dispatcher) {
         val vm = viewModel(DebugOverrides(location = PreviewSky.vancouver, timeMillis = now))
         settle()

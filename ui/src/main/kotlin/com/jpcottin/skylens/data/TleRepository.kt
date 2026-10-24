@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -65,7 +66,7 @@ class TleRepository(
             }
             text?.let { Tle.parseAll(it).forEach { tle -> all.putIfAbsent(tle.catalogNumber, tle) } }
         }
-        _state.value = _state.value.copy(tles = all.values.toList(), source = source, fetchedAtMillis = newest)
+        _state.update { it.copy(tles = all.values.toList(), source = source, fetchedAtMillis = newest) }
     }
 
     /** Refreshes groups whose cache is older than the Celestrak courtesy interval, or all with [force]. */
@@ -76,21 +77,27 @@ class TleRepository(
             loadLocal(groups)
             return@withContext
         }
-        _state.value = _state.value.copy(refreshing = true, error = null)
+        _state.update { it.copy(refreshing = true, error = null) }
         var error: String? = null
-        for (group in stale) {
-            try {
-                val text = fetch(group)
-                val parsed = Tle.parseAll(text)
-                if (parsed.isEmpty()) throw IOException("No element sets in the response for ${group.celestrakGroup}")
-                cacheFile(group).writeText(text)
-                cacheFile(group).setLastModified(now)
-            } catch (e: IOException) {
-                error = e.message ?: e.javaClass.simpleName
+        try {
+            for (group in stale) {
+                try {
+                    val text = fetch(group)
+                    val parsed = Tle.parseAll(text)
+                    if (parsed.isEmpty()) throw IOException("No element sets in the response for ${group.celestrakGroup}")
+                    cacheFile(group).writeText(text)
+                    cacheFile(group).setLastModified(now)
+                } catch (e: IOException) {
+                    error = e.message ?: e.javaClass.simpleName
+                }
             }
+            loadLocal(groups)
+            _state.update { it.copy(error = error, source = if (error == null) TleSource.NETWORK else it.source) }
+        } finally {
+            // Also on cancellation (the group setting changed mid-fetch): a flag left on
+            // would keep the Refresh button disabled and "Refreshing" shown for good.
+            _state.update { it.copy(refreshing = false) }
         }
-        loadLocal(groups)
-        _state.value = _state.value.copy(refreshing = false, error = error, source = if (error == null) TleSource.NETWORK else _state.value.source)
     }
 
     private fun fetch(group: SatelliteGroup): String {

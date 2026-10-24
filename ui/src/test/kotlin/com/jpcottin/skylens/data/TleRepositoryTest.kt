@@ -6,6 +6,13 @@ import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody.Companion.toResponseBody
+import okhttp3.Response
+import okhttp3.Protocol
+import okhttp3.MediaType.Companion.toMediaType
+import kotlinx.coroutines.test.runCurrent
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -132,5 +139,20 @@ class TleRepositoryTest {
         repo.loadLocal(setOf(SatelliteGroup.VISUAL))
         assertEquals(TleSource.CACHE, repo.state.value.source)
         assertEquals(1, repo.state.value.tles.size)
+    }
+
+    @Test
+    fun refresh_cancelledMidFlight_clearsRefreshing() = runTest {
+        lateinit var job: Job
+        val client = OkHttpClient.Builder().addInterceptor { chain ->
+            job.cancel()   // the group setting changed while the fetch was in flight
+            Response.Builder().request(chain.request()).protocol(Protocol.HTTP_1_1).code(200).message("OK")
+                .body(hstOnly.toResponseBody("text/plain".toMediaType())).build()
+        }.build()
+        val repo = TleRepository(folder.root, { PreviewSky.tleText }, client, clock, server.url("/gp.php").toString(), ioDispatcher = Dispatchers.Unconfined)
+        job = launch { repo.refresh(setOf(SatelliteGroup.VISUAL)) }
+        runCurrent()
+        repo.refresh(setOf(SatelliteGroup.VISUAL))          // the cache is fresh now: the early-return path
+        assertFalse(repo.state.value.refreshing)
     }
 }
