@@ -28,7 +28,10 @@ data class PlanetObject(val planet: Planet) : SkyObject {
 }
 
 data class StarObject(val star: Star) : SkyObject {
-    override val id = "star:${star.hipparcos}"
+    // A dozen catalogue rows (Castor B, Alula Australis B, ...) have no Hipparcos number:
+    // they must not all collapse onto "star:0", which is the list key and the selection id.
+    override val id = if (star.hipparcos > 0) "star:${star.hipparcos}"
+        else "star:${star.constellation}:${star.bayer}:${star.name}:${star.raDeg}:${star.decDeg}"
     override val name = star.label.ifBlank { "HIP ${star.hipparcos}" }
     override val kind = BodyKind.STAR
 }

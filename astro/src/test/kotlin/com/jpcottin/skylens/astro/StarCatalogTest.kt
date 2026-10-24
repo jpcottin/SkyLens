@@ -47,4 +47,11 @@ class StarCatalogTest {
         assertEquals("", c.stars[1].label)
         assertEquals(1, c.brighterThan(3.0).size)
     }
+
+    @Test
+    fun everyStar_hasItsOwnObjectId() {
+        val ids = catalog.stars.map { StarObject(it).id }
+        assertEquals(ids.size, ids.toSet().size)   // a dozen rows without a Hipparcos number shared "star:0"
+    }
+
 }
