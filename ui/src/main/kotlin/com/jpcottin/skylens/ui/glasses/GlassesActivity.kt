@@ -8,6 +8,7 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.compose.LifecycleStartEffect
 import com.jpcottin.skylens.ui.PASS_OBSERVER_STEP_DEG
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -87,6 +88,11 @@ class GlassesActivity : ComponentActivity() {
                 val state by viewModel.state.collectAsStateWithLifecycle()
                 lastObserver = state.observer
                 // On the lens a debug selection is a target: it gets the card and the guide arrow.
+                // Sensors, location and the sky computation run only while the screen is visible.
+                LifecycleStartEffect(Unit) {
+                    viewModel.setForeground(true)
+                    onStopOrDispose { viewModel.setForeground(false) }
+                }
                 LaunchedEffect(Unit) { debug.selectId?.let(viewModel::setTarget) }
 
                 var mode by rememberSaveable { mutableStateOf(GlassesMode.SKY) }

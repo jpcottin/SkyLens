@@ -119,6 +119,7 @@ class SkyViewModel(
     private var catalog: StarCatalog? = null
     private var locationJob: Job? = null
     private var sensorJob: Job? = null
+    private var computeJob: Job? = null
     private var engineKey: Pair<List<Tle>, Int>? = null
 
     /** Last pose straight from the sensors, before the compass correction. */
@@ -153,7 +154,26 @@ class SkyViewModel(
             viewModelScope.launch { shared.collect { id -> _state.update { if (it.targetId == id) it else it.copy(targetId = id, selectedId = id ?: it.selectedId) } } }
         }
         startSensors()
-        viewModelScope.launch { computeLoop() }
+        computeJob = viewModelScope.launch { computeLoop() }
+    }
+
+    /**
+     * The screen is visible ([active]) or not. In the background the rotation vector, the
+     * location updates and the twice-a-second sky computation stop: a view model outlives
+     * the screen, and nothing would otherwise release them until the process died.
+     */
+    fun setForeground(active: Boolean) {
+        if (active) {
+            if (computeJob?.isActive == true) return
+            startSensors()
+            val s = state.value.settings
+            restartLocation(s.useManualLocation, s.manualLocation)
+            computeJob = viewModelScope.launch { computeLoop() }
+        } else {
+            sensorJob?.cancel(); sensorJob = null
+            locationJob?.cancel(); locationJob = null
+            computeJob?.cancel(); computeJob = null
+        }
     }
 
     private fun restartLocation(useManual: Boolean, manual: Observer?) {
