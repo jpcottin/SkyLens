@@ -6,16 +6,22 @@ each module has a `lightbuild.yaml`, and `*/resolved.deps` pins the dependency r
 
 ```sh
 export ANDROID_CLI_BUILD=true          # unlocks `android build`
-android build query "..."              # list targets
+sh .github/scripts/android-build.sh query "..."              # list targets
 android build "app:app-debug.apk"      # debug APK (builds astro + ui first)
 android build "app:app-release.apk"    # R8-minified release APK
-android build test "astro:hostTest"    # astronomy engine unit tests (JVM)
-android build test "ui:hostTest"       # ui unit tests (JVM)
-android build test "ui:deviceTest"     # Compose UI tests on the connected device/emulator
-android build resolve                  # regenerate resolved.deps after a dependency change
+sh .github/scripts/android-build.sh test "astro:hostTest"    # astronomy engine unit tests (JVM)
+sh .github/scripts/android-build.sh test "ui:hostTest"       # ui unit tests (JVM)
+sh .github/scripts/android-build.sh test "ui:deviceTest"     # Compose UI tests on the connected device/emulator
+sh .github/scripts/android-build.sh resolve                  # regenerate resolved.deps after a dependency change
 ```
 
-Rough edges to remember (Lightbuild 0.0.20-alpha02, Android CLI 1.0.16500706):
+Rough edges to remember (Lightbuild 0.0.20-alpha02, Android CLI 1.1.16717390):
+
+- Android CLI 1.1 dropped `android build test` / `query` / `resolve` (its `build` only
+  assembles the named target, so `android build "ui:hostTest"` runs nothing) and stopped
+  streaming Lightbuild's output (it prints `Build log: /tmp/build-log-<n>.log` instead). The
+  wrapper drives the pinned Lightbuild daemon directly for those commands and reads the log
+  file for the verdict; use it rather than the bare CLI for tests.
 
 - `android build test` / `query` / `resolve` print a spurious *"Target is required for command
   build"* failure before doing their real work and exit 1 even on success. CI goes through
