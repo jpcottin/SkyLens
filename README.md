@@ -24,7 +24,7 @@ launch of the minified release APK:
 | Android CLI multi-run | `google_apis_ps16k` 37.0 | canary, 4 snapshot cycles | auto | non-blocking |
 
 The Android CLI leg runs the Compose tests through Lightbuild's own device-test runner
-(`android build test "ui:deviceTest"`) instead of `adb` + `am instrument`.
+(`sh .github/scripts/android-build.sh test "ui:deviceTest"`) instead of `adb` + `am instrument`.
 
 The two multi-run jobs boot the same AVD four times with quickboot snapshots enabled, launch the
 app only in the first cycle, and in every later cycle check that the snapshot brought it back by
@@ -229,9 +229,9 @@ There are no Gradle files in this repository. The project is described by
 export ANDROID_CLI_BUILD=true
 android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
-android build test "astro:hostTest"     # 62 astronomy engine tests on the JVM
-android build test "ui:hostTest"        # 67 ui unit tests on the JVM
-android build test "ui:deviceTest"      # 42 Compose UI tests on the connected device
+sh .github/scripts/android-build.sh test "astro:hostTest"     # 62 astronomy engine tests on the JVM
+sh .github/scripts/android-build.sh test "ui:hostTest"        # 67 ui unit tests on the JVM
+sh .github/scripts/android-build.sh test "ui:deviceTest"      # 42 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 
