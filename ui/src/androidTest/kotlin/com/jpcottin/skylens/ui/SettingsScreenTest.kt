@@ -87,6 +87,23 @@ class SettingsScreenTest {
     }
 
     @Test
+    fun manualLocation_refusesAnAltitudeThatIsNotANumber() {
+        var latest = Settings()
+        content(observe = { latest = it })
+        rule.onNodeWithTag("field_lat").performScrollTo().performTextInput("48.85")
+        rule.onNodeWithTag("field_lon").performTextInput("2.35")
+        rule.onNodeWithTag("field_alt").performTextClearance()
+        rule.onNodeWithTag("field_alt").performTextInput("abc")
+        rule.onNodeWithText("Altitude must be a number of metres, or left blank for sea level.").performScrollTo().assertIsDisplayed()
+        rule.onNodeWithTag("save_location").assertIsNotEnabled()
+        assertNull(latest.manualLocation)
+        rule.onNodeWithTag("field_alt").performTextClearance()
+        rule.onNodeWithTag("field_alt").performTextInput("35")
+        rule.onNodeWithTag("save_location").assertIsEnabled().performClick()
+        assertEquals(Observer(48.85, 2.35, 35.0), latest.manualLocation)
+    }
+
+    @Test
     fun orbitStatus_andRefresh() {
         var refreshed = false
         content(tle = TleState(PreviewSky.tles, TleSource.CACHE, fetchedAtMillis = PreviewSky.NIGHT_MILLIS, error = "HTTP 503 for visual"), onRefresh = { refreshed = true })
@@ -117,6 +134,8 @@ class SettingsScreenTest {
     fun parseObserver_rules() {
         assertEquals(Observer(1.0, 2.0, 3.0), parseObserver("1", "2", "3"))
         assertEquals(Observer(1.0, 2.0, 0.0), parseObserver("1", "2", ""))
+        assertEquals(Observer(1.0, 2.0, 0.0), parseObserver("1", "2", "  "))
+        assertNull(parseObserver("1", "2", "abc"))
         assertNull(parseObserver("91", "2", ""))
         assertNull(parseObserver("1", "-181", ""))
         assertNull(parseObserver("", "", ""))

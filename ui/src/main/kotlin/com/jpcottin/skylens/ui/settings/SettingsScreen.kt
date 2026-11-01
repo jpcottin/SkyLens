@@ -183,6 +183,7 @@ fun ManualLocationEditor(current: Observer?, onSave: (Observer) -> Unit, modifie
     var alt by rememberSaveable(current) { mutableStateOf(current?.altitudeM?.toString() ?: "0") }
     val parsed = parseObserver(lat, lon, alt)
     val dirty = parsed != current
+    val altitudeInvalid = alt.isNotBlank() && alt.trim().toDoubleOrNull() == null
     Column(modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(lat, { lat = it }, Modifier.weight(1f).testTag("field_lat"), label = { Text(stringResource(R.string.settings_latitude)) }, singleLine = true,
@@ -190,10 +191,13 @@ fun ManualLocationEditor(current: Observer?, onSave: (Observer) -> Unit, modifie
             OutlinedTextField(lon, { lon = it }, Modifier.weight(1f).testTag("field_lon"), label = { Text(stringResource(R.string.settings_longitude)) }, singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), isError = lon.isNotBlank() && lon.toDoubleOrNull()?.let { it in -180.0..180.0 } != true)
             OutlinedTextField(alt, { alt = it }, Modifier.weight(0.8f).testTag("field_alt"), label = { Text(stringResource(R.string.settings_altitude)) }, singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal))
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), isError = altitudeInvalid)
         }
-        if ((lat.isNotBlank() || lon.isNotBlank()) && parsed == null) {
+        if ((lat.isNotBlank() || lon.isNotBlank()) && parseObserver(lat, lon, "") == null) {
             Text(stringResource(R.string.settings_invalid_location), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+        }
+        if (altitudeInvalid) {
+            Text(stringResource(R.string.settings_invalid_altitude), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
         }
         Button(onClick = { parsed?.let(onSave) }, enabled = parsed != null && dirty, modifier = Modifier.testTag("save_location")) {
             Text(stringResource(R.string.settings_save_location))
@@ -201,11 +205,13 @@ fun ManualLocationEditor(current: Observer?, onSave: (Observer) -> Unit, modifie
     }
 }
 
-/** Parses the three fields; null unless latitude and longitude are both valid. */
+/** Parses the three fields; null unless latitude and longitude are both valid and the
+ *  altitude is a number or blank (blank means sea level). An altitude that is not a number
+ *  used to be saved as 0 m without a word. */
 fun parseObserver(lat: String, lon: String, alt: String): Observer? {
     val la = lat.trim().toDoubleOrNull()?.takeIf { it in -90.0..90.0 } ?: return null
     val lo = lon.trim().toDoubleOrNull()?.takeIf { it in -180.0..180.0 } ?: return null
-    val al = alt.trim().toDoubleOrNull() ?: 0.0
+    val al = alt.trim().let { if (it.isEmpty()) 0.0 else it.toDoubleOrNull() ?: return null }
     return Observer(la, lo, al)
 }
 
