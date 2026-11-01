@@ -79,6 +79,7 @@
     <string name="settings_altitude">Altitude (m)</string>
     <string name="settings_save_location">Save position</string>
     <string name="settings_invalid_location">Latitude must be within ±90 and longitude within ±180.</string>
+    <string name="settings_invalid_altitude">Altitude must be a number of metres, or left blank for sea level.</string>
     <string name="settings_min_pass">Minimum pass altitude: %1$d°</string>
     <string name="settings_orbits">Orbit data</string>
     <string name="settings_refresh">Refresh now</string>

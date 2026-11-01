@@ -7,7 +7,7 @@
 <summary><b>CI details</b> — Lightbuild through the Android CLI, emulator matrix API 34 → 37.2, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
 
 Every job builds with Lightbuild through the `android` CLI (no Gradle files in the repository).
-Instrumented legs run the 39 Compose tests, then a deterministic journey (frozen clock, fixed
+Instrumented legs run the 43 Compose tests, then a deterministic journey (frozen clock, fixed
 position and pose; the HUD, Objects and Settings read back with `android layout`), then a smoke
 launch of the minified release APK:
 
@@ -231,7 +231,7 @@ android build "app:app-debug.apk"       # debug APK
 android build "app:app-release.apk"     # R8-minified release APK
 sh .github/scripts/android-build.sh test "astro:hostTest"     # 62 astronomy engine tests on the JVM
 sh .github/scripts/android-build.sh test "ui:hostTest"        # 67 ui unit tests on the JVM
-sh .github/scripts/android-build.sh test "ui:deviceTest"      # 42 Compose UI tests on the connected device
+sh .github/scripts/android-build.sh test "ui:deviceTest"      # 43 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 
@@ -247,7 +247,7 @@ code is unreliable for `test`, `query` and `resolve`, so CI runs every build thr
 |---|---|---|
 | `astro:hostTest` | JVM | SGP4 against `python-sgp4` reference states (position to 1 µm, velocity to 1 nm/s); Sun, Moon and planets against skyfield/DE421 at six instants and three sites; sidereal time; frames; TLE parsing and checksums; star catalogue; pass prediction; camera projection; the sky engine's determinism |
 | `ui:hostTest` | JVM | `SkyViewModel` with fakes (location states, debug overrides, AR/map modes, selection, settings, passes); `TleRepository` with MockWebServer (bundled fallback, cache, courtesy interval, failures); FOV fitting; device pose from rotation matrices and declination; debug extras parsing; the glasses model (which object gets the lens card, pass ordering, countdowns); the sensor fallback from the glasses to the phone; the settings store (round trip, key removal, unknown groups, unreadable file); the display-rotation axis remap |
-| `ui:deviceTest` | emulator | Compose UI tests: sky HUD, overlay semantics, tap hit-testing, selected card, location and camera prompts; objects list, search and sections; detail with passes; settings switches, groups, manual position validation, orbit refresh; navigation between tabs, list → detail → *Point me* → sky; the Glimmer glasses screen (heading chip, focused-object card, tap to the pass list, pass selection, loading and empty states) |
+| `ui:deviceTest` | emulator | Compose UI tests: sky HUD, overlay semantics, tap hit-testing, selected card, location and camera prompts; objects list, search and sections; detail with passes; settings switches, groups, manual position validation (coordinates in range, the altitude a number or blank), orbit refresh; navigation between tabs, list → detail → *Point me* → sky; the Glimmer glasses screen (heading chip, focused-object card, tap to the pass list, pass selection, loading and empty states) |
 | CI journey | emulator | Launches the debug APK with frozen inputs, reads the HUD, the Objects and the Settings tabs back with `android layout`, then smoke-launches the signed release APK and checks the process survives |
 | CI multi-runs | emulator | Four snapshot cycles on the preview and the canary emulators: the app launched once, then checked alive and rendering after every restore |
 
