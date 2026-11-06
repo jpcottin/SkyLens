@@ -44,7 +44,11 @@ class PassPredictor(
         var t = fromMillis
         var prevAbove = elevation(prop, observer, t)?.let { it > 0.0 } ?: return emptyList()
         var riseMillis: Long? = if (prevAbove) fromMillis else null
-        while (t < endMillis && passes.size < maxPasses) {
+        // A pass that has begun inside the window is followed to its set past the
+        // window's end, else a pass rising minutes before the end would be dropped
+        // whole. The tail is bounded: a satellite that never sets is not a pass.
+        val tailEndMillis = endMillis + PASS_TAIL_MILLIS
+        while (passes.size < maxPasses && (t < endMillis || (riseMillis != null && t < tailEndMillis))) {
             val next = t + step
             val el = elevation(prop, observer, next) ?: return passes
             val above = el > 0.0
@@ -59,6 +63,11 @@ class PassPredictor(
             t = next
         }
         return passes
+    }
+
+    private companion object {
+        /** How far past the window's end a pass under way is followed before it is given up. */
+        const val PASS_TAIL_MILLIS = 2 * 3_600_000L
     }
 
     private fun buildPass(prop: Sgp4, observer: Observer, riseMillis: Long, setMillis: Long, minElevationDeg: Double): SatellitePass? {
