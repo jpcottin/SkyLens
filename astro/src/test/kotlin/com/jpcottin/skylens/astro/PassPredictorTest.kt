@@ -39,6 +39,19 @@ class PassPredictorTest {
     }
 
     @Test
+    fun aPassThatBeginsInsideTheWindow_isFollowedToItsSet() {
+        val whole = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 0.0).first()
+        // A one-hour window that closes at this pass's culmination: the pass has risen
+        // inside it and sets after it.
+        val from = whole.culminationMillis - 3_600_000L
+        val cut = PassPredictor().nextPasses(iss, vancouver, from, hours = 1, minElevationDeg = 0.0)
+        val same = cut.firstOrNull { kotlin.math.abs(it.riseMillis - whole.riseMillis) <= 2_000L }
+        assertTrue("the pass rising at ${whole.riseMillis} is missing from $cut", same != null)
+        assertTrue(kotlin.math.abs(same!!.setMillis - whole.setMillis) <= 2_000L)
+        assertEquals(whole.maxElevationDeg, same.maxElevationDeg, 0.5)
+    }
+
+    @Test
     fun minElevation_filtersLowPasses() {
         val all = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 0.0)
         val high = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 40.0)
