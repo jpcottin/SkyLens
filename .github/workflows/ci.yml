@@ -14,10 +14,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # Lightbuild support in the Android CLI is gated behind this variable.
-  ANDROID_CLI_BUILD: 'true'
-
 jobs:
   build-and-unit-tests:
     name: Build + Unit Tests (Lightbuild)
@@ -34,22 +30,29 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
-      - name: Android CLI diagnostics
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
+      - name: Toolchain diagnostics
         run: |
           android --version
           android info
+          lightbuild --version
 
-      # Targets are named explicitly: a bare `android build` prints usage and builds nothing.
+      # Every target is named, and `lightbuild`'s exit code is the verdict: a compile error or
+      # an unknown target fails the step.
       - name: Build debug APK and the instrumentation APK
         run: |
-          sh .github/scripts/android-build.sh "app:app-debug.apk"
-          sh .github/scripts/android-build.sh "ui:deviceTest"
+          lightbuild --plain build "app:app-debug.apk"
+          lightbuild --plain build "ui:deviceTest"
 
       - name: Astronomy engine unit tests (SGP4, Sun, Moon, planets, stars, passes, projection)
-        run: sh .github/scripts/android-build.sh test "astro:hostTest"
+        run: lightbuild --plain test "astro:hostTest"
 
       - name: UI unit tests (ViewModel, TLE repository, FOV, pose, glasses model, debug extras)
-        run: sh .github/scripts/android-build.sh test "ui:hostTest"
+        run: lightbuild --plain test "ui:hostTest"
 
       - name: Upload unit test results
         if: always()
@@ -86,9 +89,14 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       # Guards the R8 configuration; the emulator legs below also launch the minified APK.
       - name: Build minified release APK
-        run: sh .github/scripts/android-build.sh "app:app-release.apk"
+        run: lightbuild --plain build "app:app-release.apk"
 
       - name: Upload release APK and R8 mapping
         if: always()
@@ -188,11 +196,16 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       - name: Build the APKs with Lightbuild
         run: |
-          sh .github/scripts/android-build.sh "ui:deviceTest"
-          sh .github/scripts/android-build.sh "app:app-debug.apk"
-          sh .github/scripts/android-build.sh "app:app-release.apk"
+          lightbuild --plain build "ui:deviceTest"
+          lightbuild --plain build "app:app-debug.apk"
+          lightbuild --plain build "app:app-release.apk"
 
       # The Lightbuild and Gradle caches plus the three APKs leave the runner with ~5 GB, and
       # the emulator refuses to start with less than the 7.3 GB its userdata partition needs
@@ -262,7 +275,7 @@ jobs:
   # Drives the whole emulator flow with the Android CLI (https://d.android.com/tools/agents/android-cli)
   # instead of sdkmanager/avdmanager and the emulator-runner action: `android sdk install
   # --canary`, `android emulator create/start/stop`, and the instrumented tests through
-  # Lightbuild's own device-test runner (`android build test "ui:deviceTest"`).
+  # Lightbuild's own device-test runner (`lightbuild test "ui:deviceTest"`).
   android-cli:
     name: Android CLI (API ${{ matrix.api-level }} canary emulator, Lightbuild device tests)
     runs-on: ubuntu-latest
@@ -289,19 +302,25 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
-      - name: Android CLI diagnostics
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
+      - name: Toolchain diagnostics
         run: |
           android --version
           android info
+          lightbuild --version
 
       - name: Build the APKs with Lightbuild
         run: |
-          sh .github/scripts/android-build.sh "ui:deviceTest"
-          sh .github/scripts/android-build.sh "app:app-debug.apk"
-          sh .github/scripts/android-build.sh "app:app-release.apk"
+          lightbuild --plain build "ui:deviceTest"
+          lightbuild --plain build "app:app-debug.apk"
+          lightbuild --plain build "app:app-release.apk"
 
       # This leg runs Lightbuild again after the emulator boots (the device tests go through
-      # `android build test`), so the Gradle and Lightbuild caches must stay: only the unused
+      # `lightbuild test`), so the Gradle and Lightbuild caches must stay: only the unused
       # toolchains go.
       - name: Free disk space for the emulator
         run: |
@@ -372,7 +391,7 @@ jobs:
           adb logcat -v time > "${{ github.workspace }}/emulator_logcat.txt" &
 
       - name: Run instrumented tests through the CLI
-        run: sh .github/scripts/android-build.sh test "ui:deviceTest"
+        run: lightbuild --plain test "ui:deviceTest"
 
       - name: Run the sky journey and the release smoke launch
         run: |
@@ -418,11 +437,16 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       - name: Build the APKs with Lightbuild
         run: |
-          sh .github/scripts/android-build.sh "ui:deviceTest"
-          sh .github/scripts/android-build.sh "app:app-debug.apk"
-          sh .github/scripts/android-build.sh "app:app-release.apk"
+          lightbuild --plain build "ui:deviceTest"
+          lightbuild --plain build "app:app-debug.apk"
+          lightbuild --plain build "app:app-release.apk"
 
       - name: Free disk space for the emulator
         run: |
@@ -518,8 +542,13 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       - name: Build debug APK with Lightbuild
-        run: sh .github/scripts/android-build.sh "app:app-debug.apk"
+        run: lightbuild --plain build "app:app-debug.apk"
 
       - name: Free disk space for the emulator
         run: |
@@ -571,8 +600,13 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       - name: Build debug APK with Lightbuild
-        run: sh .github/scripts/android-build.sh "app:app-debug.apk"
+        run: lightbuild --plain build "app:app-debug.apk"
 
       - name: Free disk space for the emulator
         run: |

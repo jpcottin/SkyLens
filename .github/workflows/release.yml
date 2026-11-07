@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  ANDROID_CLI_BUILD: 'true'
-
 jobs:
   release:
     name: Build release APK and publish GitHub release
@@ -28,13 +25,18 @@ jobs:
       - name: Install Android CLI
         run: sh .github/scripts/install-android-cli.sh
 
+      # The Lightbuild version pinned in project.lightbuild.yaml, with the `lightbuild` CLI
+      # it ships (the Android CLI's `build` cannot test or query).
+      - name: Install Lightbuild
+        run: sh .github/scripts/install-lightbuild.sh
+
       - name: Unit tests
         run: |
-          sh .github/scripts/android-build.sh test "astro:hostTest"
-          sh .github/scripts/android-build.sh test "ui:hostTest"
+          lightbuild --plain test "astro:hostTest"
+          lightbuild --plain test "ui:hostTest"
 
       - name: Build minified release APK with Lightbuild
-        run: sh .github/scripts/android-build.sh "app:app-release.apk"
+        run: lightbuild --plain build "app:app-release.apk"
 
       # Lightbuild writes an unsigned APK. GitHub-release builds are signed with a debug
       # keystore so the published file is installable; replace with a real keystore before any

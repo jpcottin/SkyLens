@@ -4,9 +4,10 @@
 [![Release](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml/badge.svg)](https://github.com/jpcottin/SkyLens/actions/workflows/release.yml)
 
 <details>
-<summary><b>CI details</b> — Lightbuild through the Android CLI, emulator matrix API 34 → 37.2, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
+<summary><b>CI details</b> — Lightbuild 0.0.30 through its `lightbuild` CLI, emulator matrix API 34 → 37.2, Android CLI and Emulator Preview legs, snapshot multi-runs</summary>
 
-Every job builds with Lightbuild through the `android` CLI (no Gradle files in the repository).
+Every job builds with the `lightbuild` CLI of the pinned Lightbuild 0.0.30, installed through
+the Android CLI (no Gradle files in the repository).
 Instrumented legs run the 43 Compose tests, then a deterministic journey (frozen clock, fixed
 position and pose; the HUD, Objects and Settings read back with `android layout`), then a smoke
 launch of the minified release APK:
@@ -24,7 +25,7 @@ launch of the minified release APK:
 | Android CLI multi-run | `google_apis_ps16k` 37.0 | canary, 4 snapshot cycles | auto | non-blocking |
 
 The Android CLI leg runs the Compose tests through Lightbuild's own device-test runner
-(`sh .github/scripts/android-build.sh test "ui:deviceTest"`) instead of `adb` + `am instrument`.
+(`lightbuild test "ui:deviceTest"`) instead of `adb` + `am instrument`.
 
 The two multi-run jobs boot the same AVD four times with quickboot snapshots enabled, launch the
 app only in the first cycle, and in every later cycle check that the snapshot brought it back by
@@ -36,8 +37,8 @@ Hosted runners are left with ~5 GB after the Lightbuild caches and the three APK
 the emulator needs for its userdata partition, so every emulator job removes unused toolchains
 and the build caches before booting. The runner's old `avdmanager` writes `target=android-0`
 for minor-versioned packages (android-37.x); the matrix legs update `cmdline-tools` first.
-`android build test` / `resolve` exit 1 even when they succeed, so every build goes through
-`.github/scripts/android-build.sh`, which reads the verdict from the output.
+Since 0.0.30 the exit code of `lightbuild` is the verdict (a compile error, a failing test
+or an unknown target exits 1), so the wrapper that used to read it from the output is gone.
 The CLI installer's download drops now and then on a loaded runner, so
 `.github/scripts/install-android-cli.sh` retries the install before a leg goes red.
 
@@ -222,24 +223,27 @@ drawn-sky mode, `skylens.select` selects an object by id (`sat:25544`, `moon`,
 ## Build system: Lightbuild and the Android CLI
 
 There are no Gradle files in this repository. The project is described by
-`project.lightbuild.yaml` and one `lightbuild.yaml` per module, and built with the
-[Android CLI](https://developer.android.com/tools/agents/android-cli):
+`project.lightbuild.yaml` (which pins Lightbuild 0.0.30) and one `lightbuild.yaml` per
+module, and built with the `lightbuild` CLI that ships inside the Lightbuild SDK package;
+the [Android CLI](https://developer.android.com/tools/agents/android-cli) installs the
+package and deploys the APK:
 
 ```sh
-export ANDROID_CLI_BUILD=true
-android build "app:app-debug.apk"       # debug APK
-android build "app:app-release.apk"     # R8-minified release APK
-sh .github/scripts/android-build.sh test "astro:hostTest"     # 63 astronomy engine tests on the JVM
-sh .github/scripts/android-build.sh test "ui:hostTest"        # 67 ui unit tests on the JVM
-sh .github/scripts/android-build.sh test "ui:deviceTest"      # 43 Compose UI tests on the connected device
+android sdk install build/lightbuild/0.0.30                          # once
+bash "$(android info sdk)/build/lightbuild/0.0.30/cli/install.sh"   # ~/.local/bin/lightbuild
+lightbuild build "app:app-debug.apk"     # debug APK
+lightbuild build "app:app-release.apk"   # R8-minified release APK
+lightbuild test "astro:hostTest"         # 63 astronomy engine tests on the JVM
+lightbuild test "ui:hostTest"            # 67 ui unit tests on the JVM
+lightbuild test "ui:deviceTest"          # 43 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Lightbuild 0.0.20-alpha02 notes: `platform: jvm` modules cannot be exported yet, so `astro`
-is declared as an Android library that happens to contain no Android code; the CLI's exit
-code is unreliable for `test`, `query` and `resolve`, so CI runs every build through
-`.github/scripts/android-build.sh`, which reads the verdict from the output. See
-[AGENTS.md](AGENTS.md) for the full list.
+Lightbuild 0.0.30 notes: the exit code of `lightbuild` is the verdict, which retired the
+wrapper script that used to read it from the output of `android build`; a `platform: jvm`
+module still cannot be depended on by an Android module, so `astro` is declared as an
+Android library that happens to contain no Android code. See [AGENTS.md](AGENTS.md) for
+the full list.
 
 ## Testing
 
