@@ -56,17 +56,30 @@ class TleRepository(
         var newest: Long? = null
         val all = LinkedHashMap<String, Tle>()
         for (group in groups) {
-            val file = cacheFile(group)
-            val text = if (file.exists() && file.length() > 0) {
+            val tles = cachedTles(group)?.also {
                 source = maxOf(source, TleSource.CACHE)
-                newest = maxOf(newest ?: 0L, file.lastModified())
-                file.readText()
-            } else {
-                bundled(group)?.also { source = maxOf(source, TleSource.BUNDLED) }
-            }
-            text?.let { Tle.parseAll(it).forEach { tle -> all.putIfAbsent(tle.catalogNumber, tle) } }
+                newest = maxOf(newest ?: 0L, cacheFile(group).lastModified())
+            } ?: bundled(group)?.also { source = maxOf(source, TleSource.BUNDLED) }?.let(Tle::parseAll)
+            tles?.forEach { tle -> all.putIfAbsent(tle.catalogNumber, tle) }
         }
         _state.update { it.copy(tles = all.values.toList(), source = source, fetchedAtMillis = newest) }
+    }
+
+    /**
+     * The group's cached element sets, or null when there is no usable cache. A file with
+     * nothing to parse (a write cut short by a crash or a full disk) is deleted here: served
+     * as the cache it would show no satellites, and its young timestamp would hold the
+     * next refresh back for the whole courtesy interval.
+     */
+    private fun cachedTles(group: SatelliteGroup): List<Tle>? {
+        val file = cacheFile(group)
+        if (!file.exists()) return null
+        val parsed = Tle.parseAll(file.readText())
+        if (parsed.isEmpty()) {
+            file.delete()
+            return null
+        }
+        return parsed
     }
 
     /** Refreshes groups whose cache is older than the Celestrak courtesy interval, or all with [force]. */
@@ -85,7 +98,7 @@ class TleRepository(
                     val text = fetch(group)
                     val parsed = Tle.parseAll(text)
                     if (parsed.isEmpty()) throw IOException("No element sets in the response for ${group.celestrakGroup}")
-                    cacheFile(group).writeText(text)
+                    writeCache(group, text)
                     cacheFile(group).setLastModified(now)
                 } catch (e: IOException) {
                     error = e.message ?: e.javaClass.simpleName
@@ -109,4 +122,16 @@ class TleRepository(
     }
 
     fun cacheFile(group: SatelliteGroup): File = File(cacheDir, "tle-${group.celestrakGroup}.txt")
+
+    /** Writes next to the cache file and renames over it, so a write cut short never replaces a good cache with a torn one. */
+    private fun writeCache(group: SatelliteGroup, text: String) {
+        val file = cacheFile(group)
+        val part = File(cacheDir, file.name + ".part")
+        try {
+            part.writeText(text)
+            if (!part.renameTo(file)) throw IOException("Could not write the cache for ${group.celestrakGroup}")
+        } finally {
+            part.delete()
+        }
+    }
 }

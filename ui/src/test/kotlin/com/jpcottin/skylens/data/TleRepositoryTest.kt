@@ -142,6 +142,31 @@ class TleRepositoryTest {
     }
 
     @Test
+    fun loadLocal_aCacheFileWithNoElementSets_isDroppedForTheBundledCopy() = runTest {
+        val repo = repository()
+        // A write cut short (a crash, a full disk) leaves the first line and nothing to parse.
+        repo.cacheFile(SatelliteGroup.VISUAL).writeText("ISS (ZARYA)\n1 25544U 98067A   24")
+        repo.loadLocal(setOf(SatelliteGroup.VISUAL))
+        val s = repo.state.value
+        assertEquals(TleSource.BUNDLED, s.source)
+        assertEquals(3, s.tles.size)
+        assertNull(s.fetchedAtMillis)
+        assertFalse("the damaged file must not hold the next refresh back", repo.cacheFile(SatelliteGroup.VISUAL).exists())
+        server.enqueue(MockResponse(body = hstOnly))
+        repo.refresh(setOf(SatelliteGroup.VISUAL))
+        assertEquals("a damaged cache counts as no cache", 1, server.requestCount)
+        assertEquals(TleSource.NETWORK, repo.state.value.source)
+    }
+
+    @Test
+    fun refresh_leavesOnlyTheCacheFileBehind() = runTest {
+        server.enqueue(MockResponse(body = hstOnly))
+        val repo = repository()
+        repo.refresh(setOf(SatelliteGroup.VISUAL))
+        assertEquals(listOf(repo.cacheFile(SatelliteGroup.VISUAL).name), folder.root.list()!!.toList())
+    }
+
+    @Test
     fun refresh_cancelledMidFlight_clearsRefreshing() = runTest {
         lateinit var job: Job
         val client = OkHttpClient.Builder().addInterceptor { chain ->
