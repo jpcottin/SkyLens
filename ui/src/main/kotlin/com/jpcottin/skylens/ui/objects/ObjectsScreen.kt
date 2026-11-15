@@ -139,7 +139,7 @@ fun ObjectRow(p: SkyPosition, selected: Boolean, onSelect: (String) -> Unit, mod
             Text(p.obj.name, style = MaterialTheme.typography.bodyLarge)
             val detail = buildString {
                 append(compassPoint(h.azimuthDeg))
-                append(' ').append(SkyFormat.degrees(h.azimuthDeg)).append("° · ")
+                append(' ').append(SkyFormat.azimuth(h.azimuthDeg)).append("° · ")
                 if (h.elevationDeg < 0) append(stringResource(R.string.below_horizon)) else append("alt ").append(SkyFormat.degrees(h.elevationDeg)).append('°')
                 p.distanceKm?.takeIf { p.obj.kind == BodyKind.SATELLITE }?.let { append(" · ").append(SkyFormat.km(it)).append(" km") }
                 p.magnitude?.takeIf { p.obj.kind == BodyKind.STAR || p.obj.kind == BodyKind.PLANET }?.let { append(" · mag ").append(SkyFormat.magnitude(it)) }

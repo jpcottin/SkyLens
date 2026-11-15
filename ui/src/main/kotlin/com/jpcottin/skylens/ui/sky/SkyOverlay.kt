@@ -29,6 +29,7 @@ import com.jpcottin.skylens.astro.SkyCamera
 import com.jpcottin.skylens.astro.SkyPosition
 import com.jpcottin.skylens.astro.SkySnapshot
 import com.jpcottin.skylens.astro.StarObject
+import com.jpcottin.skylens.astro.normalizeDegrees
 import com.jpcottin.skylens.astro.SunObject
 import com.jpcottin.skylens.astro.Vector3
 import kotlin.math.atan2
@@ -379,6 +380,9 @@ private class SkyRenderer(
 /** Small helpers for the HUD. */
 object SkyFormat {
     fun degrees(v: Double): Int = Math.round(v).toInt()
+
+    /** An azimuth as printed: 0 to 359, never 360 (359.6° rounds to 0°, as the compass point N says). */
+    fun azimuth(v: Double): Int = Math.round(normalizeDegrees(v)).toInt() % 360
 
     fun km(v: Double): String = when {
         v >= 1_000_000 -> "%.2f M".format(v / 1_000_000)

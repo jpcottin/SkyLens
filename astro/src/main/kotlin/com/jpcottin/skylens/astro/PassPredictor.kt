@@ -14,6 +14,9 @@ data class SatellitePass(
     val visible: Boolean,
 ) {
     val durationSeconds: Long get() = (setMillis - riseMillis) / 1000
+
+    /** The length as printed, to the nearest minute: a 5 min 59 s pass is "6 min", and none is "0 min". */
+    val durationMinutes: Long get() = ((setMillis - riseMillis + 30_000L) / 60_000L).coerceAtLeast(1L)
 }
 
 /**

@@ -142,7 +142,7 @@ fun PassRow(pass: SatellitePass, zone: ZoneId, modifier: Modifier = Modifier) {
             tint = if (pass.visible) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Column(Modifier.weight(1f)) {
-            Text(Instant.ofEpochMilli(pass.riseMillis).atZone(zone).format(dayFormat) + " · " + stringResource(R.string.pass_duration, pass.durationSeconds / 60), style = MaterialTheme.typography.labelLarge)
+            Text(Instant.ofEpochMilli(pass.riseMillis).atZone(zone).format(dayFormat) + " · " + stringResource(R.string.pass_duration, pass.durationMinutes), style = MaterialTheme.typography.labelLarge)
             Text(
                 stringResource(
                     R.string.pass_summary,
