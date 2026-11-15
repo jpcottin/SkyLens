@@ -127,7 +127,7 @@ private fun SkyWindow(state: SkyUiState, focus: SkyPosition?, onToggleMode: () -
     ) {
         TitleChip(leadingIcon = { Icon(Icons.Rounded.Explore, contentDescription = null) }) {
             Text(
-                "${compassPoint(centre.azimuthDeg)} ${SkyFormat.degrees(centre.azimuthDeg)}° · ${SkyFormat.degrees(centre.elevationDeg)}°",
+                "${compassPoint(centre.azimuthDeg)} ${SkyFormat.azimuth(centre.azimuthDeg)}° · ${SkyFormat.degrees(centre.elevationDeg)}°",
                 maxLines = 1,
                 modifier = Modifier.testTag("glasses_heading"),
             )
@@ -167,7 +167,7 @@ private fun SkyWindow(state: SkyUiState, focus: SkyPosition?, onToggleMode: () -
 @Composable
 private fun focusLine(p: SkyPosition): String {
     val h = p.horizontal
-    val where = "${compassPoint(h.azimuthDeg)} ${SkyFormat.degrees(h.azimuthDeg)}° · ${if (h.elevationDeg < 0) stringResource(R.string.below_horizon) else "alt ${SkyFormat.degrees(h.elevationDeg)}°"}"
+    val where = "${compassPoint(h.azimuthDeg)} ${SkyFormat.azimuth(h.azimuthDeg)}° · ${if (h.elevationDeg < 0) stringResource(R.string.below_horizon) else "alt ${SkyFormat.degrees(h.elevationDeg)}°"}"
     val extra = when (val o = p.obj) {
         is SatelliteObject -> listOfNotNull(
             p.distanceKm?.let { "${SkyFormat.km(it)} km" },

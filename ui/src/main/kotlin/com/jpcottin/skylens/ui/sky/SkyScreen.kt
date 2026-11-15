@@ -201,7 +201,7 @@ private fun SkyHud(state: SkyUiState, actions: SkyActions, compact: Boolean, mod
                 Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Rounded.Explore, contentDescription = null, Modifier.padding(end = 6.dp))
                     Text(
-                        stringResource(R.string.hud_pointing, compassPoint(centre.azimuthDeg), SkyFormat.degrees(centre.azimuthDeg), SkyFormat.degrees(centre.elevationDeg)),
+                        stringResource(R.string.hud_pointing, compassPoint(centre.azimuthDeg), SkyFormat.azimuth(centre.azimuthDeg), SkyFormat.degrees(centre.elevationDeg)),
                         style = MaterialTheme.typography.labelLarge,
                     )
                 }
@@ -320,7 +320,7 @@ fun SelectedObjectCard(position: SkyPosition, state: SkyUiState, actions: SkyAct
 @Composable
 fun describePosition(p: SkyPosition): String {
     val h = p.horizontal
-    val base = stringResource(R.string.direction, compassPoint(h.azimuthDeg), SkyFormat.degrees(h.azimuthDeg), SkyFormat.degrees(h.elevationDeg))
+    val base = stringResource(R.string.direction, compassPoint(h.azimuthDeg), SkyFormat.azimuth(h.azimuthDeg), SkyFormat.degrees(h.elevationDeg))
     return if (h.elevationDeg < 0) "$base · ${stringResource(R.string.below_horizon)}" else base
 }
 

@@ -24,6 +24,15 @@ class PassPredictorTest {
     }
 
     @Test
+    fun durationMinutes_isTheNearestMinuteAndNeverZero() {
+        fun pass(seconds: Long) = SatellitePass(iss, 0L, seconds * 500, seconds * 1000, 0.0, 45.0, 0.0, 0.0, visible = false)
+        assertEquals(6L, pass(359).durationMinutes)   // 5 min 59 s reads "6 min", not "5 min"
+        assertEquals(5L, pass(329).durationMinutes)
+        assertEquals(1L, pass(50).durationMinutes)    // a sliver of a pass is still a minute, not "0 min"
+        assertEquals(5L, pass(300).durationSeconds / 60)
+    }
+
+    @Test
     fun riseAndSet_areOnTheHorizonToWithinAStep() {
         val prop = Sgp4(iss)
         val pass = PassPredictor(refineToSeconds = 1).nextPasses(iss, vancouver, t0, hours = 24).first()

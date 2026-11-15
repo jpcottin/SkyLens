@@ -108,7 +108,7 @@ On the Display AI Glasses emulator (the phone's projection display, 450 × 394 a
 - **Horizon** — the horizon line with a tick every 10° and the cardinal points; in the drawn
   mode an altitude/azimuth grid and shaded ground.
 - **Passes** — for any satellite, the passes over the next two days: rise, culmination and
-  set times with their compass directions, duration, and whether the pass is *visible*
+  set times with their compass directions, duration to the nearest minute, and whether the pass is *visible*
   (the satellite sunlit while the observer is in twilight or night).
 - **Point me** — pick an object and an arrow at the edge of the screen points the way
   until it is in view, where a ring marks it.
@@ -233,8 +233,8 @@ android sdk install build/lightbuild/0.0.30                          # once
 bash "$(android info sdk)/build/lightbuild/0.0.30/cli/install.sh"   # ~/.local/bin/lightbuild
 lightbuild build "app:app-debug.apk"     # debug APK
 lightbuild build "app:app-release.apk"   # R8-minified release APK
-lightbuild test "astro:hostTest"         # 63 astronomy engine tests on the JVM
-lightbuild test "ui:hostTest"            # 69 ui unit tests on the JVM
+lightbuild test "astro:hostTest"         # 64 astronomy engine tests on the JVM
+lightbuild test "ui:hostTest"            # 72 ui unit tests on the JVM
 lightbuild test "ui:deviceTest"          # 43 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
 ```
@@ -249,8 +249,8 @@ the full list.
 
 | Suite | Where | What |
 |---|---|---|
-| `astro:hostTest` | JVM | SGP4 against `python-sgp4` reference states (position to 1 µm, velocity to 1 nm/s); Sun, Moon and planets against skyfield/DE421 at six instants and three sites; sidereal time; frames; TLE parsing and checksums; star catalogue; pass prediction; camera projection; the sky engine's determinism |
-| `ui:hostTest` | JVM | `SkyViewModel` with fakes (location states, debug overrides, AR/map modes, selection, settings, passes); `TleRepository` with MockWebServer (bundled fallback, cache, a damaged cache dropped, courtesy interval, failures); FOV fitting; device pose from rotation matrices and declination; debug extras parsing; the glasses model (which object gets the lens card, pass ordering, countdowns); the sensor fallback from the glasses to the phone; the settings store (round trip, key removal, unknown groups, unreadable file); the display-rotation axis remap |
+| `astro:hostTest` | JVM | SGP4 against `python-sgp4` reference states (position to 1 µm, velocity to 1 nm/s); Sun, Moon and planets against skyfield/DE421 at six instants and three sites; sidereal time; frames; TLE parsing and checksums; star catalogue; pass prediction and the printed pass length; camera projection; the sky engine's determinism |
+| `ui:hostTest` | JVM | `SkyViewModel` with fakes (location states, debug overrides, AR/map modes, selection, settings, passes); `TleRepository` with MockWebServer (bundled fallback, cache, a damaged cache dropped, courtesy interval, failures); FOV fitting; device pose from rotation matrices and declination; debug extras parsing; the glasses model (which object gets the lens card, pass ordering, countdowns); the sensor fallback from the glasses to the phone; the settings store (round trip, key removal, unknown groups, unreadable file); the display-rotation axis remap; the printed azimuth (0 to 359, never 360) |
 | `ui:deviceTest` | emulator | Compose UI tests: sky HUD, overlay semantics, tap hit-testing, selected card, location and camera prompts; objects list, search and sections; detail with passes; settings switches, groups, manual position validation (coordinates in range, the altitude a number or blank), orbit refresh; navigation between tabs, list → detail → *Point me* → sky; the Glimmer glasses screen (heading chip, focused-object card, tap to the pass list, pass selection, loading and empty states) |
 | CI journey | emulator | Launches the debug APK with frozen inputs, reads the HUD, the Objects and the Settings tabs back with `android layout`, then smoke-launches the signed release APK and checks the process survives |
 | CI multi-runs | emulator | Four snapshot cycles on the preview and the canary emulators: the app launched once, then checked alive and rendering after every restore |
