@@ -57,6 +57,9 @@ data class Tle(
         fun parse(name: String, line1: String, line2: String): Tle? {
             if (line1.length < 69 || line2.length < 69) return null
             if (!checksumOk(line1) || !checksumOk(line2)) return null
+            // Both lines carry the satellite number: a line 2 from another set (a feed that lost
+            // lines) would otherwise give one satellite another's orbit under its name.
+            if (line1.substring(2, 7) != line2.substring(2, 7)) return null
             return try {
                 val epochYear2 = line1.substring(18, 20).trim().toInt()
                 val epochYear = if (epochYear2 < 57) 2000 + epochYear2 else 1900 + epochYear2

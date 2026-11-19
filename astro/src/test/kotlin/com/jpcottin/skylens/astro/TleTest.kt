@@ -55,6 +55,22 @@ class TleTest {
     }
 
     @Test
+    fun parse_rejectsLinesOfTwoSatellites() {
+        val hst = Sgp4Fixtures.cases.first { it.name == "HST" }
+        assertNull(Tle.parse("ISS", iss.line1, hst.line2))
+        assertNull(Tle.parse("HST", hst.line1, iss.line2))
+    }
+
+    @Test
+    fun parseAll_skipsASetWhoseSecondLineIsAnotherSatellites() {
+        val hst = Sgp4Fixtures.cases.first { it.name == "HST" }
+        // The ISS lost its line 2 and the HST its name and line 1.
+        val text = listOf("ISS (ZARYA)", iss.line1, hst.line2, "0 HST", hst.line1, hst.line2).joinToString("\n")
+        val all = Tle.parseAll(text)
+        assertEquals(listOf("HST"), all.map { it.name })
+    }
+
+    @Test
     fun parse_rejectsBadChecksum() {
         val corrupted = iss.line1.substring(0, 68) + "0"
         assertNull(Tle.parse("ISS", corrupted, iss.line2))
