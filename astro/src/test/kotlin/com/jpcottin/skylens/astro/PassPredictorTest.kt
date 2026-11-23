@@ -61,6 +61,19 @@ class PassPredictorTest {
     }
 
     @Test
+    fun aPassUnderWayAtTheStart_isReportedWhole() {
+        val whole = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 10.0).first()
+        // Start the search past the peak, the satellite still up and going down.
+        val from = (whole.culminationMillis + whole.setMillis) / 2
+        val joined = PassPredictor().nextPasses(iss, vancouver, from, hours = 1, minElevationDeg = 10.0).firstOrNull()
+        assertTrue("the pass under way at $from is missing", joined != null)
+        assertEquals(whole.riseMillis.toDouble(), joined!!.riseMillis.toDouble(), 2_000.0)
+        assertEquals(whole.setMillis.toDouble(), joined.setMillis.toDouble(), 2_000.0)
+        assertEquals(whole.maxElevationDeg, joined.maxElevationDeg, 0.5)
+        assertEquals(whole.riseAzimuthDeg, joined.riseAzimuthDeg, 0.5)
+    }
+
+    @Test
     fun minElevation_filtersLowPasses() {
         val all = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 0.0)
         val high = PassPredictor().nextPasses(iss, vancouver, t0, hours = 24, minElevationDeg = 40.0)

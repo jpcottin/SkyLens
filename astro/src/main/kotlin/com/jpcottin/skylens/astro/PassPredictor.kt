@@ -46,7 +46,10 @@ class PassPredictor(
         val step = coarseStepSeconds * 1000L
         var t = fromMillis
         var prevAbove = elevation(prop, observer, t)?.let { it > 0.0 } ?: return emptyList()
-        var riseMillis: Long? = if (prevAbove) fromMillis else null
+        // A pass already under way is reported whole, from its real rise: starting it at
+        // fromMillis put the rise point overhead and, past the peak, took the satellite's
+        // height now for the pass's maximum (enough to drop a high pass under minElevationDeg).
+        var riseMillis: Long? = if (prevAbove) riseBefore(prop, observer, fromMillis) else null
         // A pass that has begun inside the window is followed to its set past the
         // window's end, else a pass rising minutes before the end would be dropped
         // whole. The tail is bounded: a satellite that never sets is not a pass.
@@ -97,6 +100,19 @@ class PassPredictor(
         val sunElevation = Frames.geocentricToHorizontal(sunVector, observer, jd).elevationDeg
         val visible = SkyEngine.isSunlit(state.position, sunVector) && sunElevation < -6.0
         return SatellitePass(prop.tle, riseMillis, bestT, setMillis, riseAz, bestEl, bestAz, setAz, visible)
+    }
+
+    /** The rise of a satellite already up at [aboveMillis], stepping back at most [PASS_TAIL_MILLIS]. */
+    private fun riseBefore(prop: Sgp4, observer: Observer, aboveMillis: Long): Long {
+        val step = coarseStepSeconds * 1000L
+        var above = aboveMillis
+        while (aboveMillis - above < PASS_TAIL_MILLIS) {
+            val earlier = above - step
+            val el = elevation(prop, observer, earlier) ?: return above
+            if (el <= 0.0) return bisect(prop, observer, earlier, above, rising = true)
+            above = earlier
+        }
+        return aboveMillis
     }
 
     private fun bisect(prop: Sgp4, observer: Observer, belowMillis: Long, aboveMillis: Long, rising: Boolean): Long {
