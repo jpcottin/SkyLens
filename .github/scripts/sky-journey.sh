@@ -36,13 +36,30 @@ dismiss_anr() {
   sleep 2
 }
 
+# Starts the activity with the debug extras in $*, from a stopped process: a running one
+# would bring back its own activity and keep the extras it was started with. The arguments
+# are kept, so a launch whose window never shows can be repeated.
+LAUNCH=""
+launch() {
+  LAUNCH="$*"
+  adb shell am force-stop $PKG
+  adb shell "am start -W -n $PKG/.MainActivity $LAUNCH"
+}
+
 layout_contains() {
   # $1 = pattern, $2 = evidence name; polls up to 60 s.
-  for _ in $(seq 1 12); do
+  for i in $(seq 1 12); do
     android layout > "$OUT/$2.json" 2>/dev/null || true
     adb shell screencap -p /data/local/tmp/j.png >/dev/null 2>&1 && adb pull /data/local/tmp/j.png "$OUT/$2.png" >/dev/null 2>&1 || true
     if grep -qi -- "$1" "$OUT/$2.json"; then wait_online; return; fi
     dismiss_anr "$OUT/$2.json"
+    # A busy runner's emulator can report the launch complete and then show no SkyLens
+    # window at all (a black screen under the status bar, nothing but SYSTEM in the layout).
+    # Halfway through, start the activity again rather than wait out the rest on nothing.
+    if [ "$i" = 6 ] && ! grep -q '"window-title": \{0,1\}"SkyLens"' "$OUT/$2.json"; then
+      echo "no app window after 30 s (app pid: $(adb shell pidof $PKG | tr -d '\r')), launching again"
+      launch "$LAUNCH" >/dev/null || true
+    fi
     sleep 5
   done
   echo "ERROR: '$1' not found in layout ($2)"; cat "$OUT/$2.json"; return 1
@@ -56,19 +73,17 @@ adb shell input keyevent KEYCODE_ESCAPE || true
 adb install -r "$DEBUG_APK"
 adb shell pm grant $PKG android.permission.ACCESS_FINE_LOCATION || true
 adb shell pm grant $PKG android.permission.CAMERA || true
-adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true"
+launch "--el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true"
 layout_contains "E 100" sky-hud
 layout_contains "satellites" sky-status
 # Objects tab, opened through the launch extra so the check does not depend on where the
 # navigation bar or rail puts the item. The header and the search field are always composed
 # (the ISS itself may be far down the lazy list and therefore absent from the layout tree).
-adb shell am force-stop $PKG
-adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab objects" >/dev/null
+launch "--el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab objects" >/dev/null
 layout_contains "Satellites" objects
 layout_contains "Search the sky" objects-search
 # Settings tab: the orbit data status and the compass section are composed near the top.
-adb shell am force-stop $PKG
-adb shell "am start -W -n $PKG/.MainActivity --el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab settings" >/dev/null
+launch "--el skylens.time 1791954000000 --es skylens.location '49.2827,-123.1207,70' --es skylens.pose '100,35,0' --ez skylens.map true --es skylens.tab settings" >/dev/null
 layout_contains "Layers" settings
 
 if [ -n "$RELEASE_APK" ]; then
