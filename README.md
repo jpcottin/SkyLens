@@ -233,7 +233,7 @@ android sdk install build/lightbuild/0.0.30                          # once
 bash "$(android info sdk)/build/lightbuild/0.0.30/cli/install.sh"   # ~/.local/bin/lightbuild
 lightbuild build "app:app-debug.apk"     # debug APK
 lightbuild build "app:app-release.apk"   # R8-minified release APK
-lightbuild test "astro:hostTest"         # 64 astronomy engine tests on the JVM
+lightbuild test "astro:hostTest"         # 67 astronomy engine tests on the JVM
 lightbuild test "ui:hostTest"            # 72 ui unit tests on the JVM
 lightbuild test "ui:deviceTest"          # 43 Compose UI tests on the connected device
 android run --apks app/build/outputs/apk/debug/app-debug.apk
